@@ -72,27 +72,44 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
+@theme inline {
+  --font-display: "Literata", Georgia, serif;
+  --font-sans: "Commissioner", system-ui, sans-serif;
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-ink-muted: var(--ink-muted);
+  --color-violet: var(--violet);
+  --color-rose: var(--rose);
+  --color-success: var(--success);
+}
+
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.129 0.042 264.695);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.129 0.042 264.695);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.129 0.042 264.695);
-  --primary: oklch(0.208 0.042 265.755);
-  --primary-foreground: oklch(0.984 0.003 247.858);
-  --secondary: oklch(0.968 0.007 247.896);
-  --secondary-foreground: oklch(0.208 0.042 265.755);
-  --muted: oklch(0.968 0.007 247.896);
-  --muted-foreground: oklch(0.554 0.046 257.417);
-  --accent: oklch(0.968 0.007 247.896);
-  --accent-foreground: oklch(0.208 0.042 265.755);
+  --radius: 1rem;
+  --background: oklch(0.975 0.012 80);
+  --foreground: oklch(0.18 0.01 60);
+  --card: oklch(0.99 0.008 80);
+  --card-foreground: oklch(0.18 0.01 60);
+  --popover: oklch(0.99 0.008 80);
+  --popover-foreground: oklch(0.18 0.01 60);
+  --primary: oklch(0.18 0.01 60);
+  --primary-foreground: oklch(0.975 0.012 80);
+  --secondary: oklch(0.935 0.015 80);
+  --secondary-foreground: oklch(0.18 0.01 60);
+  --muted: oklch(0.935 0.015 80);
+  --muted-foreground: oklch(0.47 0.015 60);
+  --accent: oklch(0.6 0.12 10);
+  --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.929 0.013 255.508);
-  --input: oklch(0.929 0.013 255.508);
-  --ring: oklch(0.704 0.04 256.788);
+  --border: oklch(0.88 0.015 75);
+  --input: oklch(0.88 0.015 75);
+  --ring: oklch(0.6 0.12 10);
+  --ink: oklch(0.17 0.01 280);
+  --ink-foreground: oklch(0.97 0.01 80);
+  --ink-muted: oklch(0.7 0.02 280);
+  --violet: oklch(0.42 0.1 295);
+  --rose: oklch(0.6 0.09 10);
+  --success: oklch(0.72 0.15 150);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -151,5 +168,23 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-family: var(--font-sans);
   }
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@keyframes drift {
+  0%, 100% { background-position: 0% 30%; }
+  50% { background-position: 100% 70%; }
+}
+
+@utility hero-gradient {
+  background:
+    radial-gradient(60% 50% at 25% 55%, color-mix(in oklab, var(--violet) 80%, transparent), transparent 70%),
+    radial-gradient(50% 45% at 80% 60%, color-mix(in oklab, var(--rose) 70%, transparent), transparent 70%),
+    var(--ink);
+  background-size: 160% 160%;
+  animation: drift 18s ease-in-out infinite;
 }
