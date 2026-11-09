@@ -190,30 +190,14 @@ h1 .italic, h2 .italic, h3 .italic, .font-serif {
 }
 a:hover { color: var(--accent); }
 
-@keyframes drift {
-  0%, 100% { background-position: 0% 30%; }
-  50% { background-position: 100% 70%; }
-}
+@keyframes heroBlob1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(14%,10%) scale(1.18); } }
+@keyframes heroBlob2 { 0%, 100% { transform: translate(0,0) scale(1.1); } 50% { transform: translate(-16%,-8%) scale(.92); } }
+@keyframes heroBlob3 { 0%, 100% { transform: translate(0,0) rotate(0); } 50% { transform: translate(10%,-14%) rotate(25deg); } }
 
+/* Static portrait placeholder background used by the team cards */
 @utility hero-gradient {
   background:
     radial-gradient(45% 40% at 25% 55%, var(--violet), transparent 70%),
     radial-gradient(40% 40% at 78% 62%, var(--rose), transparent 70%),
-    radial-gradient(35% 35% at 60% 90%, #7D7064, transparent 70%),
-    radial-gradient(40% 40% at 20% 15%, #2F2A4D, transparent 70%),
     var(--ink);
-  background-size: 160% 160%;
-  animation: drift 18s ease-in-out infinite;
-}
-
-@media (max-width: 767px) {
-  .hero-gradient {
-    background:
-      radial-gradient(90% 45% at 20% 40%, var(--violet), transparent 75%),
-      radial-gradient(90% 45% at 85% 60%, var(--rose), transparent 75%),
-      radial-gradient(80% 35% at 50% 85%, #7D7064, transparent 75%),
-      radial-gradient(90% 35% at 60% 15%, #2F2A4D, transparent 75%),
-      var(--ink);
-    background-size: 120% 120%;
-  }
 }
