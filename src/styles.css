@@ -83,13 +83,14 @@
   --color-violet: var(--violet);
   --color-rose: var(--rose);
   --color-success: var(--success);
+  --color-tan: var(--tan);
 }
 
 :root {
   --radius: 0.625rem;
   --background: #FEFAF3;
   --foreground: #1C1C1A;
-  --card: #FFFDF8;
+  --card: #FFFFFF;
   --card-foreground: #1C1C1A;
   --popover: #FFFDF8;
   --popover-foreground: #1C1C1A;
@@ -112,6 +113,7 @@
   --violet: #5B4A86;
   --rose: #A06F80;
   --success: oklch(0.72 0.15 150);
+  --tan: #EFE6D6;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
