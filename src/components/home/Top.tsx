@@ -1,3 +1,5 @@
+import { GrainGradient } from "@paper-design/shaders-react";
+import { ClientOnly } from "@tanstack/react-router";
 import { ArrowRight, Building2, CirclePlay, MonitorPlay, Zap, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { clients, courses } from "./data";
@@ -53,12 +55,22 @@ export function Hero() {
   return (
     <section id="top" className="relative flex overflow-hidden bg-ink min-h-screen items-center justify-center px-5 text-center text-ink-foreground">
       <div aria-hidden className="absolute inset-0 overflow-hidden">
-        <div className="absolute" style={{ inset: "-20%", filter: "blur(80px)" }}>
-          <div className="absolute rounded-full" style={{ left: "2%", top: "8%", width: "55%", height: "70%", background: "radial-gradient(closest-side, #5B4A86, transparent)", animation: "heroBlob1 19s ease-in-out infinite" }} />
-          <div className="absolute rounded-full" style={{ right: "0%", top: "22%", width: "58%", height: "72%", background: "radial-gradient(closest-side, #A06F80, transparent)", animation: "heroBlob2 23s ease-in-out infinite" }} />
-          <div className="absolute rounded-full" style={{ left: "28%", bottom: "-6%", width: "52%", height: "56%", background: "radial-gradient(closest-side, #7D7064, transparent)", animation: "heroBlob3 27s ease-in-out infinite" }} />
-          <div className="absolute rounded-full" style={{ left: "52%", top: "0%", width: "34%", height: "42%", background: "radial-gradient(closest-side, #2F2A4D, transparent)", animation: "heroBlob1 31s ease-in-out infinite reverse" }} />
-        </div>
+        <ClientOnly fallback={null}>
+          <GrainGradient
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+            colors={["#5a3777c4", "#4d0c5f", "#4d0c5f", "#4d0c5f"]}
+            colorBack="#1e0a3d"
+            softness={0.81}
+            intensity={0.5}
+            noise={0.25}
+            shape="corners"
+            speed={2}
+            scale={0.92}
+            rotation={72}
+            offsetX={-1}
+            offsetY={-1}
+          />
+        </ClientOnly>
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,20,19,.5) 0%, rgba(20,20,19,.12) 45%, rgba(20,20,19,.45) 100%)" }} />
         <div className="absolute inset-0" style={{ opacity: 0.28, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
       </div>

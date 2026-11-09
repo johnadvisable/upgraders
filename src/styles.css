@@ -190,9 +190,6 @@ h1 .italic, h2 .italic, h3 .italic, .font-serif {
 }
 a:hover { color: var(--accent); }
 
-@keyframes heroBlob1 { 0%, 100% { transform: translate(0,0) scale(1); } 50% { transform: translate(14%,10%) scale(1.18); } }
-@keyframes heroBlob2 { 0%, 100% { transform: translate(0,0) scale(1.1); } 50% { transform: translate(-16%,-8%) scale(.92); } }
-@keyframes heroBlob3 { 0%, 100% { transform: translate(0,0) rotate(0); } 50% { transform: translate(10%,-14%) rotate(25deg); } }
 
 /* Static portrait placeholder background used by the team cards */
 @utility hero-gradient {
