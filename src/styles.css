@@ -205,3 +205,15 @@ a:hover { color: var(--accent); }
   background-size: 160% 160%;
   animation: drift 18s ease-in-out infinite;
 }
+
+@media (max-width: 767px) {
+  .hero-gradient {
+    background:
+      radial-gradient(90% 45% at 20% 40%, var(--violet), transparent 75%),
+      radial-gradient(90% 45% at 85% 60%, var(--rose), transparent 75%),
+      radial-gradient(80% 35% at 50% 85%, #8A3A7A, transparent 75%),
+      radial-gradient(90% 35% at 60% 15%, #4A2470, transparent 75%),
+      var(--ink);
+    background-size: 120% 120%;
+  }
+}
