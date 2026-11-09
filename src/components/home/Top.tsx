@@ -48,8 +48,11 @@ export function Services() {
     <Section id="services">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
-          <Eyebrow>Υπηρεσίες εκπαίδευσης</Eyebrow>
-          <Title>Επιλέξτε πώς θα αναβαθμιστείτε.</Title>
+          <Eyebrow className="text-foreground">Υπηρεσίες εκπαίδευσης</Eyebrow>
+          <Title className="mt-6 text-5xl md:text-7xl">
+            Επιλέξτε πώς θα
+            <span className="block font-serif italic !font-normal">αναβαθμιστείτε.</span>
+          </Title>
         </div>
         <Pill>Θέλω εκπαίδευση</Pill>
       </div>
