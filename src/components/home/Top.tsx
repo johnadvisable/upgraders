@@ -75,7 +75,7 @@ export function Hero() {
         <div className="absolute inset-0" style={{ opacity: 0.28, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
       </div>
       <div className="relative z-[1] max-w-4xl">
-        <h1 className="text-4xl font-semibold leading-[1.15] md:text-[64px]">
+        <h1 className="text-[clamp(2.125rem,4.4vw,4.25rem)] font-semibold leading-[1.15]">
           Βάλατε ChatGPT<br className="md:hidden" /> και Claude.
           <span className="mt-1 block md:whitespace-nowrap text-[clamp(1.6rem,4.2vw,3.6rem)] italic">Η καθημερινότητα<br className="md:hidden" /> όμως έμεινε ίδια.</span>
         </h1>
