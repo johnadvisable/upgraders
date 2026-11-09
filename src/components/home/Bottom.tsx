@@ -66,7 +66,7 @@ export function Tools() {
 
 export function Why() {
   const bubbles = [
-    { label: "Online μαθήματα & academies των AI εταιρειών", x: 18, y: 25, s: 60, cls: "bg-muted-foreground/25" },
+    { label: "Online μαθήματα & academies των AI εταιρειών", x: 22, y: 26, s: 110, cls: "bg-muted-foreground/25" },
     { label: "Κλασικά σεμινάρια", x: 22, y: 72, s: 80, cls: "bg-muted-foreground/25" },
     { label: "Μεγάλες συμβουλευτικές", x: 78, y: 75, s: 130, cls: "bg-muted-foreground/25" },
     { label: "The Upgraders", x: 78, y: 22, s: 90, cls: "bg-accent text-accent-foreground" },
