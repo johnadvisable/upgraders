@@ -4,30 +4,60 @@ import { Eyebrow, Pill, Section, Title } from "./ui";
 
 export function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 px-3 py-3">
-      <div className="mx-auto flex max-w-6xl items-center justify-between rounded-full bg-ink/70 py-2 pl-6 pr-2 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 px-5 py-4">
+      <div className="mx-auto flex max-w-6xl items-center justify-between">
         <a href="#top" className="font-display text-xl font-semibold text-ink-foreground">The Upgraders</a>
-        <Pill href="#services" variant="light">Θέλω εκπαίδευση</Pill>
+        <span className="relative">
+          <Pill href="#services" variant="light" className="px-5 py-3 font-medium">Θέλω εκπαίδευση</Pill>
+          <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-semibold text-accent-foreground">1</span>
+        </span>
       </div>
     </header>
+  );
+}
+
+function UpdateCard() {
+  return (
+    <div className="absolute bottom-5 right-5 hidden w-[360px] rounded-[18px] border border-ink-foreground/15 bg-ink/60 p-4 text-left shadow-2xl backdrop-blur-2xl sm:block">
+      <button aria-label="Κλείσιμο" className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-ink-foreground/15 text-xs text-ink-foreground">×</button>
+      <div className="flex gap-3">
+        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-ink font-display text-lg font-bold">
+          u
+          <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent" />
+        </span>
+        <div className="flex-1">
+          <div className="flex items-center justify-between pr-6">
+            <p className="text-sm font-semibold">Update Available</p>
+            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-ink-foreground/60">Τώρα</span>
+          </div>
+          <p className="mt-1 text-[13px] leading-snug text-ink-foreground/85">Το πιο σημαντικό Upgrade είναι διαθέσιμο για την εταιρεία σας. Η εταιρεία σας 2.0.</p>
+          <div className="mt-4 grid grid-cols-2 gap-2">
+            <button className="rounded-[8px] bg-ink-foreground py-1.5 text-[13px] font-medium text-ink">Εγκατάσταση τώρα</button>
+            <button className="rounded-[8px] bg-ink-foreground/15 py-1.5 text-[13px] font-medium">Αργότερα</button>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }
 
 export function Hero() {
   return (
     <section id="top" className="hero-gradient relative flex min-h-screen items-center justify-center px-5 text-center text-ink-foreground">
-      <div className="max-w-3xl">
-        <h1 className="text-4xl font-semibold leading-[1.18] md:text-6xl">
+      <div className="max-w-4xl">
+        <h1 className="text-4xl font-semibold leading-[1.15] md:text-[64px]">
           Βάλατε ChatGPT και Claude.
-          <span className="mt-2 block italic text-ink-foreground/80">Η καθημερινότητα όμως έμεινε ίδια.</span>
+          <span className="mt-1 block whitespace-nowrap text-[clamp(1.6rem,4.2vw,3.6rem)] italic">Η καθημερινότητα όμως έμεινε ίδια.</span>
         </h1>
-        <p className="mx-auto mt-8 max-w-xl text-lg text-ink-foreground/85">
-          Ήρθε η ώρα για αναβάθμιση. Αναλαμβάνουν οι Upgraders. Μια ομάδα από builders, δημιουργούς, tech και corporate education experts.
+        <p className="mx-auto mt-14 text-lg font-medium md:text-xl">Ήρθε η ώρα για αναβάθμιση. Αναλαμβάνουν οι Upgraders.</p>
+        <p className="mx-auto mt-2 text-lg text-ink-foreground/85 md:text-xl">
+          Μια ομάδα από <strong className="font-semibold text-ink-foreground">builders</strong>, <strong className="font-semibold text-ink-foreground">δημιουργούς</strong>, <strong className="font-semibold text-ink-foreground">tech και corporate education experts</strong>.
         </p>
         <a href="#services" className="mt-10 inline-block border-b border-ink-foreground/40 pb-1 text-sm font-medium hover:border-ink-foreground">
           Υπηρεσίες εκπαίδευσης για επιχειρήσεις →
         </a>
       </div>
+      <UpdateCard />
     </section>
   );
 }
