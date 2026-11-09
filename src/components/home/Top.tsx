@@ -16,7 +16,7 @@ export function Header() {
   return (
     <header className={`fixed inset-x-0 top-0 z-50 px-5 py-4 transition-colors duration-300 ${scrolled ? "border-b border-border bg-card/75 backdrop-blur-md" : "border-b border-transparent"}`}>
       <div className="mx-auto flex max-w-6xl items-center justify-between">
-        <a href="#top" className={`font-display text-xl font-semibold transition-colors ${scrolled ? "text-foreground" : "text-ink-foreground"}`}>The Upgraders</a>
+        <a href="#top" aria-label="The Upgraders"><img src={scrolled ? "/logo.svg" : "/logo-negative.svg"} alt="The Upgraders" className="h-[34px] w-auto" /></a>
         <span className="relative">
           <Pill href="#services" variant="light" className="px-5 py-3 font-medium">Θέλω εκπαίδευση</Pill>
           <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-semibold text-accent-foreground">1</span>
