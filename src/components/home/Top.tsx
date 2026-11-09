@@ -77,7 +77,7 @@ export function Hero() {
       <div className="relative z-[1] max-w-4xl">
         <h1 className="text-[clamp(2.125rem,4.4vw,4.25rem)] font-semibold leading-[1.15]">
           Βάλατε ChatGPT<br className="md:hidden" /> και Claude.
-          <span className="mt-1 block md:whitespace-nowrap text-[clamp(1.6rem,4.2vw,3.6rem)] italic">Η καθημερινότητα<br className="md:hidden" /> όμως έμεινε ίδια.</span>
+          <span className="mt-1 block md:whitespace-nowrap text-[clamp(1.75rem,3.6vw,3.4375rem)] italic">Η καθημερινότητα<br className="md:hidden" /> όμως έμεινε ίδια.</span>
         </h1>
         <p className="mx-auto mt-14 text-lg font-medium md:text-xl">Ήρθε η ώρα για αναβάθμιση. Αναλαμβάνουν οι Upgraders.</p>
         <p className="mx-auto mt-2 text-lg text-ink-foreground/85 md:text-xl">
