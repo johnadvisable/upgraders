@@ -2,11 +2,11 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn("text-xs font-semibold uppercase tracking-[0.2em] text-accent", className)}>{children}</p>;
+  return <p className={cn("font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-accent", className)}>{children}</p>;
 }
 
 export function Title({ children, className }: { children: ReactNode; className?: string }) {
-  return <h2 className={cn("mt-3 font-display text-4xl leading-tight md:text-5xl", className)}>{children}</h2>;
+  return <h2 className={cn("mt-3 text-4xl font-light leading-[1.04] md:text-6xl", className)}>{children}</h2>;
 }
 
 export function Pill({ children, href = "#contact", variant = "dark", className }: { children: ReactNode; href?: string; variant?: "dark" | "light" | "outline"; className?: string }) {

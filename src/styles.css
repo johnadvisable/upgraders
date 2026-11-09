@@ -73,7 +73,9 @@
 }
 
 @theme inline {
-  --font-display: "Literata", Georgia, serif;
+  --font-display: "Commissioner", system-ui, sans-serif;
+  --font-serif: "Noto Serif Display", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-sans: "Commissioner", system-ui, sans-serif;
   --color-ink: var(--ink);
   --color-ink-foreground: var(--ink-foreground);
@@ -84,31 +86,31 @@
 }
 
 :root {
-  --radius: 1rem;
-  --background: oklch(0.975 0.012 80);
-  --foreground: oklch(0.18 0.01 60);
-  --card: oklch(0.99 0.008 80);
-  --card-foreground: oklch(0.18 0.01 60);
-  --popover: oklch(0.99 0.008 80);
-  --popover-foreground: oklch(0.18 0.01 60);
-  --primary: oklch(0.18 0.01 60);
-  --primary-foreground: oklch(0.975 0.012 80);
-  --secondary: oklch(0.935 0.015 80);
-  --secondary-foreground: oklch(0.18 0.01 60);
-  --muted: oklch(0.935 0.015 80);
-  --muted-foreground: oklch(0.47 0.015 60);
-  --accent: oklch(0.6 0.12 10);
+  --radius: 0.625rem;
+  --background: #FEFAF3;
+  --foreground: #1C1C1A;
+  --card: #FFFDF8;
+  --card-foreground: #1C1C1A;
+  --popover: #FFFDF8;
+  --popover-foreground: #1C1C1A;
+  --primary: #1C1C1A;
+  --primary-foreground: #FEFAF3;
+  --secondary: #F5EEE2;
+  --secondary-foreground: #1C1C1A;
+  --muted: #EFE9DE;
+  --muted-foreground: #5F5B53;
+  --accent: #FF3B30;
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.984 0.003 247.858);
-  --border: oklch(0.88 0.015 75);
-  --input: oklch(0.88 0.015 75);
-  --ring: oklch(0.6 0.12 10);
-  --ink: oklch(0.17 0.01 280);
-  --ink-foreground: oklch(0.97 0.01 80);
-  --ink-muted: oklch(0.7 0.02 280);
-  --violet: oklch(0.42 0.1 295);
-  --rose: oklch(0.6 0.09 10);
+  --border: rgba(28, 28, 26, 0.14);
+  --input: rgba(28, 28, 26, 0.14);
+  --ring: #FF3B30;
+  --ink: #1C1C1A;
+  --ink-foreground: #FEFAF3;
+  --ink-muted: #A8A296;
+  --violet: #5B4A86;
+  --rose: #A06F80;
   --success: oklch(0.72 0.15 150);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
@@ -175,6 +177,17 @@
   }
 }
 
+h1, h2, h3 {
+  letter-spacing: -0.035em;
+}
+h1 .italic, h2 .italic, h3 .italic, .font-serif {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+a:hover { color: var(--accent); }
+
 @keyframes drift {
   0%, 100% { background-position: 0% 30%; }
   50% { background-position: 100% 70%; }
@@ -182,8 +195,10 @@
 
 @utility hero-gradient {
   background:
-    radial-gradient(60% 50% at 25% 55%, color-mix(in oklab, var(--violet) 80%, transparent), transparent 70%),
-    radial-gradient(50% 45% at 80% 60%, color-mix(in oklab, var(--rose) 70%, transparent), transparent 70%),
+    radial-gradient(45% 40% at 25% 55%, var(--violet), transparent 70%),
+    radial-gradient(40% 40% at 78% 62%, var(--rose), transparent 70%),
+    radial-gradient(35% 35% at 60% 90%, #7D7064, transparent 70%),
+    radial-gradient(40% 40% at 20% 15%, #2F2A4D, transparent 70%),
     var(--ink);
   background-size: 160% 160%;
   animation: drift 18s ease-in-out infinite;

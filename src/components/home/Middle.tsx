@@ -92,14 +92,14 @@ export function Enablement() {
           <Pill className="mt-8" href="#tools">Δείτε τι έχουμε χτίσει</Pill>
         </div>
       </div>
-      <div className="mt-14 rounded-3xl bg-ink p-6 text-ink-foreground md:p-8">
-        <div className="flex items-center justify-between text-xs font-semibold tracking-widest text-ink-muted">
+      <div className="mt-14 rounded-[14px] bg-ink p-6 text-ink-foreground md:p-8">
+        <div className="flex items-center justify-between text-xs font-semibold font-mono tracking-[0.08em] text-ink-muted">
           <span>AI OPS · Ροή προσφορών B2B</span>
           <span className="flex items-center gap-2 text-success"><span className="h-2 w-2 animate-pulse rounded-full bg-success" />LIVE</span>
         </div>
         <div className="mt-6 grid gap-8 md:grid-cols-2">
           <div>
-            <p className="mb-3 text-xs tracking-widest text-ink-muted">ΣΥΝΔΕΔΕΜΕΝΑ ΣΥΣΤΗΜΑΤΑ</p>
+            <p className="mb-3 text-xs font-mono tracking-[0.08em] text-ink-muted">ΣΥΝΔΕΔΕΜΕΝΑ ΣΥΣΤΗΜΑΤΑ</p>
             <div className="space-y-2">
               {systems.map(([k, n, s]) => (
                 <div key={k} className="flex items-center gap-3 rounded-xl bg-ink-foreground/5 p-3 text-sm">
@@ -110,7 +110,7 @@ export function Enablement() {
             </div>
           </div>
           <div>
-            <p className="text-xs tracking-widest text-ink-muted">ΩΡΕΣ ΠΟΥ ΕΞΟΙΚΟΝΟΜΗΘΗΚΑΝ · Q3</p>
+            <p className="text-xs font-mono tracking-[0.08em] text-ink-muted">ΩΡΕΣ ΠΟΥ ΕΞΟΙΚΟΝΟΜΗΘΗΚΑΝ · Q3</p>
             <p className="mt-2 font-display text-6xl">1.284 <span className="text-lg text-success">+18%</span></p>
             <div className="mt-6 space-y-2">
               {feed.map(([t, m]) => (
@@ -141,17 +141,17 @@ export function Method() {
           <TabsContent key={s.key} value={s.key} className="mt-8">
             <div className="grid gap-10 lg:grid-cols-2">
               <div>
-                <p className="text-xs font-semibold tracking-widest text-muted-foreground">0{i + 1} / 04 · {s.label.toUpperCase()}</p>
+                <p className="text-xs font-semibold font-mono tracking-[0.08em] text-muted-foreground">0{i + 1} / 04 · {s.label.toUpperCase()}</p>
                 <h3 className="mt-3 font-display text-3xl">{s.title}</h3>
                 <p className="mt-4 text-muted-foreground">{s.text}</p>
                 <Checks items={s.bullets} />
               </div>
-              <div className="rounded-3xl border border-border bg-card p-6">
-                <div className="flex justify-between text-sm"><span className="font-semibold">Ευκαιρίες AI <span className="text-muted-foreground">14</span></span><span className="text-xs tracking-widest text-muted-foreground">ΕΠΙΔΡΑΣΗ</span></div>
+              <div className="rounded-[14px] border border-border bg-card p-6">
+                <div className="flex justify-between text-sm"><span className="font-semibold">Ευκαιρίες AI <span className="text-muted-foreground">14</span></span><span className="text-xs font-mono tracking-[0.08em] text-muted-foreground">ΕΠΙΔΡΑΣΗ</span></div>
                 <div className="mt-4 space-y-4">
                   {opportunities.map(([n, d, v]) => (
                     <div key={n}>
-                      <div className="flex justify-between text-sm"><span>{n} <span className="ml-2 text-[10px] tracking-widest text-muted-foreground">{d}</span></span><span className="font-semibold">{v}</span></div>
+                      <div className="flex justify-between text-sm"><span>{n} <span className="ml-2 text-[10px] font-mono tracking-[0.08em] text-muted-foreground">{d}</span></span><span className="font-semibold">{v}</span></div>
                       <div className="mt-1 h-1.5 rounded-full bg-muted"><div className="h-1.5 rounded-full bg-accent" style={{ width: `${v}%` }} /></div>
                     </div>
                   ))}

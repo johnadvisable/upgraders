@@ -16,9 +16,9 @@ export function Hero() {
   return (
     <section id="top" className="hero-gradient relative flex min-h-screen items-center justify-center px-5 text-center text-ink-foreground">
       <div className="max-w-3xl">
-        <h1 className="font-display text-5xl leading-[1.05] md:text-7xl">
+        <h1 className="text-4xl font-semibold leading-[1.18] md:text-6xl">
           Βάλατε ChatGPT και Claude.
-          <span className="mt-2 block italic text-ink-foreground/75">Η καθημερινότητα όμως έμεινε ίδια.</span>
+          <span className="mt-2 block italic text-ink-foreground/80">Η καθημερινότητα όμως έμεινε ίδια.</span>
         </h1>
         <p className="mx-auto mt-8 max-w-xl text-lg text-ink-foreground/85">
           Ήρθε η ώρα για αναβάθμιση. Αναλαμβάνουν οι Upgraders. Μια ομάδα από builders, δημιουργούς, tech και corporate education experts.
@@ -33,8 +33,8 @@ export function Hero() {
 
 function ServiceCard({ title, sub, text, cta, badge }: { title: string; sub?: string; text: string; cta: string; badge?: string }) {
   return (
-    <div className="relative flex flex-col rounded-3xl border border-border bg-card p-7">
-      {badge && <span className="absolute right-6 top-6 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-accent-foreground">{badge}</span>}
+    <div className="relative flex flex-col rounded-[14px] border border-border bg-card p-7">
+      {badge && <span className="absolute right-6 top-6 rounded-full bg-accent px-3 py-1 font-mono text-[10px] uppercase text-accent-foreground">{badge}</span>}
       <h3 className="font-display text-2xl">{title}</h3>
       {sub && <p className="text-sm text-muted-foreground">{sub}</p>}
       <p className="mt-4 flex-1 text-muted-foreground">{text}</p>
@@ -89,7 +89,7 @@ export function LiveCourses() {
         {courses.map((c, i) => {
           const done = c.status === "done";
           return (
-            <div key={i} className={`grid items-center gap-4 rounded-3xl border border-border bg-card p-6 md:grid-cols-[2fr_1.2fr_auto] ${done ? "opacity-55" : ""}`}>
+            <div key={i} className={`grid items-center gap-4 rounded-[14px] border border-border bg-card p-6 md:grid-cols-[2fr_1.2fr_auto] ${done ? "opacity-55" : ""}`}>
               <div>
                 <h3 className="font-display text-2xl">{c.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{c.tools}</p>

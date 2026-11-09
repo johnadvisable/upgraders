@@ -11,8 +11,8 @@ export function Cases() {
       <p className="mt-4 text-muted-foreground">Τι άλλαξε μετά την αναβάθμιση.</p>
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
         {cases.map((c) => (
-          <div key={c.name} className="rounded-3xl bg-ink p-7 text-ink-foreground">
-            <span className="rounded-full bg-ink-foreground/10 px-3 py-1 text-xs font-semibold tracking-widest">{c.release}</span>
+          <div key={c.name} className="rounded-[14px] bg-ink p-7 text-ink-foreground">
+            <span className="rounded-full bg-ink-foreground/10 px-3 py-1 text-xs font-semibold font-mono tracking-[0.08em]">{c.release}</span>
             <h3 className="mt-5 font-display text-3xl">{c.name}</h3>
             <p className="text-sm text-ink-muted">{c.sector}</p>
             <p className="mt-6 font-display text-6xl">{c.hero[0]}</p>
@@ -20,13 +20,13 @@ export function Cases() {
             <div className="mt-6 grid gap-3 sm:grid-cols-3">
               {c.metrics.map(([v, l, s]) => (
                 <div key={l} className="rounded-2xl bg-ink-foreground/5 p-4">
-                  <p className="font-display text-2xl text-rose">{v}</p>
+                  <p className="font-display text-2xl text-accent">{v}</p>
                   <p className="mt-1 text-sm">{l}</p>
                   <p className="text-xs text-ink-muted">{s}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-5 text-[10px] tracking-widest text-ink-muted">ΕΝΔΕΙΚΤΙΚΕΣ ΤΙΜΕΣ · PLACEHOLDER</p>
+            <p className="mt-5 text-[10px] font-mono tracking-[0.08em] text-ink-muted">ΕΝΔΕΙΚΤΙΚΕΣ ΤΙΜΕΣ · PLACEHOLDER</p>
           </div>
         ))}
       </div>
@@ -49,7 +49,7 @@ export function Tools() {
       <div className="mt-8 grid gap-6 md:grid-cols-2">
         {shown.length === 0 && <p className="text-muted-foreground">Σύντομα νέα εργαλεία σε αυτή την κατηγορία.</p>}
         {shown.map((t) => (
-          <div key={t.name} className="rounded-3xl border border-border bg-card p-7">
+          <div key={t.name} className="rounded-[14px] border border-border bg-card p-7">
             <div className="flex gap-2">{t.tags.map((g) => <span key={g} className="rounded-full bg-secondary px-3 py-1 text-xs">{g}</span>)}</div>
             <h3 className="mt-5 font-display text-2xl">{t.name}</h3>
             <p className="mt-1 text-muted-foreground">{t.text}</p>
@@ -79,7 +79,7 @@ export function Why() {
           <Title>Είναι σεμινάριο; Είναι consulting; <span className="italic text-accent">Είναι Αναβάθμιση.</span></Title>
           <p className="mt-6 text-muted-foreground">Τα σεμινάρια δεν αλλάζουν τη δουλειά. Οι σύμβουλοι δεν χτίζουν. Εμείς εκπαιδεύουμε τους ανθρώπους και χτίζουμε τα συστήματα, γρήγορα και εξατομικευμένα, όπως κάναμε στις δικές μας εταιρείες.</p>
         </div>
-        <div className="relative aspect-square rounded-3xl border border-border bg-card">
+        <div className="relative aspect-square rounded-[14px] border border-border bg-card">
           <div className="absolute inset-y-6 left-1/2 border-l border-dashed border-border" />
           <div className="absolute inset-x-6 top-1/2 border-t border-dashed border-border" />
           <span className="absolute left-3 top-3 text-xs text-muted-foreground">Γρήγορα</span>
@@ -105,7 +105,7 @@ export function Team() {
       <p className="mt-4 text-muted-foreground">Πρώτα το κάναμε για τις εταιρείες μας. Τώρα, το κάνουμε και για τις δικές σας.</p>
       <div className="mt-10 grid gap-6 md:grid-cols-3">
         {team.map((m) => (
-          <div key={m.name} className="overflow-hidden rounded-3xl bg-card">
+          <div key={m.name} className="overflow-hidden rounded-[14px] bg-card">
             <div className="hero-gradient flex aspect-[4/5] items-end p-6">
               <span className="font-display text-6xl text-ink-foreground/80">{m.name.split(" ").map((w) => w[0]).join("")}</span>
             </div>
@@ -159,8 +159,8 @@ export function Footer() {
           <div className="flex gap-4 text-sm text-ink-muted">{["IG", "TT", "f", "YT"].map((s) => <a key={s} href="#" className="hover:text-ink-foreground">{s}</a>)}</div>
           {Object.entries(cols).map(([h, items]) => (
             <div key={h}>
-              <p className="text-xs font-semibold tracking-widest text-ink-muted">{h}</p>
-              <ul className="mt-4 space-y-2 text-sm">{items.map((i) => <li key={i}><a href="#" className="hover:text-rose">{i}</a></li>)}</ul>
+              <p className="text-xs font-semibold font-mono tracking-[0.08em] text-ink-muted">{h}</p>
+              <ul className="mt-4 space-y-2 text-sm">{items.map((i) => <li key={i}><a href="#" className="hover:text-accent">{i}</a></li>)}</ul>
             </div>
           ))}
         </div>
