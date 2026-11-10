@@ -129,12 +129,15 @@
   --trusted-placeholder: #B5AFA4;
   --trusted-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   --live-completed: rgba(28, 28, 26, 0.2);
-  --live-info-foreground: #FFFFFF;
+  --live-info-foreground: #FEFAF3;
   --live-table-border: rgba(28, 28, 26, 0.08);
   --live-header-divider: #F0EAE0;
   --live-row-divider: #F3EEE5;
   --live-subtitle: #77726A;
   --live-booking-hover: #000000;
+  --live-xsell-icon-bg: #E2D6C2;
+  --live-xsell-hover-foreground: #FFFFFF;
+  --live-xsell-tooltip-shadow: 0 12px 30px -12px rgba(0, 0, 0, 0.4);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -223,6 +226,14 @@ a:hover { color: var(--accent); }
 .trusted-by-track {
   animation: trustedByScroll 44s linear infinite;
 }
+.live-xsell-list { display: flex; flex-wrap: wrap; gap: 10px; margin-top: clamp(44px, 5vw, 64px); }
+.live-xsell-card { position: relative; display: flex; align-items: center; flex: 1 1 280px; min-width: 0; gap: 6px; padding: 14px 18px; border-radius: 14px; background: var(--tan); }
+.live-xsell-link { flex: 1; min-width: 0; display: flex; align-items: center; gap: 14px; padding: 0; border: 0; border-radius: 0; background: transparent; font-size: 15px; font-weight: 500; line-height: 1.3; color: var(--foreground); }
+.live-xsell-link:hover { background: transparent; color: var(--live-booking-hover); }
+.live-xsell-swatch { display: flex; align-items: center; justify-content: center; flex: 0 0 auto; width: 40px; height: 40px; border-radius: 10px; background: var(--live-xsell-icon-bg); color: var(--foreground); }
+.live-xsell-info { position: absolute; top: -9px; right: -7px; width: 22px; height: 22px; padding: 0; border: 2px solid var(--background); border-radius: 50%; background: var(--primary); color: var(--live-info-foreground); cursor: help; }
+.live-xsell-info:hover { background: var(--live-booking-hover); color: var(--live-xsell-hover-foreground); }
+.live-xsell-tooltip { position: absolute; right: -7px; bottom: calc(100% + 18px); z-index: 5; width: max-content; max-width: 260px; padding: 10px 14px; border-radius: 10px; background: var(--primary); color: var(--live-info-foreground); font-size: 13px; line-height: 1.4; box-shadow: var(--live-xsell-tooltip-shadow); }
 .live-course-grid { grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 1024px) {
   .live-course-grid {

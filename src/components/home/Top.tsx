@@ -1,7 +1,8 @@
 import { GrainGradient } from "@paper-design/shaders-react";
 import { ClientOnly } from "@tanstack/react-router";
-import { ArrowRight, Building2, CirclePlay, Info, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ArrowRight, Building2, CirclePlay, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide-react";
+import { useEffect, useId, useState } from "react";
+import { Button } from "@/components/ui/button";
 import { courses } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
@@ -195,23 +196,40 @@ export function LiveCourses() {
           );
         })}
       </div>
-      <div className="mt-10 grid gap-4 lg:grid-cols-3">
+      <div className="live-xsell-list">
         {[
-          { text: "Θέλω εξατομικευμένη εταιρική εκπαίδευση", icon: UserRound },
-          { text: "Θέλω ένα 8ωρο Sprint μέσα στην εταιρεία μου", icon: Zap },
-          { text: "Θέλω να δω μαγνητοσκοπημένες εκπαιδεύσεις", icon: MonitorPlay },
-        ].map(({ text, icon: Icon }) => (
-          <div key={text} className="relative min-w-0">
-            <Pill variant="outline" className="h-full w-full gap-3 rounded-[14px] p-3 text-left font-medium">
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-tan"><Icon aria-hidden className="h-5 w-5" strokeWidth={1.5} /></span>
-              <span className="min-w-0 flex-1">{text}</span>
-            </Pill>
-            <span tabIndex={0} role="img" aria-label={text} title={text} className="absolute -right-1.5 -top-1.5 flex h-[22px] w-[22px] items-center justify-center rounded-full border border-card bg-primary text-live-info-foreground">
-              <Info aria-hidden className="h-3.5 w-3.5" strokeWidth={1.5} />
-            </span>
-          </div>
+          { text: "Θέλω εξατομικευμένη εταιρική εκπαίδευση", icon: UserRound, tooltip: "Η πιο εξατομικευμένη αλλά και ακριβή επιλογή." },
+          { text: "Θέλω ένα 8ωρο Sprint μέσα στην εταιρεία μου", icon: Zap, tooltip: "Υψηλή εξατομίκευση, ελκυστικό κόστος." },
+          { text: "Θέλω να δω μαγνητοσκοπημένες εκπαιδεύσεις", icon: MonitorPlay, tooltip: "Η πιο οικονομική, Do-it-Yourself επιλογή." },
+        ].map((card) => (
+          <LiveCrossSellCard key={card.text} {...card} />
         ))}
       </div>
     </Section>
+  );
+}
+
+function LiveCrossSellCard({ text, icon: Icon, tooltip }: { text: string; icon: LucideIcon; tooltip: string }) {
+  const tooltipId = useId();
+  const [hovered, setHovered] = useState(false);
+  const [focused, setFocused] = useState(false);
+  const [pinned, setPinned] = useState(false);
+  const open = hovered || focused || pinned;
+  return (
+    <div className="live-xsell-card">
+      <Pill showArrow={false} className="live-xsell-link">
+        <span className="live-xsell-swatch"><Icon aria-hidden className="h-5 w-5" strokeWidth={1.8} /></span>
+        <span className="min-w-0 flex-1">{text}</span>
+        <svg aria-hidden width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </Pill>
+      <Button type="button" variant="ghost" size="icon" className="live-xsell-info [&_svg]:size-3" aria-label={`Πληροφορίες: ${text}`} aria-describedby={open ? tooltipId : undefined} aria-expanded={open}
+        onMouseEnter={() => setHovered(true)} onMouseLeave={() => setHovered(false)}
+        onFocus={() => setFocused(true)} onBlur={() => { setFocused(false); setPinned(false); }}
+        onClick={() => setPinned((value) => !value)}
+        onKeyDown={(event) => { if (event.key === "Escape") { setHovered(false); setFocused(false); setPinned(false); } }}>
+        <svg aria-hidden width={12} height={12} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round"><path d="M12 11v6M12 7h.01" strokeWidth={2.6} /></svg>
+      </Button>
+      {open && <div id={tooltipId} role="tooltip" className="live-xsell-tooltip">{tooltip}</div>}
+    </div>
   );
 }

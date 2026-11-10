@@ -31,3 +31,4 @@ use the editor.
 
 - Keep the trusted-by marquee in its own homepage section with two identical client groups; equal group widths make the CSS loop seamless.
 - Keep LiveCourses headers and rows on the same responsive grid with separate price and action cells; table-specific border tokens isolate its reference styling from other sections.
+- Keep cross-sell tooltip state local to each card and use accessible Button triggers for hover, focus, click, and Escape interactions; scoped CSS prevents shared link styles from changing reference values.
