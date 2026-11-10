@@ -1,28 +1,41 @@
 import { useEffect, useRef, useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { industries, opportunities, roles, steps } from "./data";
+import { Slider } from "./Slider";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
-function List({ eyebrow, title, items, id }: { eyebrow: string; title: string; items: string[][]; id: string }) {
+const listImages = {
+  roles: { src: "https://images.pexels.com/photos/8636650/pexels-photo-8636650.jpeg?auto=compress&cs=tinysrgb&w=1400", alt: "Χαμογελαστή ελληνική ομάδα γραφείου (Kampus Production / Pexels)" },
+  industries: { src: "https://images.pexels.com/photos/799091/pexels-photo-799091.jpeg?auto=compress&cs=tinysrgb&w=1400", alt: "Λιμάνι με πλοίο (Martin Damboldt / Pexels)" },
+};
+
+function List({ eyebrow, title, items, id, reverse }: { eyebrow: string; title: string; items: string[][]; id: "roles" | "industries"; reverse?: boolean }) {
+  const img = listImages[id];
   return (
     <Section id={id} className="py-[28px] min-[760px]:py-[clamp(56px,7vw,104px)]">
       <Eyebrow>{eyebrow}</Eyebrow>
       <Title>{title}</Title>
-      <div className="mt-10 divide-y divide-border border-y border-border">
-        {items.map(([name, text]) => (
-          <a key={name} href="#contact" className="group grid gap-2 py-5 transition-colors hover:bg-secondary md:grid-cols-[1fr_2fr_auto] md:items-center md:px-3">
-            <span className="font-display text-xl">{name}</span>
-            <span className="text-muted-foreground">{text}</span>
-            <span className="hidden text-accent transition-transform group-hover:translate-x-1 md:block">→</span>
-          </a>
-        ))}
+      <div className={`mt-[clamp(32px,4vw,56px)] flex flex-wrap items-start gap-[clamp(24px,3vw,44px)] ${reverse ? "flex-row-reverse" : ""}`}>
+        <img src={img.src} alt={img.alt} loading="lazy" className="relative h-[240px] max-w-full flex-[1_1_300px] rounded-[20px] object-cover min-[760px]:sticky min-[760px]:top-[100px] min-[760px]:h-auto min-[760px]:max-w-[440px] min-[760px]:self-start" />
+        <div className="relative -mx-5 min-w-0 flex-[2_1_480px] min-[760px]:mx-0 min-[760px]:pl-[26px]">
+          <span aria-hidden="true" className="absolute top-[30px] bottom-[30px] left-1 hidden border-l border-role-line min-[760px]:block" />
+          <Slider sliderClassName="list-slider grid gap-[10px]">
+            {items.map(([name, text]) => (
+              <article key={name} className="relative flex flex-wrap content-start items-baseline gap-x-7 gap-y-1.5 rounded-[14px] bg-secondary px-[22px] py-[18px]">
+                <span aria-hidden="true" className="absolute top-[26px] -left-[26px] hidden h-[9px] w-[9px] rounded-full border-2 border-background bg-role-card-dot min-[760px]:block" />
+                <h3 className="flex-[0_1_240px] text-lg font-semibold tracking-[-0.01em]">{name}</h3>
+                <p className="flex-[1_1_280px] text-[15px] leading-normal text-muted-foreground">{text}</p>
+              </article>
+            ))}
+          </Slider>
+        </div>
       </div>
     </Section>
   );
 }
 
 export const Roles = () => <List id="roles" eyebrow="Ανά ρόλο" title="Εκπαίδευση ανά θέση εργασίας." items={roles} />;
-export const Industries = () => <List id="industries" eyebrow="Ανά κλάδο" title="Εκπαίδευση ανά κλάδο δραστηριότητας." items={industries} />;
+export const Industries = () => <List id="industries" reverse eyebrow="Ανά κλάδο" title="Εκπαίδευση ανά κλάδο δραστηριότητας." items={industries} />;
 
 function useInView<T extends HTMLElement>() {
   const ref = useRef<T>(null);

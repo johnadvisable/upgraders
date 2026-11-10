@@ -3,6 +3,7 @@ import { ClientOnly } from "@tanstack/react-router";
 import { ArrowRight, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { Slider } from "./Slider";
 import { courses } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
@@ -136,17 +137,17 @@ export function Services() {
       <div className="mt-12 grid gap-4 lg:grid-cols-2">
         <div className="min-w-0">
           <GroupLabel title="Σε τμήματα" sub="Ανοιχτά μαθήματα & βιβλιοθήκη εκπαιδεύσεων" />
-          <ServiceSlider>
+          <Slider className="lg:h-[calc(100%-3rem)]" sliderClassName="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
             <ServiceCard tone="light" icon="live" title="Live Εκπαίδευση" sub="(σε μικρά τμήματα)" text="Μικρά groups, σε δική μας αίθουσα ή livestream." cta="Επόμενα μαθήματα" />
             <ServiceCard tone="light" icon="demand" title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" />
-          </ServiceSlider>
+          </Slider>
         </div>
         <div className="min-w-0">
           <GroupLabel title="Εξατομικευμένη" sub="Στημένη αποκλειστικά για την ομάδα σας" />
-          <ServiceSlider>
+          <Slider className="lg:h-[calc(100%-3rem)]" sliderClassName="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
             <ServiceCard tone="tan" icon="corporate" title="Εταιρικό AI Upgrade" text="Tailor-made εκπαίδευση, στημένη πάνω στην εταιρεία σας." cta="Δείτε πώς γίνεται" />
             <ServiceCard tone="tan" icon="sprint" badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
-          </ServiceSlider>
+          </Slider>
         </div>
       </div>
     </Section>
@@ -231,53 +232,6 @@ function LiveCrossSellCard({ text, icon: Icon, tooltip }: { text: string; icon: 
       </Button>
       {open && <div id={tooltipId} role="tooltip" className="live-xsell-tooltip">{tooltip}</div>}
     </div>
-  );
-}
-
-function ServiceSlider({ children }: { children: ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [canPrev, setCanPrev] = useState(false);
-  const [canNext, setCanNext] = useState(false);
-  const update = useCallback(() => {
-    const el = ref.current;
-    if (!el) return;
-    setCanPrev(el.scrollLeft > 2);
-    setCanNext(el.scrollLeft + el.clientWidth < el.scrollWidth - 2);
-  }, []);
-  useEffect(() => {
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, [update]);
-  const go = (dir: 1 | -1) => {
-    const el = ref.current;
-    const card = el?.firstElementChild as HTMLElement | null;
-    if (!el || !card) return;
-    el.scrollBy({ left: dir * (card.offsetWidth + 16), behavior: "smooth" });
-  };
-  return (
-    <div className="relative lg:h-[calc(100%-3rem)]">
-      <div ref={ref} onScroll={update} className="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
-        {children}
-      </div>
-      {canPrev && <SliderArrow dir="prev" onClick={() => go(-1)} />}
-      {canNext && <SliderArrow dir="next" onClick={() => go(1)} />}
-    </div>
-  );
-}
-
-function SliderArrow({ dir, onClick }: { dir: "prev" | "next"; onClick: () => void }) {
-  return (
-    <button
-      type="button"
-      aria-label={dir === "prev" ? "Προηγούμενο" : "Επόμενο"}
-      onClick={onClick}
-      className={`slider-arrow absolute top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full min-[760px]:hidden ${dir === "prev" ? "left-1" : "right-1"}`}
-    >
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d={dir === "prev" ? "M19 12H5M11 6l-6 6 6 6" : "M5 12h14M13 6l6 6-6 6"} />
-      </svg>
-    </button>
   );
 }
 

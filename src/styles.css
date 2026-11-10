@@ -73,6 +73,8 @@
 }
 
 @theme inline {
+  --color-role-card-dot: var(--role-card-dot);
+  --color-role-line: var(--role-line);
   --font-display: "Commissioner", system-ui, sans-serif;
   --font-serif: "Noto Serif Display", Georgia, serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
@@ -106,6 +108,8 @@
   --primary: #1C1C1A;
   --primary-foreground: #FEFAF3;
   --secondary: #F5EEE2;
+  --role-card-dot: #D9D0C1;
+  --role-line: rgba(28, 28, 26, 0.15);
   --secondary-foreground: #1C1C1A;
   --muted: #EFE9DE;
   --muted-foreground: #5F5B53;
@@ -267,3 +271,9 @@ a:hover { color: var(--accent); }
 @media (min-width: 600px) and (max-width: 759.98px) { .service-slider > * { flex: 1 1 0; } }
 
 .slider-arrow { background: #1C1C1A; color: #FFFFFF; box-shadow: 0 8px 20px -6px rgba(0,0,0,.45); }
+
+@media (max-width: 759.98px) {
+  .list-slider { grid-auto-flow: column; grid-auto-columns: 80%; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 0 20px; scroll-padding-inline: 20px; }
+  .list-slider::-webkit-scrollbar { display: none; }
+  .list-slider > * { scroll-snap-align: center; }
+}
