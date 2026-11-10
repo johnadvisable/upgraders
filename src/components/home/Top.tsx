@@ -108,16 +108,17 @@ function ServiceCard({ title, sub, text, cta, badge, icon, tone, modal, tooltip 
   const canHover = () => window.matchMedia("(hover: hover) and (min-width: 900px)").matches;
   return (
     <div onMouseEnter={() => canHover() && setOpen(true)} onMouseLeave={() => setOpen(false)} onFocus={() => canHover() && setOpen(true)} onBlur={() => setOpen(false)}
-      className={`relative flex flex-col rounded-[20px] p-7 ${light ? "bg-card shadow-[0_8px_24px_-12px_rgba(28,28,26,0.18)]" : "bg-tan"}`}>
+      className={`relative flex flex-col rounded-[20px] p-[22px] min-[760px]:p-7 ${light ? "bg-card shadow-[0_8px_24px_-12px_rgba(28,28,26,0.18)]" : "bg-tan"}`}>
       {open && <div id={tooltipId} role="tooltip" className="pointer-events-none absolute left-7 right-7 bottom-[calc(100%+10px)] z-[5] rounded-[10px] bg-ink px-[14px] py-[10px] text-[13px] font-normal leading-[1.4] text-ink-foreground shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)]">{tooltip}</div>}
       {badge && <span className="absolute right-5 top-7 rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-accent-foreground">{badge}</span>}
-      <span className={`flex h-11 w-11 items-center justify-center rounded-[4px] ${light ? "bg-tan" : "bg-card"}`}>
+      <span className={`flex h-11 w-11 items-center justify-center rounded-[4px] ${light ? "bg-tan" : "bg-background"}`}>
         <ServiceIcon name={icon} className="h-[22px] w-[22px]" />
       </span>
-      <h3 className="mt-10 text-xl font-semibold tracking-tight">{title}</h3>
-      {sub && <p className="mt-1 text-foreground/70">{sub}</p>}
-      <p className="mt-2 flex-1 leading-relaxed text-foreground/80">{text}</p>
-      <a href={modal ? "#contact" : "#live"} onClick={modal ? openBooking : undefined} aria-describedby={open ? tooltipId : undefined} className="mt-8 inline-flex items-center gap-2 self-start rounded-[6px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 hover:text-primary-foreground">
+      <h3 className="mt-[30px] text-xl font-semibold tracking-tight">{title}</h3>
+      {sub && <p className="mt-[2px] text-foreground/70">{sub}</p>}
+      <p className="mt-[10px] leading-relaxed text-foreground/80">{text}</p>
+      <div className="flex-1" />
+      <a href={modal ? "#contact" : "#live"} onClick={modal ? openBooking : undefined} aria-describedby={open ? tooltipId : undefined} className="mt-4 inline-flex items-center gap-2 self-start rounded-[6px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 hover:text-primary-foreground">
         {cta} <ArrowRight className="h-4 w-4" />
       </a>
     </div>
