@@ -6,7 +6,7 @@ export function Eyebrow({ children, className }: { children: ReactNode; classNam
 }
 
 export function Title({ children, className }: { children: ReactNode; className?: string }) {
-  return <h2 className={cn("mt-3 text-4xl font-light leading-[1.04] md:text-6xl", className)}>{children}</h2>;
+  return <h2 className={cn("mt-3 text-[clamp(2.25rem,5vw,4.5rem)] font-light leading-[1.04]", className)}>{children}</h2>;
 }
 
 export function Pill({ children, href = "#contact", variant = "dark", className }: { children: ReactNode; href?: string; variant?: "dark" | "light" | "outline"; className?: string }) {
