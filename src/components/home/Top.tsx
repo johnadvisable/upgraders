@@ -158,8 +158,8 @@ export function LiveCourses() {
       <div className="max-w-[51.25rem]">
         <Eyebrow>Live Upgrades</Eyebrow>
         <Title>Τα επόμενα <span className="font-serif italic font-normal!">live<br className="hidden lg:block" /> μαθήματα.</span></Title>
+        <p className="mt-4 text-lg text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
       </div>
-      <p className="mt-4 max-w-2xl text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
       <div className="mt-10 rounded-[20px] border border-border bg-card">
         <div className="live-course-grid hidden border-b border-border px-6 py-4 font-mono text-[11px] uppercase text-muted-foreground lg:grid">
           <span>ΜΑΘΗΜΑ</span><span>ΗΜΕΡΟΜΗΝΙΑ</span><span>ΩΡΕΣ</span><span>ΤΡΟΠΟΣ</span><span>ΤΙΜΗ</span>
