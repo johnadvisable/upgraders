@@ -74,6 +74,9 @@
 
 @theme inline {
   --color-role-card-dot: var(--role-card-dot);
+  --color-ops-line: var(--ops-line);
+  --color-ops-dot: var(--ops-dot);
+  --color-ops-chip: var(--ops-chip);
   --color-role-line: var(--role-line);
   --font-display: "Commissioner", system-ui, sans-serif;
   --font-serif: "Noto Serif Display", Georgia, serif;
@@ -109,6 +112,9 @@
   --primary-foreground: #FEFAF3;
   --secondary: #F5EEE2;
   --role-card-dot: #D9D0C1;
+  --ops-line: #EFE9DE;
+  --ops-dot: #E4DDD1;
+  --ops-chip: #F3EDE2;
   --role-line: rgba(28, 28, 26, 0.15);
   --secondary-foreground: #1C1C1A;
   --muted: #EFE9DE;
@@ -279,3 +285,6 @@ a:hover { color: var(--accent); }
 }
 
 .paradox-glow { background: radial-gradient(60% 70% at 50% 0%, rgb(91 74 134 / .32), transparent 70%), radial-gradient(40% 50% at 85% 100%, rgb(160 111 128 / .18), transparent 70%); }
+
+.ops-frame { background: radial-gradient(80% 90% at 0% 0%, #8E7BAA, transparent 60%), radial-gradient(70% 80% at 100% 100%, #B88A92, transparent 60%), #6E6478; }
+.ops-card { box-shadow: 0 30px 60px -30px rgb(28 28 26 / .5); }

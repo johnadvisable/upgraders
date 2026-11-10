@@ -93,51 +93,86 @@ function Checks({ items }: { items: string[] }) {
   );
 }
 
+const svgBase = { width: 30, height: 30, viewBox: "0 0 24 24", fill: "none", stroke: "var(--foreground)", strokeWidth: 1.4, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true } as const;
+
+function EnableText({ icon, eyebrow, lead, accent, text, bullets, link, href }: { icon: string[]; eyebrow: string; lead: string; accent: string; text: string; bullets: string[]; link: string; href: string }) {
+  return (
+    <div className="flex max-w-[540px] flex-[1_1_min(100%,360px)] flex-col gap-5">
+      <svg {...svgBase}>{icon.map((d) => <path key={d} d={d} />)}</svg>
+      <p className="font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground">{eyebrow}</p>
+      <h2 className="text-[clamp(36px,4.4vw,60px)] font-light leading-[1.04] tracking-[-0.035em]">{lead}<span className="font-serif font-normal! italic">{accent}</span></h2>
+      <p className="text-lg leading-[1.55] text-muted-foreground">{text}</p>
+      <ul className="grid gap-[10px] text-base">
+        {bullets.map((b) => <li key={b} className="flex items-center gap-3"><span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 bg-foreground" />{b}</li>)}
+      </ul>
+      <a href={href} className="inline-flex items-center gap-2 self-start text-base font-medium">
+        {link}
+        <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+      </a>
+    </div>
+  );
+}
+
 export function Enablement() {
   const systems = [["ERP", "SoftOne ERP", "Συγχρονίστηκε πριν 2'"], ["CRM", "HubSpot CRM", "Συγχρονίστηκε πριν 1'"], ["DOC", "SharePoint · Έγγραφα", "12.480 αρχεία"], ["MAIL", "Outlook", "Εισερχόμενα πωλήσεων"]];
   const feed = [["Προσφορά #2381 · έτοιμη για έγκριση", "2'"], ["Τιμολόγιο ↔ Δελτίο · ταιριάζει", "6'"], ["Email πελάτη · απαντήθηκε", "9'"]];
+  const bars = [30, 42, 38, 55, 61, 58, 72, 80, 77, 92];
   return (
     <Section id="programs" className="pt-[clamp(40px,5vw,72px)] pb-[clamp(72px,9vw,120px)]">
-      <div className="grid gap-16 lg:grid-cols-2">
-        <div>
-          <Eyebrow>Team enablement</Eyebrow>
-          <Title>Αναβαθμίζουμε τους ανθρώπους.</Title>
-          <p className="mt-5 text-muted-foreground">Εκπαιδεύουμε την ομάδα σας να χρησιμοποιεί AI στη δουλειά που ήδη κάνει: έρευνα, επικοινωνία, ανάλυση, αποφάσεις, καθημερινές ροές.</p>
-          <Checks items={["Hands-on εκπαίδευση ανά ρόλο", "Πάνω στην πραγματική δουλειά της ομάδας", "Από τη βασική χρήση σε επαναλαμβανόμενες ροές"]} />
-          <Pill className="mt-8" href="#roles">Δείτε τα προγράμματα</Pill>
-        </div>
-        <div>
-          <Eyebrow>Production systems</Eyebrow>
-          <Title>Αναβαθμίζουμε τα συστήματα.</Title>
-          <p className="mt-5 text-muted-foreground">Συνδέουμε τα δεδομένα, τα έγγραφα και το λογισμικό σας και στήνουμε συστήματα AI γύρω από τις ροές που αξίζει να αλλάξουν.</p>
-          <Checks items={["Πάνω στα συστήματα που ήδη έχετε", "Συνδεδεμένα με πραγματικά δεδομένα", "Σε λειτουργία, με παρακολούθηση και συνεχή βελτίωση"]} />
-          <Pill className="mt-8" href="#tools">Δείτε τι έχουμε χτίσει</Pill>
-        </div>
+      <div className="flex flex-wrap items-center gap-[clamp(36px,5vw,88px)]">
+        <EnableText
+          icon={["M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8z", "M2 21c0-4 3-6.5 7-6.5s7 2.5 7 6.5", "M16 3.6a4 4 0 0 1 0 7.3", "M18 14.8c2.4.6 4 2.6 4 6.2"]}
+          eyebrow="Team enablement" lead="Αναβαθμίζουμε " accent="τους ανθρώπους."
+          text="Εκπαιδεύουμε την ομάδα σας να χρησιμοποιεί AI στη δουλειά που ήδη κάνει: έρευνα, επικοινωνία, ανάλυση, αποφάσεις, καθημερινές ροές."
+          bullets={["Hands-on εκπαίδευση ανά ρόλο", "Πάνω στην πραγματική δουλειά της ομάδας", "Από τη βασική χρήση σε επαναλαμβανόμενες ροές"]}
+          link="Δείτε τα προγράμματα" href="#services"
+        />
+        <img src="https://images.pexels.com/photos/3184327/pexels-photo-3184327.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Ελληνική ομάδα σε workshop γύρω από τραπέζι με laptops" loading="lazy" className="min-w-0 flex-[1.3_1_min(100%,460px)] rounded-[22px] object-cover" />
       </div>
-      <div className="mt-14 rounded-[14px] bg-ink p-6 text-ink-foreground md:p-8">
-        <div className="flex items-center justify-between text-xs font-semibold font-mono tracking-[0.08em] text-ink-muted">
-          <span>AI OPS · Ροή προσφορών B2B</span>
-          <span className="flex items-center gap-2 text-success"><span className="h-2 w-2 animate-pulse rounded-full bg-success" />LIVE</span>
-        </div>
-        <div className="mt-6 grid gap-8 md:grid-cols-2">
-          <div>
-            <p className="mb-3 text-xs font-mono tracking-[0.08em] text-ink-muted">ΣΥΝΔΕΔΕΜΕΝΑ ΣΥΣΤΗΜΑΤΑ</p>
-            <div className="space-y-2">
-              {systems.map(([k, n, s]) => (
-                <div key={k} className="flex items-center gap-3 rounded-xl bg-ink-foreground/5 p-3 text-sm">
-                  <span className="w-12 rounded-md bg-ink-foreground/10 py-1 text-center text-[10px] font-bold">{k}</span>
-                  <span className="flex-1">{n}</span><span className="text-xs text-ink-muted">{s}</span>
-                </div>
-              ))}
+      <div className="mt-[clamp(56px,7vw,104px)] flex flex-row-reverse flex-wrap items-center gap-[clamp(36px,5vw,88px)]">
+        <EnableText
+          icon={["M3 4h18v6H3z", "M3 14h18v6H3z", "M7 7h.01", "M7 17h.01", "M11 7h6", "M11 17h6"]}
+          eyebrow="Production systems" lead="Αναβαθμίζουμε " accent="τα συστήματα."
+          text="Συνδέουμε τα δεδομένα, τα έγγραφα και το λογισμικό σας και στήνουμε συστήματα AI γύρω από τις ροές που αξίζει να αλλάξουν."
+          bullets={["Πάνω στα συστήματα που ήδη έχετε", "Συνδεδεμένα με πραγματικά δεδομένα", "Σε λειτουργία, με παρακολούθηση και συνεχή βελτίωση"]}
+          link="Δείτε τι έχουμε χτίσει" href="#tools"
+        />
+        <div className="ops-frame relative min-w-0 flex-[1.3_1_min(100%,460px)] overflow-hidden rounded-[22px] p-[clamp(18px,3vw,40px)]">
+          <div aria-hidden="true" className="absolute inset-0" style={{ opacity: 0.3, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
+          <div className="ops-card relative overflow-hidden rounded-[14px] bg-card">
+            <div className="flex items-center gap-3 border-b border-ops-line px-4 py-3">
+              <span className="flex gap-1.5">{[0, 1, 2].map((d) => <span key={d} className="h-[9px] w-[9px] rounded-full bg-ops-dot" />)}</span>
+              <span className="flex-1 text-center font-mono text-[11px] text-muted-foreground">AI OPS · Ροή προσφορών B2B</span>
+              <span className="flex items-center gap-1.5 font-mono text-[11px]"><span className="h-[7px] w-[7px] animate-pulse rounded-full bg-accent" />LIVE</span>
             </div>
-          </div>
-          <div>
-            <p className="text-xs font-mono tracking-[0.08em] text-ink-muted">ΩΡΕΣ ΠΟΥ ΕΞΟΙΚΟΝΟΜΗΘΗΚΑΝ · Q3</p>
-            <p className="mt-2 font-display text-6xl">1.284 <span className="text-lg text-success">+18%</span></p>
-            <div className="mt-6 space-y-2">
-              {feed.map(([t, m]) => (
-                <div key={t} className="flex justify-between border-b border-ink-foreground/10 pb-2 text-sm"><span>{t}</span><span className="text-ink-muted">{m}</span></div>
-              ))}
+            <div className="grid grid-cols-[repeat(auto-fit,minmax(min(100%,220px),1fr))]">
+              <div className="border-r border-ops-line p-5">
+                <p className="font-mono text-[10px] tracking-[0.08em] text-muted-foreground">ΣΥΝΔΕΔΕΜΕΝΑ ΣΥΣΤΗΜΑΤΑ</p>
+                <div className="mt-3 grid gap-3">
+                  {systems.map(([k, n, sub]) => (
+                    <div key={k} className="flex items-center gap-3">
+                      <span className="flex h-[34px] w-[34px] shrink-0 items-center justify-center rounded-[9px] bg-ops-chip font-mono text-[10px] font-semibold">{k}</span>
+                      <span className="min-w-0 flex-1"><span className="block text-sm">{n}</span><span className="block text-xs text-live-subtitle">{sub}</span></span>
+                      <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="var(--foreground)" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l4 4 10-10" /></svg>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="p-5">
+                <p className="font-mono text-[10px] tracking-[0.08em] text-muted-foreground">ΩΡΕΣ ΠΟΥ ΕΞΟΙΚΟΝΟΜΗΘΗΚΑΝ · Q3</p>
+                <div className="mt-1 flex items-center gap-2">
+                  <span className="text-[52px] font-light tracking-[-0.04em]">1.284</span>
+                  <span className="rounded-full bg-accent px-2 py-[3px] text-xs font-medium text-accent-foreground">+18%</span>
+                </div>
+                <div aria-hidden="true" className="mt-2 flex h-16 items-end gap-1">
+                  {bars.map((h, idx) => <span key={idx} className="flex-1 rounded-t-[3px] bg-foreground opacity-85" style={{ height: `${h}%` }} />)}
+                </div>
+                <div className="mt-3">
+                  {feed.map(([t, m]) => (
+                    <div key={t} className="flex justify-between gap-3 border-b border-live-row-divider py-[9px] text-[13px]"><span>{t}</span><span className="font-mono text-[11px] text-live-subtitle">{m}</span></div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
