@@ -113,7 +113,7 @@ function UpdateCard({ textRef }: { textRef: React.RefObject<HTMLDivElement | nul
   const small = vw < 600;
   const rightOffset = sheet && small ? "12px" : sheet ? "clamp(20px,4vw,48px)" : "clamp(16px,3vw,32px)";
   const pos: React.CSSProperties =
-    sheet ? { position: "fixed", bottom: small ? 12 : 16, right: rightOffset, left: small ? 12 : undefined, width: small ? "auto" : 360 }
+    sheet ? { position: "absolute", bottom: small ? 12 : 16, right: rightOffset, left: small ? 12 : undefined, width: small ? "auto" : 360 }
     : placement === "bottom" ? { position: "absolute", bottom: 20, right: rightOffset, width: 360 }
     : placement === "top" ? { position: "fixed", top: 88, right: rightOffset, width: 360 }
     : { position: "fixed", bottom: 12, right: rightOffset, width: 360 };
@@ -246,15 +246,12 @@ function GroupLabel({ title, sub }: { title: string; sub: string }) {
 export function Services() {
   return (
     <Section id="services" className="py-[clamp(72px,9vw,128px)]">
-      <Reveal className="flex flex-wrap items-end justify-between gap-6">
-        <div>
-          <Eyebrow className="text-foreground">Υπηρεσίες εκπαίδευσης</Eyebrow>
-          <Title className="mt-6 text-5xl md:text-7xl">
-            Επιλέξτε πώς θα
-            <span className="block font-serif italic !font-normal">αναβαθμιστείτε.</span>
-          </Title>
-        </div>
-        <Pill>Θέλω εκπαίδευση</Pill>
+      <Reveal className="max-w-[51.25rem]">
+        <Eyebrow className="text-foreground">Υπηρεσίες εκπαίδευσης</Eyebrow>
+        <Title>
+          Επιλέξτε πώς θα
+          <span className="block font-serif italic !font-normal">αναβαθμιστείτε.</span>
+        </Title>
       </Reveal>
       <Reveal className="mt-12 grid gap-4 lg:grid-cols-2">
         <div className="min-w-0">
