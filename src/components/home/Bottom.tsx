@@ -310,7 +310,7 @@ export function Footer() {
         <img src="/logo-negative.svg" alt="The Upgraders" className="block h-auto w-full" />
       </div>
       <div className="mx-auto max-w-6xl px-5">
-        <div className="flex flex-wrap justify-between gap-4 py-[22px] text-xs text-ink-muted">
+        <div className="flex flex-wrap justify-between gap-4 py-[22px] font-mono text-[11px] tracking-[0.06em] text-ink-foreground/60">
           <span>© 2026 THE UPGRADERS. ΜΕ ΕΠΙΦΥΛΑΞΗ ΠΑΝΤΟΣ ΔΙΚΑΙΩΜΑΤΟΣ.</span>
           <span>Made with &lt;3 by Humble &amp; Advisable.</span>
         </div>
