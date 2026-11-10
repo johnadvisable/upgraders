@@ -157,7 +157,7 @@ export function LiveCourses() {
     <Section id="live" className="bg-secondary">
       <div className="max-w-[51.25rem]">
         <Eyebrow>Live Upgrades</Eyebrow>
-        <Title>Τα επόμενα <span className="font-serif italic">live<br className="hidden lg:block" /> μαθήματα.</span></Title>
+        <Title>Τα επόμενα <span className="font-serif italic font-normal!">live<br className="hidden lg:block" /> μαθήματα.</span></Title>
       </div>
       <p className="mt-4 max-w-2xl text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
       <div className="mt-10 rounded-[20px] border border-border bg-card">
