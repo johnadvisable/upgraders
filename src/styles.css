@@ -257,3 +257,11 @@ a:hover { color: var(--accent); }
     radial-gradient(40% 40% at 78% 62%, var(--rose), transparent 70%),
     var(--ink);
 }
+
+/* Services: phone swipe slider below 760px; bleed equals Section's px-5 so cards align with page content */
+@media (max-width: 759.98px) {
+  .service-slider { display: flex; flex-wrap: nowrap; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; margin: -16px -20px 0; padding: 16px 20px 8px; scroll-padding-inline: 20px; }
+  .service-slider::-webkit-scrollbar { display: none; }
+  .service-slider > * { flex: 0 0 82%; scroll-snap-align: center; }
+}
+@media (min-width: 600px) and (max-width: 759.98px) { .service-slider > * { flex: 1 1 0; } }

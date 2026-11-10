@@ -134,16 +134,16 @@ export function Services() {
         <Pill>Θέλω εκπαίδευση</Pill>
       </div>
       <div className="mt-12 grid gap-4 lg:grid-cols-2">
-        <div>
+        <div className="min-w-0">
           <GroupLabel title="Σε τμήματα" sub="Ανοιχτά μαθήματα & βιβλιοθήκη εκπαιδεύσεων" />
-          <div className="grid gap-4 sm:grid-cols-2 lg:h-[calc(100%-3rem)]">
+          <div className="service-slider min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4 lg:h-[calc(100%-3rem)]">
             <ServiceCard tone="light" icon={MonitorPlay} title="Live Εκπαίδευση" sub="(σε μικρά τμήματα)" text="Μικρά groups, σε δική μας αίθουσα ή livestream." cta="Επόμενα μαθήματα" />
             <ServiceCard tone="light" icon={CirclePlay} title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" />
           </div>
         </div>
-        <div>
+        <div className="min-w-0">
           <GroupLabel title="Εξατομικευμένη" sub="Στημένη αποκλειστικά για την ομάδα σας" />
-          <div className="grid gap-4 sm:grid-cols-2 lg:h-[calc(100%-3rem)]">
+          <div className="service-slider min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4 lg:h-[calc(100%-3rem)]">
             <ServiceCard tone="tan" icon={Building2} title="Εταιρικό AI Upgrade" text="Tailor-made εκπαίδευση, στημένη πάνω στην εταιρεία σας." cta="Δείτε πώς γίνεται" />
             <ServiceCard tone="tan" icon={Zap} badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
           </div>
