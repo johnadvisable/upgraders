@@ -155,7 +155,7 @@ export function Services() {
 
 export function LiveCourses() {
   return (
-    <Section id="live">
+    <Section id="live" className="pb-0 md:pb-0">
       <div className="max-w-[51.25rem]">
         <Eyebrow>Live Upgrades</Eyebrow>
         <Title>Τα επόμενα <span className="font-serif italic font-normal!">live<br className="hidden lg:block" /> μαθήματα.</span></Title>
