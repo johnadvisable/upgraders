@@ -234,6 +234,21 @@ export function Team() {
   );
 }
 
+export function Quote() {
+  return (
+    <section id="contact" className="px-[clamp(12px,3vw,48px)] pb-[clamp(80px,10vw,140px)]">
+      <div className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[28px] px-6 py-[clamp(80px,10vw,140px)] text-center text-white" style={{ background: "radial-gradient(60% 80% at 0% 100%,#B07F9C 0%,transparent 65%), radial-gradient(60% 70% at 100% 0%,#36366E 0%,transparent 70%), linear-gradient(120deg,#5E62A0 0%,#53508E 45%,#6B5791 100%)" }}>
+        <div aria-hidden="true" className="absolute inset-0" style={{ opacity: 0.35, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
+        <div className="relative">
+          <p className="text-[clamp(32px,4.4vw,64px)] font-light leading-[1.06] tracking-[-0.035em]">Φτιαγμένο με AI,</p>
+          <p className="mx-auto mt-3 max-w-[900px] font-serif text-[clamp(24px,3.2vw,44px)] font-light! italic leading-[1.15] tracking-[-0.02em]">Και 15 χρόνια εμπειρίας σε product, business, copywriting, design και coding.</p>
+          <img src="/logo-negative.svg" alt="The Upgraders" className="mx-auto mt-10 block h-[30px]" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 export function Faq() {
   return (
     <Section id="faq" className="pt-0 pb-[clamp(80px,10vw,140px)]">
@@ -262,7 +277,7 @@ export function Footer() {
     "ΝΟΜΙΚΑ": ["Όροι χρήσης", "Πολιτική απορρήτου", "Πολιτική cookies"],
   };
   return (
-    <footer id="contact" className="bg-ink px-5 pb-10 pt-20 text-ink-foreground">
+    <footer className="bg-ink px-5 pb-10 pt-20 text-ink-foreground">
       <div className="mx-auto max-w-6xl">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <h2 className="font-display text-4xl md:text-5xl">Έτοιμοι για αναβάθμιση;</h2>

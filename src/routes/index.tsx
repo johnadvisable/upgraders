@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header, Hero, LiveCourses, Services } from "@/components/home/Top";
 import { TrustedBy } from "@/components/home/TrustedBy";
 import { Enablement, Industries, Method, Paradox, Roles } from "@/components/home/Middle";
-import { Cases, Faq, Footer, Team, Tools, Why } from "@/components/home/Bottom";
+import { Cases, Faq, Footer, Quote, Team, Tools, Why } from "@/components/home/Bottom";
 
 const title = "The Upgraders — Εκπαίδευση AI & custom συστήματα για επιχειρήσεις";
 const description = "Βάλατε ChatGPT και Claude, η καθημερινότητα όμως έμεινε ίδια. Εκπαιδεύουμε την ομάδα σας και χτίζουμε συστήματα AI.";
@@ -38,6 +38,7 @@ function Index() {
       <Tools />
       <Why />
       <Team />
+      <Quote />
       <Faq />
       <Footer />
     </main>
