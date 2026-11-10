@@ -1,4 +1,5 @@
-import { createContext, useCallback, useContext, useEffect, useRef, useState, type MouseEvent, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useState, type MouseEvent, type ReactNode } from "react";
+import { ModalShell } from "./ModalShell";
 
 const BookingContext = createContext<(e?: MouseEvent) => void>(() => {});
 export const useOpenBooking = () => useContext(BookingContext);
@@ -12,29 +13,12 @@ const items = [
 
 export function BookingProvider({ children }: { children: ReactNode }) {
   const [open, setOpen] = useState(false);
-  const trigger = useRef<HTMLElement | null>(null);
-  const dialog = useRef<HTMLDivElement>(null);
   const openModal = useCallback((e?: MouseEvent) => {
     e?.preventDefault();
-    trigger.current = (e?.currentTarget as HTMLElement) ?? (document.activeElement as HTMLElement);
+    (e?.currentTarget as HTMLElement | undefined)?.focus();
     setOpen(true);
   }, []);
   const close = useCallback(() => setOpen(false), []);
-
-  useEffect(() => {
-    if (!open) return;
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    dialog.current?.focus();
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && close();
-    document.addEventListener("keydown", onKey);
-    const t = trigger.current;
-    return () => {
-      document.body.style.overflow = prev;
-      document.removeEventListener("keydown", onKey);
-      t?.focus();
-    };
-  }, [open, close]);
 
   const src = typeof window === "undefined" ? "" : "https://calendly.com/theupgraders/30min?hide_gdpr_banner=1&hide_landing_page_details=1&background_color=ffffff&text_color=1c1c1a&primary_color=1c1c1a&embed_type=Inline&embed_domain=" + encodeURIComponent(window.location.hostname);
 
@@ -42,12 +26,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     <BookingContext.Provider value={openModal}>
       {children}
       {open && (
-        <div onClick={close} className="fixed inset-0 z-[200] flex items-start justify-center overflow-y-auto bg-foreground/45 px-[clamp(12px,3vw,32px)] py-[clamp(12px,4vh,56px)] backdrop-blur-[6px]">
-          <div ref={dialog} role="dialog" aria-modal="true" aria-labelledby="booking-title" tabIndex={-1} onClick={(e) => e.stopPropagation()}
-            className="booking-dialog relative my-auto w-full max-w-[1120px] rounded-[20px] p-[clamp(28px,4vw,56px)] text-foreground shadow-[0_30px_80px_-30px_rgba(0,0,0,.45)] outline-none">
-            <button type="button" aria-label="Κλείσιμο" onClick={close} className="absolute right-[18px] top-[18px] flex h-10 w-10 items-center justify-center rounded-[10px] bg-transparent hover:bg-foreground/7">
-              <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" aria-hidden><path d="M6 6l12 12" /><path d="M18 6L6 18" /></svg>
-            </button>
+        <ModalShell onClose={close} labelledBy="booking-title" z="z-[200]" className="booking-dialog max-w-[1120px] p-[clamp(28px,4vw,56px)]">
             <div className="booking-grid">
               <div style={{ gridArea: "intro" }}>
                 <p className="text-[13px] font-medium uppercase tracking-[0.08em] text-[#5F5B53]">Δωρεάν γνωριμία · 30 λεπτά</p>
@@ -66,8 +45,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
                 <iframe src={src} title="Κλείστε ραντεβού" className="block h-[700px] w-full border-0" />
               </div>
             </div>
-          </div>
-        </div>
+        </ModalShell>
       )}
     </BookingContext.Provider>
   );
