@@ -101,7 +101,7 @@ export function Tools() {
                   </span>
                   <span className="text-xs opacity-90">{t.meta}</span>
                 </div>
-                <span aria-hidden="true" className="ml-auto h-[38px] w-[38px] shrink-0 rounded-[10px] bg-ink shadow-lg" />
+                <img src="/icon.png" alt="" aria-hidden="true" className="ml-auto h-[38px] w-[38px] shrink-0 rounded-[10px] object-cover shadow-lg" />
               </div>
               <h3 className="relative mt-6 max-w-[340px] text-[27px] font-normal leading-tight">{t.name}</h3>
               <p className="relative mt-2 max-w-[320px] text-sm opacity-88">{t.text}</p>

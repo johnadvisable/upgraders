@@ -240,7 +240,7 @@ function MethodPanel({ step }: { step: number }) {
             {[26, 75, 125, 174].map((y) => <path key={y} d={`M0 ${y} C50 ${y} 50 100 100 100`} fill="none" stroke="var(--foreground)" strokeWidth={1.2} strokeDasharray="3 4" vectorEffect="non-scaling-stroke" />)}
           </svg>
           <div className="rounded-[16px] bg-ink p-5 text-ink-foreground">
-            <svg width={34} height={34} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" /><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" /></svg>
+            <img src="/icon.png" alt="" aria-hidden="true" className="h-[34px] w-[34px] rounded-[8px] object-cover" />
             <p className="mt-3 text-lg">AI Assistant</p>
             <p className="mt-1 text-xs text-ink-foreground/70">Συντάσσει προσφορές από CRM, τιμοκατάλογο ERP και ιστορικό email.</p>
           </div>
