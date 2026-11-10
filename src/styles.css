@@ -77,6 +77,9 @@
   --color-ops-line: var(--ops-line);
   --color-ops-dot: var(--ops-dot);
   --color-ops-chip: var(--ops-chip);
+  --color-method-bg: var(--method-bg);
+  --color-method-chip: var(--method-chip);
+  --color-method-chip-border: var(--method-chip-border);
   --color-role-line: var(--role-line);
   --font-display: "Commissioner", system-ui, sans-serif;
   --font-serif: "Noto Serif Display", Georgia, serif;
@@ -115,6 +118,9 @@
   --ops-line: #EFE9DE;
   --ops-dot: #E4DDD1;
   --ops-chip: #F3EDE2;
+  --method-bg: #F3ECDF;
+  --method-chip: #FCFAF6;
+  --method-chip-border: #ECE5D9;
   --role-line: rgba(28, 28, 26, 0.15);
   --secondary-foreground: #1C1C1A;
   --muted: #EFE9DE;
@@ -288,3 +294,5 @@ a:hover { color: var(--accent); }
 
 .ops-frame { background: radial-gradient(80% 90% at 0% 0%, #8E7BAA, transparent 60%), radial-gradient(70% 80% at 100% 100%, #B88A92, transparent 60%), #6E6478; }
 .ops-card { box-shadow: 0 30px 60px -30px rgb(28 28 26 / .5); }
+
+.method-panel { box-shadow: 0 30px 60px -40px rgb(28 28 26 / .45); }

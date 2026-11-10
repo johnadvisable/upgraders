@@ -1,6 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { industries, opportunities, roles, steps } from "./data";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { industries, roles, steps } from "./data";
 import { Slider } from "./Slider";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
@@ -85,13 +84,6 @@ export function Paradox() {
   );
 }
 
-function Checks({ items }: { items: string[] }) {
-  return (
-    <ul className="mt-6 space-y-2">
-      {items.map((i) => <li key={i} className="flex gap-3"><span className="text-accent">✓</span>{i}</li>)}
-    </ul>
-  );
-}
 
 const svgBase = { width: 30, height: 30, viewBox: "0 0 24 24", fill: "none", stroke: "var(--foreground)", strokeWidth: 1.4, strokeLinecap: "round", strokeLinejoin: "round", "aria-hidden": true } as const;
 
@@ -181,43 +173,135 @@ export function Enablement() {
   );
 }
 
-export function Method() {
-  return (
-    <Section id="method" className="pt-0 pb-[clamp(72px,9vw,128px)]">
-      <Eyebrow>Μεθοδολογία</Eyebrow>
-      <Title>Εφαρμόζουμε 4 βήματα. <span className="italic text-muted-foreground">Μετά, φέρνουμε αποτέλεσμα.</span></Title>
-      <Tabs defaultValue="diag" className="mt-10">
-        <TabsList className="h-auto flex-wrap rounded-full bg-card p-1">
-          {steps.map((s, i) => (
-            <TabsTrigger key={s.key} value={s.key} className="rounded-full px-4 py-2 data-[state=active]:bg-primary data-[state=active]:text-primary-foreground">
-              0{i + 1} {s.label}
-            </TabsTrigger>
-          ))}
-        </TabsList>
-        {steps.map((s, i) => (
-          <TabsContent key={s.key} value={s.key} className="mt-8">
-            <div className="grid gap-10 lg:grid-cols-2">
-              <div>
-                <p className="text-xs font-semibold font-mono tracking-[0.08em] text-muted-foreground">0{i + 1} / 04 · {s.label.toUpperCase()}</p>
-                <h3 className="mt-3 font-display text-3xl">{s.title}</h3>
-                <p className="mt-4 text-muted-foreground">{s.text}</p>
-                <Checks items={s.bullets} />
-              </div>
-              <div className="rounded-[14px] border border-border bg-card p-6">
-                <div className="flex justify-between text-sm"><span className="font-semibold">Ευκαιρίες AI <span className="text-muted-foreground">14</span></span><span className="text-xs font-mono tracking-[0.08em] text-muted-foreground">ΕΠΙΔΡΑΣΗ</span></div>
-                <div className="mt-4 space-y-4">
-                  {opportunities.map(([n, d, v]) => (
-                    <div key={n}>
-                      <div className="flex justify-between text-sm"><span>{n} <span className="ml-2 text-[10px] font-mono tracking-[0.08em] text-muted-foreground">{d}</span></span><span className="font-semibold">{v}</span></div>
-                      <div className="mt-1 h-1.5 rounded-full bg-muted"><div className="h-1.5 rounded-full bg-accent" style={{ width: `${v}%` }} /></div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </TabsContent>
+const methodOpps = [["Προσφορές B2B", "ΠΩΛΗΣΕΙΣ", 92], ["Απαντήσεις σε email πελατών", "ΕΞΥΠΗΡΕΤΗΣΗ", 84], ["Αντιστοίχιση τιμολογίων", "ΛΟΓΙΣΤΗΡΙΟ", 77], ["Εβδομαδιαία reports", "ΔΙΟΙΚΗΣΗ", 61], ["Onboarding νέων συνεργατών", "HR", 48]] as const;
+const methodDots = [[80, 18, 16, "var(--accent)", "Προσφορές B2B"], [64, 30, 12, "var(--foreground)", "Email πελατών"], [86, 40, 11, "var(--foreground)", ""], [70, 44, 9, "var(--foreground)", "Τιμολόγια"], [28, 26, 10, "rgb(28 28 26 / .3)", ""], [58, 68, 9, "rgb(28 28 26 / .3)", ""], [20, 76, 8, "rgb(28 28 26 / .3)", ""], [38, 58, 10, "rgb(28 28 26 / .3)", ""]] as const;
+const methodSources = [{ k: "ERP", n: "Τιμοκατάλογος" }, { k: "CRM", n: "Πελάτες & deals" }, { k: "EMAIL", n: "Ιστορικό" }, { k: "DOCS", n: "Όροι & πρότυπα" }];
+const methodAdoption = [["ΜΑΪ", 22], ["ΙΟΥΝ", 35], ["ΙΟΥΛ", 48], ["ΑΥΓ", 57], ["ΣΕΠ", 71], ["ΟΚΤ", 86]] as const;
+const mono = "font-mono tracking-[0.08em]";
+
+function PanelHead({ children, right }: { children: ReactNode; right: ReactNode }) {
+  return <div className="mb-[18px] flex items-center justify-between gap-3">{children}{right}</div>;
+}
+
+function MethodPanel({ step }: { step: number }) {
+  if (step === 0)
+    return (
+      <>
+        <PanelHead right={<span className={`${mono} text-[10px] text-muted-foreground`}>ΕΠΙΔΡΑΣΗ</span>}>
+          <span className="flex items-center gap-2 text-base font-medium">Ευκαιρίες AI <span className="inline-flex h-[22px] min-w-[22px] items-center justify-center rounded-[11px] bg-accent px-1.5 text-xs font-semibold text-accent-foreground">14</span></span>
+        </PanelHead>
+        {methodOpps.map(([n, d, v]) => (
+          <div key={n} className="grid grid-cols-[minmax(0,1fr)_34%_34px] items-center gap-[14px] border-t border-live-header-divider py-[13px]">
+            <span className="min-w-0"><span className="block text-[15px]">{n}</span><span className={`${mono} block text-[10px] text-live-subtitle`}>{d}</span></span>
+            <span className="h-1.5 rounded-[3px] bg-live-header-divider"><span className="block h-full rounded-[3px] bg-foreground" style={{ width: `${v}%` }} /></span>
+            <span className="text-right font-mono text-[13px]">{v}</span>
+          </div>
         ))}
-      </Tabs>
-    </Section>
+      </>
+    );
+  if (step === 1)
+    return (
+      <>
+        <PanelHead right={<span className={`${mono} text-[10px] text-muted-foreground`}>14 ΕΥΚΑΙΡΙΕΣ</span>}><span className="text-base font-medium">Επίδραση × Εφικτότητα</span></PanelHead>
+        <div className="relative ml-[22px]">
+          <span className={`${mono} absolute top-1/2 -left-[22px] -translate-x-1/2 -translate-y-1/2 -rotate-90 whitespace-nowrap text-[10px] text-muted-foreground`}>ΕΠΙΔΡΑΣΗ →</span>
+          <div className="relative aspect-[1.55] border-b-[1.5px] border-l-[1.5px] border-foreground">
+            <span className="absolute top-0 bottom-1/2 left-0 right-1/2 bg-foreground/[0.035]" />
+            <span className="absolute top-0 bottom-0 left-1/2 border-l border-dashed border-foreground/20" />
+            <span className="absolute top-1/2 left-0 right-0 border-t border-dashed border-foreground/20" />
+            <span className={`${mono} absolute top-2 right-2 text-[10px]`}>ΧΤΙΖΕΤΑΙ ΠΡΩΤΟ</span>
+            {methodDots.map(([x, y, sz, c, l], idx) => (
+              <span key={idx} className="absolute flex -translate-x-1/2 -translate-y-1/2 items-center gap-1.5" style={{ left: `${x}%`, top: `${y}%` }}>
+                <span className="block rounded-full" style={{ width: sz, height: sz, background: c }} />
+                {l && <span className="absolute left-full ml-1.5 whitespace-nowrap rounded-md bg-card px-1.5 py-0.5 text-[11px] shadow-sm">{l}</span>}
+              </span>
+            ))}
+          </div>
+          <p className={`${mono} mt-2 text-center text-[10px] text-muted-foreground`}>ΕΦΙΚΤΟΤΗΤΑ →</p>
+        </div>
+      </>
+    );
+  if (step === 2)
+    return (
+      <>
+        <PanelHead right={<span className={`${mono} inline-flex items-center gap-1.5 rounded-full bg-ops-chip px-2.5 py-1 text-[11px]`}><span className="h-[7px] w-[7px] animate-pulse rounded-full bg-accent" />LIVE</span>}>
+          <span className="text-base font-medium">Ροή: Προσφορές B2B</span>
+        </PanelHead>
+        <div className="grid grid-cols-[minmax(0,1fr)_minmax(40px,.8fr)_minmax(0,1.1fr)] items-center">
+          <div className="grid min-w-0 gap-3">
+            {methodSources.map((s) => (
+              <div key={s.k} className="flex min-w-0 items-center gap-[10px] overflow-hidden rounded-[10px] border border-method-chip-border bg-method-chip px-3 py-[10px]">
+                <span className="w-[38px] shrink-0 font-mono text-[10px] font-semibold">{s.k}</span>
+                <span className="truncate text-xs text-muted-foreground">{s.n}</span>
+              </div>
+            ))}
+          </div>
+          <svg viewBox="0 0 100 200" preserveAspectRatio="none" className="h-[220px] w-full" aria-hidden="true">
+            {[26, 75, 125, 174].map((y) => <path key={y} d={`M0 ${y} C50 ${y} 50 100 100 100`} fill="none" stroke="var(--foreground)" strokeWidth={1.2} strokeDasharray="3 4" vectorEffect="non-scaling-stroke" />)}
+          </svg>
+          <div className="rounded-[16px] bg-ink p-5 text-ink-foreground">
+            <svg width={34} height={34} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z" /><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" /></svg>
+            <p className="mt-3 text-lg">AI Assistant</p>
+            <p className="mt-1 text-xs text-ink-foreground/70">Συντάσσει προσφορές από CRM, τιμοκατάλογο ERP και ιστορικό email.</p>
+          </div>
+        </div>
+        <div className={`${mono} mt-5 flex flex-wrap justify-between gap-2 border-t border-live-header-divider pt-4 text-[11px]`}>
+          <span>ΔΟΚΙΜΕΣ: 248/250 ΠΕΡΙΠΤΩΣΕΙΣ ✓</span><span>ΣΕ ΠΑΡΑΓΩΓΗ ΑΠΟ 14/10</span>
+        </div>
+      </>
+    );
+  return (
+    <>
+      <PanelHead right={<span className="flex items-center gap-2"><span className="text-[46px] font-light leading-none">86%</span><span className="rounded-full bg-accent px-2 py-[3px] text-xs font-medium text-accent-foreground">+15</span></span>}>
+        <span><span className="block text-base font-medium">Υιοθέτηση ομάδας</span><span className="block text-[13px] text-live-subtitle">Ενεργοί χρήστες / εβδομάδα</span></span>
+      </PanelHead>
+      <div className="mt-7 flex h-[210px] items-end gap-[clamp(8px,1.6vw,18px)] border-b-[1.5px] border-foreground">
+        {methodAdoption.map(([m, v], idx) => (
+          <div key={m} className="flex h-full flex-1 flex-col items-center justify-end">
+            <span className="mb-1 font-mono text-[10px]">{v}%</span>
+            <span className="block w-full rounded-t-[6px] bg-foreground" style={{ height: `${v}%`, opacity: 0.35 + idx * 0.13 }} />
+          </div>
+        ))}
+      </div>
+      <div className="mt-2 flex gap-[clamp(8px,1.6vw,18px)]">
+        {methodAdoption.map(([m]) => <span key={m} className={`${mono} flex-1 text-center text-[10px] text-muted-foreground`}>{m}</span>)}
+      </div>
+    </>
+  );
+}
+
+export function Method() {
+  const [active, setActive] = useState(0);
+  const s = steps[active];
+  return (
+    <section id="method" className="mx-auto max-w-[1320px] px-[clamp(12px,3vw,48px)] pt-0 pb-[clamp(72px,9vw,128px)]">
+      <div className="rounded-[28px] bg-method-bg px-[clamp(20px,5vw,72px)] py-[clamp(32px,5vw,72px)]">
+        <Eyebrow>Μεθοδολογία</Eyebrow>
+        <h2 className="mt-3 text-[clamp(36px,5vw,72px)] font-light leading-[1.04] tracking-[-0.035em]">Εφαρμόζουμε 4 βήματα.<br /><span className="font-serif font-normal! italic">Μετά, φέρνουμε αποτέλεσμα.</span></h2>
+        <div className="mt-[clamp(36px,5vw,64px)] flex flex-wrap items-center gap-[clamp(28px,4vw,64px)]">
+          <div className="grid min-h-[300px] max-w-[480px] flex-[1_1_320px] content-start gap-[18px]">
+            <p className={`${mono} text-xs text-muted-foreground`}>0{active + 1} / 04 · {s.key}</p>
+            <h3 className="text-[clamp(30px,3.4vw,46px)] font-light leading-[1.08] tracking-[-0.03em]">{s.h}<span className="font-serif font-normal! italic">{s.hi}</span>{s.h2}</h3>
+            <p className="text-[17px] leading-[1.55] text-muted-foreground">{s.text}</p>
+            {s.bullets.length > 0 && (
+              <ul className="grid gap-[10px] text-base">
+                {s.bullets.map((b) => <li key={b} className="flex items-center gap-3"><span aria-hidden="true" className="h-1.5 w-1.5 shrink-0 bg-foreground" />{b}</li>)}
+              </ul>
+            )}
+          </div>
+          <div className="method-panel min-h-[380px] min-w-0 flex-[1.4_1_440px] rounded-[20px] bg-card p-[clamp(18px,2.4vw,30px)]">
+            <MethodPanel step={active} />
+          </div>
+        </div>
+        <div className="mt-[clamp(36px,4vw,56px)] flex flex-wrap justify-center gap-2" role="tablist" aria-label="Βήματα μεθοδολογίας">
+          {steps.map((st, i) => (
+            <button key={st.key} type="button" role="tab" aria-selected={i === active} onClick={() => setActive(i)}
+              className={`${mono} rounded-full px-[18px] py-3 text-xs ${i === active ? "bg-foreground text-background" : "bg-background text-foreground"}`}>
+              0{i + 1} {st.key}
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
