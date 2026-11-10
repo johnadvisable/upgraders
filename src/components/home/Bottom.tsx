@@ -162,32 +162,41 @@ function ProgressBar({ bar, light }: { bar: { left: number; width: number }; lig
 }
 
 export function Why() {
+  const light = "bg-white border border-[rgba(28,28,26,0.14)] text-foreground";
   const bubbles = [
-    { label: "Online μαθήματα & academies των AI εταιρειών", x: 22, y: 26, s: 110, cls: "bg-muted-foreground/25" },
-    { label: "Κλασικά σεμινάρια", x: 22, y: 72, s: 80, cls: "bg-muted-foreground/25" },
-    { label: "Μεγάλες συμβουλευτικές", x: 78, y: 75, s: 130, cls: "bg-muted-foreground/25" },
-    { label: "The Upgraders", x: 78, y: 22, s: 90, cls: "bg-accent text-accent-foreground" },
+    { label: "Online μαθήματα & academies των AI εταιρειών", cls: `${light} left-[4%] top-[3%] w-[36%] p-[4%] text-[10px] min-[600px]:left-[12%] min-[600px]:top-[9%] min-[600px]:w-[18%] min-[600px]:p-[2.4%] min-[600px]:text-[clamp(11px,1.1vw,13px)]` },
+    { label: "Κλασικά σεμινάρια", cls: `${light} left-[12%] top-[42%] w-[32%] p-[4%] text-[11px] min-[600px]:left-[22%] min-[600px]:top-[48%] min-[600px]:w-[22%] min-[600px]:p-[3%] min-[600px]:text-[clamp(13px,1.4vw,17px)]` },
+    { label: "Μεγάλες συμβουλευτικές", cls: `${light} left-[52%] top-[47%] w-[44%] p-[4%] text-[12px] min-[600px]:left-[61%] min-[600px]:top-[44%] min-[600px]:w-[32%] min-[600px]:p-[4%] min-[600px]:text-[clamp(15px,1.7vw,21px)]` },
   ];
+  const muted = "text-[#5F5B53]";
   return (
-    <Section id="why" className="pt-[clamp(40px,5vw,64px)] pb-[clamp(80px,10vw,140px)]">
-      <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
-        <div>
-          <Eyebrow>Γιατί The Upgraders</Eyebrow>
-          <Title>Είναι σεμινάριο; Είναι consulting; <span className="italic text-accent">Είναι Αναβάθμιση.</span></Title>
-          <p className="mt-6 text-muted-foreground">Τα σεμινάρια δεν αλλάζουν τη δουλειά. Οι σύμβουλοι δεν χτίζουν. Εμείς εκπαιδεύουμε τους ανθρώπους και χτίζουμε τα συστήματα, γρήγορα και εξατομικευμένα, όπως κάναμε στις δικές μας εταιρείες.</p>
-        </div>
-        <div className="relative aspect-square rounded-[14px] border border-border bg-card">
-          <div className="absolute inset-y-6 left-1/2 border-l border-dashed border-border" />
-          <div className="absolute inset-x-6 top-1/2 border-t border-dashed border-border" />
-          <span className="absolute left-3 top-3 text-xs text-muted-foreground">Γρήγορα</span>
-          <span className="absolute bottom-3 left-3 text-xs text-muted-foreground">Αργά</span>
-          <span className="absolute bottom-3 left-1/2 -translate-x-1/2 text-xs text-muted-foreground">Γενικό → Ειδικά για εσάς · Προσαρμογή</span>
-          {bubbles.map((b) => (
-            <div key={b.label} className={`absolute flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full p-2 text-center text-[11px] font-semibold leading-tight ${b.cls}`} style={{ left: `${b.x}%`, top: `${b.y}%`, width: b.s, height: b.s }}>
-              {b.label}
+    <Section id="why" className="pt-[clamp(40px,5vw,64px)] pb-[clamp(80px,10vw,140px)] text-center">
+      <p className="font-serif text-[22px] italic">Γιατί The Upgraders</p>
+      <h2 className="mx-auto mt-4 max-w-[1000px] text-[clamp(34px,4.8vw,68px)] font-light leading-[1.05] tracking-[-0.035em]">Είναι σεμινάριο; Είναι consulting;<br /><span className="font-serif font-normal! italic">Είναι Αναβάθμιση.</span></h2>
+      <p className={`mx-auto mt-6 max-w-[700px] text-[18px] leading-[1.55] ${muted}`}>Τα σεμινάρια δεν αλλάζουν τη δουλειά. Οι σύμβουλοι δεν χτίζουν. Εμείς εκπαιδεύουμε τους ανθρώπους και χτίζουμε τα συστήματα, γρήγορα και εξατομικευμένα, όπως κάναμε στις δικές μας εταιρείες.</p>
+      <div className="mt-[clamp(48px,6vw,80px)] overflow-x-auto text-left" role="img" aria-label="Διάγραμμα: ταχύτητα αποτελέσματος έναντι προσαρμογής. Τα online μαθήματα είναι γρήγορα αλλά γενικά, τα κλασικά σεμινάρια αργά και γενικά, οι μεγάλες συμβουλευτικές αργές και ειδικές με μεγάλη επένδυση, ενώ οι The Upgraders γρήγοροι και ειδικά για εσάς.">
+        <div className="relative mx-auto aspect-[0.9] max-w-[980px] min-[600px]:aspect-[1.32] min-[600px]:min-w-[660px]">
+          <div className="absolute top-2 right-2 bottom-16 left-16 border-b-[1.5px] border-l-[1.5px] border-foreground">
+            <div className="absolute inset-y-0 left-1/2 border-l border-dashed border-[rgba(28,28,26,0.25)]" />
+            <div className="absolute inset-x-0 top-1/2 border-t border-dashed border-[rgba(28,28,26,0.25)]" />
+            <span className="absolute -top-2 -left-[6px] h-0 w-0 border-x-[5px] border-b-[8px] border-x-transparent border-b-foreground" />
+            <span className="absolute -right-2 -bottom-[6px] h-0 w-0 border-y-[5px] border-l-[8px] border-y-transparent border-l-foreground" />
+            {bubbles.map((b) => (
+              <div key={b.label} className={`absolute flex aspect-square items-center justify-center rounded-full text-center leading-[1.25] ${b.cls}`}>{b.label}</div>
+            ))}
+            <div className="absolute top-[3%] left-[56%] flex aspect-square w-[38%] items-center justify-center rounded-full bg-foreground p-[4%] text-center text-[13px] leading-[1.2] tracking-[-0.02em] text-white shadow-[0_24px_50px_-16px_rgba(28,28,26,0.5)] min-[600px]:top-[6%] min-[600px]:left-[66%] min-[600px]:w-[23%] min-[600px]:p-0 min-[600px]:text-[clamp(17px,2vw,26px)]">
+              The Upgraders
+              <span className="absolute top-[6%] right-[6%] flex aspect-square w-[16%] items-center justify-center rounded-full bg-[#FF3B30] text-[clamp(11px,1.2vw,15px)] font-semibold text-white shadow-[0_0_0_3px_#FEFAF3]">1</span>
             </div>
-          ))}
-          <span className="absolute right-3 top-3 text-[10px] text-muted-foreground">Μέγεθος κύκλου = επένδυση</span>
+            <div className="absolute bottom-[4%] left-[3%] grid gap-[10px] rounded-[12px] bg-[#F1EADD] px-4 py-[14px] text-[13px]">
+              <div className="flex items-center gap-1.5">{[8, 12, 18].map((s) => <span key={s} className="rounded-full bg-foreground" style={{ width: s, height: s }} />)}</div>
+              <span>Μέγεθος κύκλου = επένδυση</span>
+            </div>
+          </div>
+          <div className={`pointer-events-none absolute top-0 bottom-[70px] left-[74px] flex flex-col justify-between text-[13px] ${muted}`}><span>Γρήγορα</span><span>Αργά</span></div>
+          <div className={`pointer-events-none absolute top-2 bottom-16 left-1 flex items-center ${muted}`}><span className="-ml-[74px] origin-center -rotate-90 whitespace-nowrap text-[15px] font-medium">Ταχύτητα αποτελέσματος</span></div>
+          <div className={`pointer-events-none absolute right-2 bottom-9 left-16 flex justify-between text-[13px] ${muted}`}><span>Γενικό</span><span>Ειδικά για εσάς</span></div>
+          <div className="pointer-events-none absolute right-2 bottom-1 left-16 text-center text-[15px] font-medium text-foreground">Προσαρμογή</div>
         </div>
       </div>
     </Section>
