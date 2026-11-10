@@ -170,8 +170,8 @@ export function LiveCourses() {
           return (
             <div key={i} className={`live-course-grid grid items-center gap-5 px-7 py-[22px] ${i > 0 ? "border-t border-live-row-divider" : ""} ${done ? "opacity-55" : ""}`}>
               <div>
-                <h3 className="font-display text-2xl">{c.title}</h3>
-                <p className="mt-1 text-sm text-muted-foreground">{c.tools}</p>
+                <div className="text-[17px] font-medium">{c.title}</div>
+                <p className="mt-1 text-[13px] text-live-subtitle">{c.tools}</p>
               </div>
               <p className="flex items-start gap-2 text-sm font-semibold"><Calendar aria-hidden className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.5} />{c.date}</p>
               <p className="flex items-center gap-2 whitespace-nowrap text-sm text-muted-foreground"><Clock aria-hidden className="h-4 w-4 shrink-0" strokeWidth={1.5} />{c.time}</p>
