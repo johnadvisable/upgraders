@@ -9,7 +9,7 @@ const listImages = {
   industries: { src: "/industries-photo.webp", alt: "Λιμάνι με πλοίο" },
 };
 
-function List({ eyebrow, title, items, id, reverse }: { eyebrow: string; title: string; items: string[][]; id: "roles" | "industries"; reverse?: boolean }) {
+function List({ eyebrow, title, items, id, reverse }: { eyebrow: string; title: ReactNode; items: string[][]; id: "roles" | "industries"; reverse?: boolean }) {
   const img = listImages[id];
   return (
     <Section id={id} className="py-[28px] min-[760px]:py-[clamp(56px,7vw,104px)]">
@@ -34,8 +34,8 @@ function List({ eyebrow, title, items, id, reverse }: { eyebrow: string; title: 
   );
 }
 
-export const Roles = () => <List id="roles" eyebrow="Ανά ρόλο" title="Εκπαίδευση ανά θέση εργασίας." items={roles} />;
-export const Industries = () => <List id="industries" reverse eyebrow="Ανά κλάδο" title="Εκπαίδευση ανά κλάδο δραστηριότητας." items={industries} />;
+export const Roles = () => <List id="roles" eyebrow="Ανά ρόλο" title={<>Εκπαίδευση ανά <span className="italic !font-normal">θέση εργασίας.</span></>} items={roles} />;
+export const Industries = () => <List id="industries" reverse eyebrow="Ανά κλάδο" title={<>Εκπαίδευση ανά <span className="italic !font-normal">κλάδο δραστηριότητας.</span></>} items={industries} />;
 
 function useInView<T extends HTMLElement>() {
   const ref = useRef<T>(null);
