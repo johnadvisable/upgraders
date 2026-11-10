@@ -276,7 +276,7 @@ export function Method() {
   return (
     <section id="method" className="mx-auto max-w-[1320px] px-[clamp(12px,3vw,48px)] pt-0 pb-[clamp(72px,9vw,128px)]">
       <div className="rounded-[28px] bg-method-bg px-[clamp(20px,5vw,72px)] py-[clamp(32px,5vw,72px)]">
-        <Eyebrow>Μεθοδολογία</Eyebrow>
+        <Eyebrow className="text-foreground">Μεθοδολογία</Eyebrow>
         <h2 className="mt-3 text-[clamp(36px,5vw,72px)] font-light leading-[1.04] tracking-[-0.035em]">Εφαρμόζουμε 4 βήματα.<br /><span className="font-serif font-normal! italic">Μετά, φέρνουμε αποτέλεσμα.</span></h2>
         <div className="mt-[clamp(36px,5vw,64px)] flex flex-wrap items-center gap-[clamp(28px,4vw,64px)]">
           <div className="grid min-h-[300px] max-w-[480px] flex-[1_1_320px] content-start gap-[18px]">
