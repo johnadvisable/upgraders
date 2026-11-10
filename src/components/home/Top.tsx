@@ -1,6 +1,6 @@
 import { GrainGradient } from "@paper-design/shaders-react";
 import { ClientOnly } from "@tanstack/react-router";
-import { ArrowRight, Building2, CirclePlay, MonitorPlay, Zap, type LucideIcon } from "lucide-react";
+import { ArrowRight, Building2, Calendar, CirclePlay, Clock, Info, MapPin, Monitor, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { courses } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
@@ -156,43 +156,61 @@ export function LiveCourses() {
   return (
     <Section id="live" className="bg-secondary">
       <Eyebrow>Live Upgrades</Eyebrow>
-      <Title>Τα επόμενα live μαθήματα.</Title>
+      <Title>Τα επόμενα <span className="font-serif italic">live</span> μαθήματα.</Title>
       <p className="mt-4 max-w-2xl text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
-      <div className="mt-10 space-y-4">
+      <div className="mt-10 rounded-[20px] border border-border bg-card">
+        <div className="live-course-grid hidden border-b border-border px-6 py-4 font-mono text-[11px] uppercase text-muted-foreground lg:grid">
+          <span>ΜΑΘΗΜΑ</span><span>ΗΜΕΡΟΜΗΝΙΑ</span><span>ΩΡΕΣ</span><span>ΤΡΟΠΟΣ</span><span>ΤΙΜΗ</span>
+        </div>
         {courses.map((c, i) => {
           const done = c.status === "done";
           return (
-            <div key={i} className={`grid items-center gap-4 rounded-[14px] border border-border bg-card p-6 md:grid-cols-[2fr_1.2fr_auto] ${done ? "opacity-55" : ""}`}>
+            <div key={i} className={`live-course-grid grid items-center gap-5 p-6 ${i > 0 ? "border-t border-border" : ""} ${done ? "opacity-55" : ""}`}>
               <div>
                 <h3 className="font-display text-2xl">{c.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{c.tools}</p>
               </div>
-              <div className="text-sm">
-                <p className="font-semibold">{c.date}</p>
-                <p className="text-muted-foreground">{c.time}</p>
-                <div className="mt-2 flex gap-2">
-                  {c.modes.map((m) => <span key={m} className="rounded-full border border-border px-2.5 py-0.5 text-xs">{m}</span>)}
-                </div>
+              <p className="flex items-start gap-2 text-sm font-semibold"><Calendar aria-hidden className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.5} />{c.date}</p>
+              <p className="flex items-center gap-2 whitespace-nowrap text-sm text-muted-foreground"><Clock aria-hidden className="h-4 w-4 shrink-0" strokeWidth={1.5} />{c.time}</p>
+              <div className="flex flex-wrap gap-3 text-sm text-muted-foreground lg:flex-col lg:gap-2">
+                {c.modes.map((m) => {
+                  const ModeIcon = m === "On site" ? MapPin : Monitor;
+                  return <span key={m} className="inline-flex items-center gap-2 whitespace-nowrap"><ModeIcon aria-hidden className="h-4 w-4" strokeWidth={1.5} />{m}</span>;
+                })}
               </div>
               {done ? (
-                <span className="text-sm font-semibold text-muted-foreground">Ολοκληρώθηκε</span>
+                <span className="justify-self-start rounded-full border border-live-completed px-3 py-1.5 text-xs font-medium text-muted-foreground">Ολοκληρώθηκε</span>
               ) : (
-                <div className="flex items-center gap-4 md:flex-col md:items-end">
-                  <div className="text-right">
+                <div className="flex flex-wrap items-center gap-4 lg:flex-col lg:items-start">
+                  <div>
                     <p className="font-display text-2xl">{c.price}</p>
-                    <p className="text-xs font-semibold text-accent">Λίγες θέσεις</p>
                   </div>
-                  <Pill>Κράτηση θέσης</Pill>
+                  <span className="relative mt-2 inline-flex">
+                    <Pill className="whitespace-nowrap px-4">Κράτηση θέσης</Pill>
+                    <span className="absolute -right-2 -top-3 rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">Λίγες θέσεις</span>
+                  </span>
                 </div>
               )}
             </div>
           );
         })}
       </div>
-      <div className="mt-10 flex flex-wrap gap-3">
-        <Pill variant="outline">Θέλω εξατομικευμένη εταιρική εκπαίδευση</Pill>
-        <Pill variant="outline">Θέλω ένα 8ωρο Sprint μέσα στην εταιρεία μου</Pill>
-        <Pill variant="outline">Θέλω να δω μαγνητοσκοπημένες εκπαιδεύσεις</Pill>
+      <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        {[
+          { text: "Θέλω εξατομικευμένη εταιρική εκπαίδευση", icon: UserRound },
+          { text: "Θέλω ένα 8ωρο Sprint μέσα στην εταιρεία μου", icon: Zap },
+          { text: "Θέλω να δω μαγνητοσκοπημένες εκπαιδεύσεις", icon: MonitorPlay },
+        ].map(({ text, icon: Icon }) => (
+          <div key={text} className="relative min-w-0">
+            <Pill variant="outline" className="h-full w-full gap-3 rounded-[14px] p-3 text-left font-medium">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[10px] bg-tan"><Icon aria-hidden className="h-5 w-5" strokeWidth={1.5} /></span>
+              <span className="min-w-0 flex-1">{text}</span>
+            </Pill>
+            <span tabIndex={0} role="img" aria-label={text} title={text} className="absolute -right-1.5 -top-1.5 flex h-[22px] w-[22px] items-center justify-center rounded-full border border-card bg-primary text-live-info-foreground">
+              <Info aria-hidden className="h-3.5 w-3.5" strokeWidth={1.5} />
+            </span>
+          </div>
+        ))}
       </div>
     </Section>
   );
