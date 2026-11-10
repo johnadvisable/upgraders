@@ -24,7 +24,7 @@ export function Pill({ children, href = "#contact", variant = "dark", className,
 
 export function Section({ id, children, className }: { id?: string; children: ReactNode; className?: string }) {
   return (
-    <section id={id} className={cn("px-5 py-20 md:py-28", className)}>
+    <section id={id} className={cn("px-5", !/(^|\s)(min-\[\d+px\]:)?p[ytb]-/.test(className ?? "") && "py-20 md:py-28", className)}>
       <div className="mx-auto max-w-6xl">{children}</div>
     </section>
   );

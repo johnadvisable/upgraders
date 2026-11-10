@@ -5,7 +5,7 @@ import { Eyebrow, Pill, Section, Title } from "./ui";
 
 function List({ eyebrow, title, items, id }: { eyebrow: string; title: string; items: string[][]; id: string }) {
   return (
-    <Section id={id}>
+    <Section id={id} className="py-[28px] min-[760px]:py-[clamp(56px,7vw,104px)]">
       <Eyebrow>{eyebrow}</Eyebrow>
       <Title>{title}</Title>
       <div className="mt-10 divide-y divide-border border-y border-border">
@@ -40,7 +40,7 @@ export function Paradox() {
   const [ref, seen] = useInView<HTMLDivElement>();
   const bars = [["ΕΛΛΑΔΑ", 8.9, "8,9%", "bg-accent"], ["ΕΕ", 20, "20%", "bg-ink-foreground/70"]] as const;
   return (
-    <section className="bg-ink px-5 py-24 text-ink-foreground">
+    <section className="bg-ink px-5 py-[clamp(44px,5vw,72px)] text-ink-foreground">
       <div ref={ref} className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
         <div>
           <Eyebrow>Το ελληνικό παράδοξο</Eyebrow>
@@ -75,7 +75,7 @@ export function Enablement() {
   const systems = [["ERP", "SoftOne ERP", "Συγχρονίστηκε πριν 2'"], ["CRM", "HubSpot CRM", "Συγχρονίστηκε πριν 1'"], ["DOC", "SharePoint · Έγγραφα", "12.480 αρχεία"], ["MAIL", "Outlook", "Εισερχόμενα πωλήσεων"]];
   const feed = [["Προσφορά #2381 · έτοιμη για έγκριση", "2'"], ["Τιμολόγιο ↔ Δελτίο · ταιριάζει", "6'"], ["Email πελάτη · απαντήθηκε", "9'"]];
   return (
-    <Section id="programs">
+    <Section id="programs" className="pt-[clamp(40px,5vw,72px)] pb-[clamp(72px,9vw,120px)]">
       <div className="grid gap-16 lg:grid-cols-2">
         <div>
           <Eyebrow>Team enablement</Eyebrow>
@@ -126,7 +126,7 @@ export function Enablement() {
 
 export function Method() {
   return (
-    <Section id="method" className="bg-secondary">
+    <Section id="method" className="pt-0 pb-[clamp(72px,9vw,128px)]">
       <Eyebrow>Μεθοδολογία</Eyebrow>
       <Title>Εφαρμόζουμε 4 βήματα. <span className="italic text-muted-foreground">Μετά, φέρνουμε αποτέλεσμα.</span></Title>
       <Tabs defaultValue="diag" className="mt-10">

@@ -122,7 +122,7 @@ function GroupLabel({ title, sub }: { title: string; sub: string }) {
 
 export function Services() {
   return (
-    <Section id="services">
+    <Section id="services" className="py-[clamp(72px,9vw,128px)]">
       <div className="flex flex-wrap items-end justify-between gap-6">
         <div>
           <Eyebrow className="text-foreground">Υπηρεσίες εκπαίδευσης</Eyebrow>
@@ -155,7 +155,7 @@ export function Services() {
 
 export function LiveCourses() {
   return (
-    <Section id="live" className="pb-0 md:pb-0">
+    <Section id="live" className="pt-[clamp(40px,5vw,72px)] pb-0">
       <div className="max-w-[51.25rem]">
         <Eyebrow>Live Upgrades</Eyebrow>
         <Title>Τα επόμενα <span className="font-serif italic font-normal!">live<br className="hidden lg:block" /> μαθήματα.</span></Title>

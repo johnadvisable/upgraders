@@ -3,7 +3,7 @@ import { clients } from "./data";
 export function TrustedBy() {
   return (
     <section aria-label="Μας εμπιστεύονται" className="trusted-by">
-      <div className="mx-auto flex max-w-6xl items-center gap-6 px-5 py-8 md:gap-10">
+      <div className="mx-auto flex max-w-6xl items-center gap-6 px-5 py-[26px] md:gap-10">
         <p className="w-[110px] shrink-0 text-[15px] leading-snug">
           Μας<br />εμπιστεύονται
         </p>

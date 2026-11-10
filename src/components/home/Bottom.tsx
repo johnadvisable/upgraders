@@ -5,7 +5,7 @@ import { Eyebrow, Pill, Section, Title } from "./ui";
 
 export function Cases() {
   return (
-    <Section id="cases">
+    <Section id="cases" className="bg-ink text-ink-foreground py-[clamp(80px,10vw,140px)]">
       <Eyebrow>Release notes</Eyebrow>
       <Title>Τι κάναμε για πελάτες μας.</Title>
       <p className="mt-4 text-muted-foreground">Τι άλλαξε μετά την αναβάθμιση.</p>
@@ -38,7 +38,7 @@ export function Tools() {
   const [filter, setFilter] = useState("Όλα");
   const shown = tools.filter((t) => filter === "Όλα" || t.filters.includes(filter));
   return (
-    <Section id="tools" className="bg-secondary">
+    <Section id="tools" className="pt-[clamp(80px,10vw,140px)] pb-[clamp(40px,5vw,64px)]">
       <Title className="max-w-3xl">Χτίζουμε και Custom Εργαλεία: <span className="italic text-muted-foreground">σχεδιασμένα για κλάδους ή αποκλειστικά για τη δική σας εταιρεία.</span></Title>
       <p className="mt-4 text-muted-foreground">Πραγματικά συστήματα AI, σε πραγματικές ελληνικές εταιρείες.</p>
       <div className="mt-8 flex flex-wrap gap-2">
@@ -72,7 +72,7 @@ export function Why() {
     { label: "The Upgraders", x: 78, y: 22, s: 90, cls: "bg-accent text-accent-foreground" },
   ];
   return (
-    <Section id="why">
+    <Section id="why" className="pt-[clamp(40px,5vw,64px)] pb-[clamp(80px,10vw,140px)]">
       <div className="grid gap-12 lg:grid-cols-2 lg:items-center">
         <div>
           <Eyebrow>Γιατί The Upgraders</Eyebrow>
@@ -99,7 +99,7 @@ export function Why() {
 
 export function Team() {
   return (
-    <Section id="team" className="bg-secondary">
+    <Section id="team" className="pt-0 pb-[clamp(80px,10vw,140px)]">
       <Eyebrow>Γνωρίστε την ομάδα</Eyebrow>
       <Title>Builders, Makers, Entrepreneurs, Trainers</Title>
       <p className="mt-4 text-muted-foreground">Πρώτα το κάναμε για τις εταιρείες μας. Τώρα, το κάνουμε και για τις δικές σας.</p>
@@ -123,7 +123,7 @@ export function Team() {
 
 export function Faq() {
   return (
-    <Section id="faq">
+    <Section id="faq" className="pt-0 pb-[clamp(80px,10vw,140px)]">
       <div className="grid gap-10 lg:grid-cols-[1fr_2fr]">
         <div>
           <Eyebrow>The Upgraders</Eyebrow>
