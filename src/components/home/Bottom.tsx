@@ -1,26 +1,10 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { cases, faqs, team, toolFilters, tools } from "./data";
+import { cases, faqs, team, tools, type ToolTag } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
 export function Cases() {
-  const ref = useRef<HTMLDivElement>(null);
-  const [bar, setBar] = useState({ left: 0, width: 100 });
-  const update = useCallback(() => {
-    const el = ref.current;
-    if (!el || !el.scrollWidth) return;
-    setBar({ left: (el.scrollLeft / el.scrollWidth) * 100, width: (el.clientWidth / el.scrollWidth) * 100 });
-  }, []);
-  useEffect(() => {
-    update();
-    window.addEventListener("resize", update);
-    return () => window.removeEventListener("resize", update);
-  }, [update]);
-  const go = (dir: 1 | -1) => {
-    const el = ref.current;
-    const card = el?.firstElementChild as HTMLElement | null;
-    if (el && card) el.scrollBy({ left: dir * (card.offsetWidth + 16), behavior: "smooth" });
-  };
+  const { ref, bar, update, go } = useCarousel(16);
   return (
     <Section id="cases" className="bg-ink text-ink-foreground py-[clamp(80px,10vw,140px)]">
       <div className="flex flex-wrap gap-[clamp(36px,5vw,72px)]">
@@ -30,13 +14,7 @@ export function Cases() {
           <p className="text-[17px] text-ink-foreground/78">Τι άλλαξε μετά την αναβάθμιση.</p>
         </div>
         <div className="min-w-0 flex-[2_1_520px]">
-          <div className="mb-5 flex justify-end gap-2">
-            {([-1, 1] as const).map((d) => (
-              <button key={d} type="button" aria-label={d < 0 ? "Προηγούμενο" : "Επόμενο"} onClick={() => go(d)} className="flex h-10 w-10 items-center justify-center rounded-[10px] bg-ink-foreground/10 text-ink-foreground transition-colors hover:bg-ink-foreground/20">
-                <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d < 0 ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"} /></svg>
-              </button>
-            ))}
-          </div>
+          <div className="mb-5 flex justify-end"><CarouselNav go={go} /></div>
           <div ref={ref} onScroll={update} className="cases-track flex gap-4 overflow-x-auto">
             {cases.map((c) => (
               <article key={c.name} className="flex flex-[0_0_min(500px,84vw)] snap-start flex-col overflow-hidden rounded-[22px] bg-card text-foreground">
@@ -67,42 +45,119 @@ export function Cases() {
               </article>
             ))}
           </div>
-          <div className="relative mt-[26px] h-0.5 rounded-[1px] bg-ink-foreground/14">
-            <span className="absolute top-0 h-full rounded-[1px] bg-ink-foreground" style={{ left: `${bar.left}%`, width: `${bar.width}%` }} />
-          </div>
+          <ProgressBar bar={bar} />
         </div>
       </div>
     </Section>
   );
 }
 
+const toolStyles: Record<ToolTag, { bg: string; icon: string[] }> = {
+  Πωλήσεις: { bg: "radial-gradient(120% 80% at 85% 0%, #9886C9 0%, transparent 60%), linear-gradient(160deg,#5E4E95 0%,#3B3170 58%,#8A6FA6 100%)", icon: ["M3 17l6-6 4 4 8-8", "M15 7h6v6"] },
+  Εξυπηρέτηση: { bg: "radial-gradient(100% 70% at 15% 0%, #7E5DA2 0%, transparent 60%), linear-gradient(170deg,#3D2757 0%,#24183A 60%,#6B4C80 100%)", icon: ["M4 5h16v11H9l-5 4z"] },
+  Λειτουργίες: { bg: "radial-gradient(110% 80% at 85% 10%, #93A884 0%, transparent 60%), linear-gradient(165deg,#4F6A55 0%,#2C4236 60%,#6F8A6A 100%)", icon: ["M4 4h7v7H4z", "M13 4h7v7h-7z", "M4 13h7v7H4z", "M13 13h7v7h-7z"] },
+  Περιεχόμενο: { bg: "radial-gradient(110% 80% at 15% 5%, #D3A0A8 0%, transparent 60%), linear-gradient(165deg,#A4677A 0%,#6E3F57 60%,#B88593 100%)", icon: ["M4 20l4-1 11-11-3-3L5 16z"] },
+  Κλαδικά: { bg: "radial-gradient(110% 80% at 80% 0%, #B49A86 0%, transparent 60%), linear-gradient(165deg,#5E5470 0%,#3A3346 60%,#8A7466 100%)", icon: ["M3 8h18v12H3z", "M9 8V5h6v3"] },
+};
+const filterTag: Record<string, ToolTag | null> = { "Όλα": null, "Πωλήσεις": "Πωλήσεις", "Εξυπηρέτηση": "Εξυπηρέτηση", "Λειτουργίες": "Λειτουργίες", "Περιεχόμενο & Marketing": "Περιεχόμενο", "Κλαδικά": "Κλαδικά" };
+const chipAlign = [["self-start", "self-end"], ["self-end", "self-start"], ["self-center", "self-end"]] as const;
+
 export function Tools() {
   const [filter, setFilter] = useState("Όλα");
-  const shown = tools.filter((t) => filter === "Όλα" || t.filters.includes(filter));
+  const { ref, bar, update, go } = useCarousel(14);
+  const tag = filterTag[filter] ?? null;
+  const shown = tools.filter((t) => !tag || t.tag === tag);
+  useEffect(() => {
+    if (ref.current) ref.current.scrollLeft = 0;
+    update();
+  }, [filter, ref, update]);
   return (
     <Section id="tools" className="pt-[clamp(80px,10vw,140px)] pb-[clamp(40px,5vw,64px)]">
-      <Title className="max-w-3xl">Χτίζουμε και Custom Εργαλεία: <span className="italic text-muted-foreground">σχεδιασμένα για κλάδους ή αποκλειστικά για τη δική σας εταιρεία.</span></Title>
-      <p className="mt-4 text-muted-foreground">Πραγματικά συστήματα AI, σε πραγματικές ελληνικές εταιρείες.</p>
-      <div className="mt-8 flex flex-wrap gap-2">
-        {toolFilters.map((f) => (
-          <button key={f} onClick={() => setFilter(f)} className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${filter === f ? "bg-primary text-primary-foreground" : "bg-card hover:bg-card/70"}`}>{f}</button>
+      <div className="flex flex-wrap items-end justify-between gap-7">
+        <div className="max-w-[900px] flex-[1_1_500px]">
+          <h2 className="text-[clamp(30px,3.8vw,52px)] font-semibold leading-[1.08] tracking-[-0.03em]">Χτίζουμε και Custom Εργαλεία<span className="font-serif font-semibold! italic">: σχεδιασμένα για κλάδους ή αποκλειστικά για τη δική σας εταιρεία.</span></h2>
+          <p className="mt-4 text-lg text-muted-foreground">Πραγματικά συστήματα AI, σε πραγματικές ελληνικές εταιρείες.</p>
+        </div>
+        <CarouselNav go={go} light />
+      </div>
+      <div className="no-scrollbar mt-9 flex gap-2 overflow-x-auto">
+        {Object.keys(filterTag).map((f) => (
+          <button key={f} type="button" onClick={() => setFilter(f)} aria-pressed={filter === f}
+            className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2.5 text-sm ${filter === f ? "border-foreground bg-foreground text-background" : "border-foreground/20 bg-transparent text-foreground"}`}>{f}</button>
         ))}
       </div>
-      <div className="mt-8 grid gap-6 md:grid-cols-2">
-        {shown.length === 0 && <p className="text-muted-foreground">Σύντομα νέα εργαλεία σε αυτή την κατηγορία.</p>}
-        {shown.map((t) => (
-          <div key={t.name} className="rounded-[14px] border border-border bg-card p-7">
-            <div className="flex gap-2">{t.tags.map((g) => <span key={g} className="rounded-full bg-secondary px-3 py-1 text-xs">{g}</span>)}</div>
-            <h3 className="mt-5 font-display text-2xl">{t.name}</h3>
-            <p className="mt-1 text-muted-foreground">{t.text}</p>
-            <div className="mt-6 flex justify-between rounded-2xl bg-ink p-4 text-sm text-ink-foreground">
-              <span>{t.preview[0]}</span><span className="text-success">{t.preview[1]}</span>
-            </div>
-            <Pill variant="outline" className="mt-6">Δείτε πώς δουλεύει</Pill>
-          </div>
-        ))}
+      <div ref={ref} onScroll={update} className="cases-track mt-6 flex gap-[14px] overflow-x-auto">
+        {shown.map((t, i) => {
+          const st = toolStyles[t.tag];
+          const al = chipAlign[i % 3]!;
+          return (
+            <article key={t.name} className="relative h-[430px] flex-[0_0_min(420px,84vw)] snap-start overflow-hidden rounded-[22px] p-6 text-white" style={{ background: st.bg }}>
+              <div aria-hidden="true" className="absolute inset-0" style={{ opacity: 0.4, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
+              <div className="relative flex items-start gap-3">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="tool-glass inline-flex items-center gap-1.5 rounded-[8px] px-2.5 py-[5px] text-xs">
+                    <svg width={13} height={13} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">{st.icon.map((d) => <path key={d} d={d} />)}</svg>
+                    {t.tag}
+                  </span>
+                  <span className="text-xs opacity-90">{t.meta}</span>
+                </div>
+                <span aria-hidden="true" className="ml-auto h-[38px] w-[38px] shrink-0 rounded-[10px] bg-ink shadow-lg" />
+              </div>
+              <h3 className="relative mt-6 max-w-[340px] text-[27px] font-normal leading-tight">{t.name}</h3>
+              <p className="relative mt-2 max-w-[320px] text-sm opacity-88">{t.text}</p>
+              <div className="absolute right-6 bottom-[84px] left-6 flex flex-col gap-[10px]">
+                <span className={`tool-chip ${al[0]} flex items-center gap-2 rounded-[12px] px-3.5 py-[11px] text-sm`}><span className="h-2 w-2 shrink-0 rounded-full bg-accent" />{t.chip1}</span>
+                <span className={`tool-chip ${al[1]} rounded-[12px] px-3.5 py-[11px] text-sm`}>{t.chip2}</span>
+              </div>
+              <a href="#contact" className="tool-cta absolute bottom-6 left-6 rounded-[10px] bg-background px-4 py-[11px] text-sm font-medium text-foreground">Δείτε πώς δουλεύει</a>
+            </article>
+          );
+        })}
       </div>
+      <ProgressBar bar={bar} light />
     </Section>
+  );
+}
+
+function useCarousel(gap: number) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [bar, setBar] = useState({ left: 0, width: 100 });
+  const update = useCallback(() => {
+    const el = ref.current;
+    if (!el || !el.scrollWidth) return;
+    setBar({ left: (el.scrollLeft / el.scrollWidth) * 100, width: (el.clientWidth / el.scrollWidth) * 100 });
+  }, []);
+  useEffect(() => {
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, [update]);
+  const go = useCallback((dir: 1 | -1) => {
+    const el = ref.current;
+    const card = el?.firstElementChild as HTMLElement | null;
+    if (el && card) el.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: "smooth" });
+  }, [gap]);
+  return { ref, bar, update, go };
+}
+
+function CarouselNav({ go, light }: { go: (d: 1 | -1) => void; light?: boolean }) {
+  return (
+    <div className="flex gap-2">
+      {([-1, 1] as const).map((d) => (
+        <button key={d} type="button" aria-label={d < 0 ? "Προηγούμενο" : "Επόμενο"} onClick={() => go(d)}
+          className={`flex h-10 w-10 items-center justify-center rounded-[10px] transition-colors ${light ? "bg-foreground/[0.07] text-foreground hover:bg-foreground/[0.14]" : "bg-ink-foreground/10 text-ink-foreground hover:bg-ink-foreground/20"}`}>
+          <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d={d < 0 ? "M15 6l-6 6 6 6" : "M9 6l6 6-6 6"} /></svg>
+        </button>
+      ))}
+    </div>
+  );
+}
+
+function ProgressBar({ bar, light }: { bar: { left: number; width: number }; light?: boolean }) {
+  return (
+    <div className={`relative mt-[26px] h-0.5 rounded-[1px] ${light ? "bg-foreground/12" : "bg-ink-foreground/14"}`}>
+      <span className={`absolute top-0 h-full rounded-[1px] ${light ? "bg-foreground" : "bg-ink-foreground"}`} style={{ left: `${bar.left}%`, width: `${bar.width}%` }} />
+    </div>
   );
 }
 

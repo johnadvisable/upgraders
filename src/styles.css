@@ -306,3 +306,9 @@ a:hover { color: var(--accent); }
 .cases-track { scroll-snap-type: x mandatory; scrollbar-width: none; }
 .cases-track::-webkit-scrollbar { display: none; }
 .cases-badge { background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .28); backdrop-filter: blur(10px); }
+
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.tool-glass { background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .25); backdrop-filter: blur(10px); }
+.tool-chip { background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .3); backdrop-filter: blur(14px); box-shadow: 0 10px 30px -12px rgb(0 0 0 / .35); }
+.tool-cta:hover { color: var(--foreground); }

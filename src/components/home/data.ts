@@ -51,10 +51,29 @@ export const cases = [
   { name: "Pharmacy Discount", sector: "Αλυσίδα φαρμακείων", release: "RELEASE 2.2", gradient: "radial-gradient(90% 120% at 100% 100%,#9886C9,transparent 60%),linear-gradient(120deg,#36366E,#6B5791)", label: "Χρόνος παραγωγής περιεχομένου", hero: "−46%", heroBadge: "−46%", rows: [["Περιγραφές προϊόντων / εβδομάδα", "Με έλεγχο ακρίβειας", "600"], ["Καμπάνιες που τρέχουν παράλληλα", "Ανά μήνα", "12"], ["Κόστος ανά καμπάνια", "Εσωτερικοί πόροι", "−38%"]] },
 ];
 
-export const toolFilters = ["Όλα", "Πωλήσεις", "Εξυπηρέτηση", "Λειτουργίες", "Περιεχόμενο & Marketing", "Κλαδικά"];
-export const tools = [
-  { name: "Proposal Generation System", tags: ["Πωλήσεις", "B2B"], filters: ["Πωλήσεις"], text: "Επαγγελματικές προτάσεις σε λεπτά.", preview: ["Πρόταση #208 · 14 σελίδες", "Έτοιμη σε 4'"] },
-  { name: "Hospitality Booking Assistant", tags: ["Κλαδικά", "Τουρισμός"], filters: ["Κλαδικά", "Εξυπηρέτηση"], text: "Βοηθός κρατήσεων για ξενοδοχεία, 24/7.", preview: ["Κράτηση · 2 νύχτες ✓", "Απάντηση σε 3''"] },
+export type ToolTag = "Πωλήσεις" | "Εξυπηρέτηση" | "Λειτουργίες" | "Περιεχόμενο" | "Κλαδικά";
+export const tools: { name: string; text: string; tag: ToolTag; meta: string; chip1: string; chip2: string }[] = [
+  { name: "Proposal Generation System", text: "Επαγγελματικές προτάσεις σε λεπτά.", tag: "Πωλήσεις", meta: "B2B", chip1: "Πρόταση #208 · 14 σελίδες", chip2: "Έτοιμη σε 4'" },
+  { name: "Hospitality Booking Assistant", text: "Βοηθός κρατήσεων για ξενοδοχεία, 24/7.", tag: "Κλαδικά", meta: "Τουρισμός", chip1: "Κράτηση · 2 νύχτες ✓", chip2: "Απάντηση σε 3''" },
+  { name: "AI Sales Chatbot για Eshops", text: "Chatbot που προτείνει προϊόντα και κλείνει πωλήσεις.", tag: "Πωλήσεις", meta: "E-commerce", chip1: "«Ψάχνω δώρο έως 50€»", chip2: "3 προτάσεις · 1 στο καλάθι" },
+  { name: "B2B Email Sales System", text: "Αυτοματοποιημένες προσωποποιημένες καμπάνιες email για B2B πωλήσεις.", tag: "Πωλήσεις", meta: "B2B", chip1: "Νέο lead · Ποιοτικό ✓", chip2: "Καμπάνια Q4 · 38% opens" },
+  { name: "E-commerce Campaign Automation", text: "Αυτοματοποιημένες καμπάνιες για eshops.", tag: "Περιεχόμενο", meta: "E-commerce", chip1: "Black Friday · 3 segments", chip2: "Προγραμματίστηκε ✓" },
+  { name: "AI Support Assistant", text: "Απαντήσεις εξυπηρέτησης πάνω στη γνώση της εταιρείας.", tag: "Εξυπηρέτηση", meta: "Όλοι οι κλάδοι", chip1: "Απάντηση σε 3''", chip2: "Πηγή: Πολιτική επιστροφών §4" },
+  { name: "AI Prospect Qualification", text: "Αξιολόγηση και ιεράρχηση υποψήφιων πελατών.", tag: "Πωλήσεις", meta: "B2B", chip1: "Score 87 · Ζεστός lead", chip2: "Προτεραιότητα: Υψηλή" },
+  { name: "Voice-to-CRM for Field Sales", text: "Από φωνητική σημείωση σε εγγραφή CRM.", tag: "Πωλήσεις", meta: "Field sales", chip1: "Φωνητική σημείωση · 0:42", chip2: "CRM ενημερώθηκε ✓" },
+  { name: "Property Tour AI Assistant", text: "Ξεναγός ακινήτων που απαντά σε ενδιαφερόμενους.", tag: "Κλαδικά", meta: "Real Estate", chip1: "«Έχει θέση πάρκινγκ;»", chip2: "Ξενάγηση · Πέμπτη 11:00" },
+  { name: "Invoice & Delivery Note Matching", text: "Αυτόματη αντιστοίχιση τιμολογίων και δελτίων αποστολής.", tag: "Λειτουργίες", meta: "Όλοι οι κλάδοι", chip1: "Τιμολόγιο ↔ Δελτίο: Ταιριάζει", chip2: "Απόκλιση: 0,00 €" },
+  { name: "Social Media Carousel System", text: "Carousels για social media σε κλίμακα.", tag: "Περιεχόμενο", meta: "Social", chip1: "Carousel · 8 slides", chip2: "Brand check ✓" },
+  { name: "Campaign Production System", text: "Παραγωγή καμπανιών από το brief μέχρι το τελικό υλικό.", tag: "Περιεχόμενο", meta: "Marketing", chip1: "Brief → 24 assets", chip2: "Έγκριση · 1 εκκρεμεί" },
+  { name: "AI Operations From Your Phone", text: "Διαχείριση λειτουργιών μέσα από το κινητό.", tag: "Λειτουργίες", meta: "Mobile", chip1: "«Στείλε το report της εβδομάδας»", chip2: "Εστάλη σε 6 παραλήπτες ✓" },
+  { name: "Medical Content Engine", text: "Παραγωγή ιατρικού περιεχομένου με έλεγχο ακρίβειας.", tag: "Περιεχόμενο", meta: "Υγεία", chip1: "Έλεγχος ακρίβειας · 12/12 ✓", chip2: "Άρθρο έτοιμο για review" },
+  { name: "Regulated AI Assistant", text: "Βοηθός AI για αυστηρά ρυθμιζόμενους κλάδους.", tag: "Κλαδικά", meta: "Τράπεζες & Ασφάλειες", chip1: "Έλεγχος συμμόρφωσης ✓", chip2: "Audit log · καταγράφηκε" },
+  { name: "Vessel Manuals & Spare Parts", text: "Άμεση αναζήτηση σε εγχειρίδια πλοίων και ανταλλακτικά.", tag: "Κλαδικά", meta: "Ναυτιλία", chip1: "Part 4417-B · Σε απόθεμα", chip2: "Εγχειρίδιο κινητήρα · σελ. 212" },
+  { name: "AI Video Editing Pipeline", text: "Αυτοματοποιημένο μοντάζ βίντεο.", tag: "Περιεχόμενο", meta: "Video", chip1: "Raw 42' → Τελικό 90''", chip2: "Υπότιτλοι EL / EN ✓" },
+  { name: "Multi-Agent Operations System", text: "Πολλοί AI agents που συνεργάζονται σε σύνθετες ροές.", tag: "Λειτουργίες", meta: "Enterprise", chip1: "4 agents σε συνεργασία", chip2: "Βήμα 3/5 · Έλεγχος" },
+  { name: "Real-Time Voice Research Agent", text: "Φωνητικός agent που κάνει έρευνα σε πραγματικό χρόνο.", tag: "Λειτουργίες", meta: "Research", chip1: "«Βρες τιμές ανταγωνισμού»", chip2: "18 πηγές · Live" },
+  { name: "Patent Research & FTO", text: "Έρευνα διπλωμάτων ευρεσιτεχνίας και ελευθερίας χρήσης.", tag: "Κλαδικά", meta: "Νομικά", chip1: "214 διπλώματα σαρώθηκαν", chip2: "FTO: Χαμηλός κίνδυνος" },
+  { name: "AI Agent Identity & Email Infrastructure", text: "Υποδομή ταυτότητας και email για AI agents.", tag: "Λειτουργίες", meta: "Υποδομή", chip1: "agent@company.gr · Ενεργό", chip2: "SPF · DKIM ✓" },
 ];
 
 export const team = [
