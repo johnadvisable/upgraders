@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { cases, faqs, team, tools, type ToolTag } from "./data";
-import { Eyebrow, Pill, Section, Title } from "./ui";
+import { Eyebrow, Section } from "./ui";
 
 export function Cases() {
   const { ref, bar, update, go } = useCarousel(16);
@@ -275,29 +275,42 @@ export function Faq() {
 }
 
 export function Footer() {
-  const cols = {
-    "ΥΠΗΡΕΣΙΕΣ": ["Εταιρικό AI Upgrade", "8ώρο AI Sprint", "Live Εκπαίδευση", "Custom AI εργαλεία"],
-    "ΕΤΑΙΡΕΙΑ": ["Η ομάδα", "Case Studies", "Συχνές ερωτήσεις", "Επικοινωνία"],
-    "ΝΟΜΙΚΑ": ["Όροι χρήσης", "Πολιτική απορρήτου", "Πολιτική cookies"],
+  const cols: Record<string, [string, string][]> = {
+    "ΥΠΗΡΕΣΙΕΣ": [["Εταιρικό AI Upgrade", "#contact"], ["8ώρο AI Sprint", "#contact"], ["Live Εκπαίδευση", "#live"], ["Custom AI εργαλεία", "#tools"]],
+    "ΕΤΑΙΡΕΙΑ": [["Η ομάδα", "#team"], ["Case Studies", "#cases"], ["Συχνές ερωτήσεις", "#faq"], ["Επικοινωνία", "#contact"]],
+    "ΝΟΜΙΚΑ": [["Όροι χρήσης", "#"], ["Πολιτική απορρήτου", "#"], ["Πολιτική cookies", "#"]],
   };
+  const socials = [
+    { code: "IG", label: "Instagram @nikosxydas", href: "https://www.instagram.com/nikosxydas" },
+    { code: "TT", label: "TikTok @nikosxydas", href: "https://www.tiktok.com/@nikosxydas" },
+    { code: "f", label: "Facebook @nikosxydas", href: "https://www.facebook.com/nikosxydas" },
+    { code: "YT", label: "YouTube @ScrollStoppers", href: "https://www.youtube.com/@ScrollStoppers" },
+  ];
   return (
-    <footer className="bg-ink px-5 pb-10 pt-20 text-ink-foreground">
-      <div className="mx-auto max-w-6xl">
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <h2 className="font-display text-4xl md:text-5xl">Έτοιμοι για αναβάθμιση;</h2>
-          <Pill variant="light" href="mailto:hello@theupgraders.gr">Θέλω εκπαίδευση</Pill>
+    <footer className="bg-ink pt-[clamp(64px,8vw,100px)] text-ink-foreground">
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="flex flex-wrap justify-between gap-12">
+          <div className="flex flex-wrap gap-2 self-start">
+            {socials.map((s) => (
+              <a key={s.code} href={s.href} target="_blank" rel="noopener" aria-label={s.label}
+                className="flex h-[38px] w-[38px] items-center justify-center rounded-[10px] border border-ink-foreground/20 font-mono text-[11px] font-medium transition-colors hover:border-ink-foreground hover:text-ink-foreground">{s.code}</a>
+            ))}
+          </div>
+          <div className="grid max-w-[860px] flex-[1_1_620px] grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-9">
+            {Object.entries(cols).map(([h, items]) => (
+              <div key={h}>
+                <p className="font-mono text-xs font-semibold tracking-[0.08em] text-ink-muted">{h}</p>
+                <ul className="mt-4 space-y-2 text-sm">{items.map(([l, href]) => <li key={l}><a href={href} className="hover:text-accent">{l}</a></li>)}</ul>
+              </div>
+            ))}
+          </div>
         </div>
-        <div className="mt-16 grid gap-10 sm:grid-cols-4">
-          <div className="flex gap-4 text-sm text-ink-muted">{["IG", "TT", "f", "YT"].map((s) => <a key={s} href="#" className="hover:text-ink-foreground">{s}</a>)}</div>
-          {Object.entries(cols).map(([h, items]) => (
-            <div key={h}>
-              <p className="text-xs font-semibold font-mono tracking-[0.08em] text-ink-muted">{h}</p>
-              <ul className="mt-4 space-y-2 text-sm">{items.map((i) => <li key={i}><a href="#" className="hover:text-accent">{i}</a></li>)}</ul>
-            </div>
-          ))}
-        </div>
-        <p className="mt-20 font-display text-[18vw] leading-none text-ink-foreground/10 md:text-[11rem]">The Upgraders</p>
-        <div className="mt-6 flex flex-wrap justify-between gap-4 text-xs text-ink-muted">
+      </div>
+      <div className="px-[clamp(12px,2vw,28px)] pt-[clamp(40px,5vw,72px)] pb-[clamp(16px,2vw,28px)]">
+        <img src="/logo-negative.svg" alt="The Upgraders" className="block h-auto w-full" />
+      </div>
+      <div className="mx-auto max-w-6xl px-5">
+        <div className="flex flex-wrap justify-between gap-4 py-[22px] text-xs text-ink-muted">
           <span>© 2026 THE UPGRADERS. ΜΕ ΕΠΙΦΥΛΑΞΗ ΠΑΝΤΟΣ ΔΙΚΑΙΩΜΑΤΟΣ.</span>
           <span>Made with &lt;3 by Humble &amp; Advisable.</span>
         </div>
