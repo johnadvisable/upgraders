@@ -2,7 +2,7 @@ import { GrainGradient } from "@paper-design/shaders-react";
 import { ClientOnly } from "@tanstack/react-router";
 import { ArrowRight, Building2, CirclePlay, MonitorPlay, Zap, type LucideIcon } from "lucide-react";
 import { useEffect, useState } from "react";
-import { clients, courses } from "./data";
+import { courses } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
 export function Header() {
@@ -147,12 +147,6 @@ export function Services() {
             <ServiceCard tone="tan" icon={Zap} badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
           </div>
         </div>
-      </div>
-      <div className="mt-16 flex flex-wrap items-center gap-x-12 gap-y-4 border-t border-border pt-10">
-        <span className="text-sm font-semibold text-muted-foreground">Μας εμπιστεύονται</span>
-        {clients.map((c) => (
-          <span key={c} className="font-display text-2xl text-foreground/60">{c}</span>
-        ))}
       </div>
     </Section>
   );

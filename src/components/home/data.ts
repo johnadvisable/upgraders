@@ -1,4 +1,4 @@
-export const clients = ["Insurance Market", "Seajets", "Stoiximan", "GBL"];
+export const clients = ["Insurance Market", "Seajets", "Stoiximan", "GBL", "Wecare", "Edructer", "Jacobs", "Νέα Οδός", "Κεντρική Οδός", "sebamed", "Galerie de Beauté", "chillbox"];
 
 export const courses = [
   { title: "AI for Business", tools: "ChatGPT, Claude, Copilot · Projects, Skills, MCP connectors", date: "12 & 13 Νοεμβρίου 2026", time: "10:00 – 14:00", modes: ["On site", "Online"], price: "189 €", status: "open" as const },

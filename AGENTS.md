@@ -28,3 +28,5 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep the trusted-by marquee in its own homepage section with two identical client groups; equal group widths make the CSS loop seamless.
