@@ -100,11 +100,16 @@ export function Hero() {
   );
 }
 
-function ServiceCard({ title, sub, text, cta, badge, icon, tone, modal }: { title: string; sub?: string; text: string; cta: string; badge?: string; icon: ServiceIconName; tone: "light" | "tan"; modal?: boolean }) {
+function ServiceCard({ title, sub, text, cta, badge, icon, tone, modal, tooltip }: { title: string; sub?: string; text: string; cta: string; badge?: string; icon: ServiceIconName; tone: "light" | "tan"; modal?: boolean; tooltip: string }) {
   const openBooking = useOpenBooking();
   const light = tone === "light";
+  const tooltipId = useId();
+  const [open, setOpen] = useState(false);
+  const canHover = () => window.matchMedia("(hover: hover) and (min-width: 900px)").matches;
   return (
-    <div className={`relative flex flex-col rounded-[20px] p-7 ${light ? "bg-card shadow-[0_8px_24px_-12px_rgba(28,28,26,0.18)]" : "bg-tan"}`}>
+    <div onMouseEnter={() => canHover() && setOpen(true)} onMouseLeave={() => setOpen(false)} onFocus={() => canHover() && setOpen(true)} onBlur={() => setOpen(false)}
+      className={`relative flex flex-col rounded-[20px] p-7 ${light ? "bg-card shadow-[0_8px_24px_-12px_rgba(28,28,26,0.18)]" : "bg-tan"}`}>
+      {open && <div id={tooltipId} role="tooltip" className="pointer-events-none absolute left-7 right-7 bottom-[calc(100%+10px)] z-[5] rounded-[10px] bg-ink px-[14px] py-[10px] text-[13px] font-normal leading-[1.4] text-ink-foreground shadow-[0_12px_30px_-12px_rgba(0,0,0,0.4)]">{tooltip}</div>}
       {badge && <span className="absolute right-5 top-7 rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-accent-foreground">{badge}</span>}
       <span className={`flex h-11 w-11 items-center justify-center rounded-[4px] ${light ? "bg-tan" : "bg-card"}`}>
         <ServiceIcon name={icon} className="h-[22px] w-[22px]" />
@@ -112,7 +117,7 @@ function ServiceCard({ title, sub, text, cta, badge, icon, tone, modal }: { titl
       <h3 className="mt-10 text-xl font-semibold tracking-tight">{title}</h3>
       {sub && <p className="mt-1 text-foreground/70">{sub}</p>}
       <p className="mt-2 flex-1 leading-relaxed text-foreground/80">{text}</p>
-      <a href={modal ? "#contact" : "#live"} onClick={modal ? openBooking : undefined} className="mt-8 inline-flex items-center gap-2 self-start rounded-[6px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 hover:text-primary-foreground">
+      <a href={modal ? "#contact" : "#live"} onClick={modal ? openBooking : undefined} aria-describedby={open ? tooltipId : undefined} className="mt-8 inline-flex items-center gap-2 self-start rounded-[6px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 hover:text-primary-foreground">
         {cta} <ArrowRight className="h-4 w-4" />
       </a>
     </div>
@@ -145,15 +150,15 @@ export function Services() {
         <div className="min-w-0">
           <GroupLabel title="Σε τμήματα" sub="Ανοιχτά μαθήματα & βιβλιοθήκη εκπαιδεύσεων" />
           <Slider className="lg:h-[calc(100%-3rem)]" sliderClassName="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
-            <ServiceCard tone="light" icon="live" title="Live Εκπαίδευση" sub="(σε μικρά τμήματα)" text="Μικρά groups, σε δική μας αίθουσα ή livestream." cta="Επόμενα μαθήματα" />
-            <ServiceCard tone="light" icon="demand" title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" />
+            <ServiceCard tone="light" icon="live" title="Live Εκπαίδευση" sub="(σε μικρά τμήματα)" text="Μικρά groups, σε δική μας αίθουσα ή livestream." cta="Επόμενα μαθήματα" tooltip="Ζωντανή εκπαίδευση σε μικρή ομάδα, σε προσιτό κόστος." />
+            <ServiceCard tone="light" icon="demand" title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" tooltip="Η πιο οικονομική, Do-it-Yourself επιλογή." />
           </Slider>
         </div>
         <div className="min-w-0">
           <GroupLabel title="Εξατομικευμένη" sub="Στημένη αποκλειστικά για την ομάδα σας" />
           <Slider className="lg:h-[calc(100%-3rem)]" sliderClassName="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
-            <ServiceCard modal tone="tan" icon="corporate" title="Εταιρικό AI Upgrade" text="Tailor-made εκπαίδευση, στημένη πάνω στην εταιρεία σας." cta="Δείτε πώς γίνεται" />
-            <ServiceCard modal tone="tan" icon="sprint" badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
+            <ServiceCard modal tone="tan" icon="corporate" title="Εταιρικό AI Upgrade" text="Tailor-made εκπαίδευση, στημένη πάνω στην εταιρεία σας." cta="Δείτε πώς γίνεται" tooltip="Η πιο εξατομικευμένη αλλά και ακριβή επιλογή." />
+            <ServiceCard modal tone="tan" icon="sprint" badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" tooltip="Υψηλή εξατομίκευση, ελκυστικό κόστος." />
           </Slider>
         </div>
       </Reveal>
