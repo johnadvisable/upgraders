@@ -162,31 +162,31 @@ export function LiveCourses() {
         <p className="mt-4 text-lg text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
       </div>
       <div className="mt-10 rounded-[20px] border border-live-table-border bg-card">
-        <div className="live-course-grid hidden border-b border-live-header-divider px-7 py-4 font-mono text-[11px] uppercase text-muted-foreground lg:grid">
+        <div className="live-course-grid hidden border-b border-live-header-divider px-7 py-[18px] font-mono text-[11px] uppercase text-muted-foreground min-[900px]:grid">
           <span>ΜΑΘΗΜΑ</span><span>ΗΜΕΡΟΜΗΝΙΑ</span><span>ΩΡΕΣ</span><span>ΤΡΟΠΟΣ</span><span>ΤΙΜΗ</span>
           <span aria-hidden />
         </div>
         {courses.map((c, i) => {
           const done = c.status === "done";
           return (
-            <div key={i} className={`live-course-grid grid items-center gap-5 px-7 py-[22px] ${i > 0 ? "border-t border-live-row-divider" : ""} ${done ? "opacity-55" : ""}`}>
+            <div key={i} className={`live-course-grid grid items-center gap-3 min-[900px]:gap-5 px-7 py-[22px] ${i > 0 ? "border-t border-live-row-divider" : ""} ${done ? "opacity-55" : ""}`}>
               <div>
                 <div className="text-[17px] font-medium">{c.title}</div>
                 <p className="mt-1 text-[13px] text-live-subtitle">{c.tools}</p>
               </div>
               <p className="flex items-start gap-2 text-[15px] font-normal"><svg aria-hidden width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 h-4 w-4 shrink-0"><path d="M4 6h16v14H4zM4 10h16M8 3v4M16 3v4" /></svg>{c.date}</p>
               <p className="flex items-center gap-2 whitespace-nowrap text-[15px]"><svg aria-hidden width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18zM12 7v5l3 2" /></svg>{c.time}</p>
-              <div className="flex flex-wrap gap-3 text-[15px] lg:flex-col lg:gap-2">
+              <div className="flex flex-wrap gap-3 text-[15px] min-[900px]:flex-col min-[900px]:gap-2">
                 {c.modes.map((m) => {
                   return <span key={m} className="inline-flex items-center gap-2 whitespace-nowrap"><svg aria-hidden width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.6} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><path d={m === "On site" ? "M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z" : "M3 5h18v11H3zM8 20h8M12 16v4"} /></svg>{m}</span>;
                 })}
               </div>
               {done ? (
-                <span className="justify-self-start rounded-full border border-live-completed px-3 py-1.5 text-xs font-medium text-muted-foreground lg:col-span-2">Ολοκληρώθηκε</span>
+                <span className="justify-self-start rounded-full border border-live-completed px-3 py-1.5 text-xs font-medium text-muted-foreground min-[900px]:col-span-2">Ολοκληρώθηκε</span>
               ) : (
                 <>
                   <p className="text-base font-medium">{c.price}</p>
-                  <span className="relative inline-flex justify-self-start">
+                  <span className="relative inline-flex justify-self-start min-[900px]:justify-self-end">
                     <Pill showArrow={false} className="whitespace-nowrap px-4 hover:bg-live-booking-hover hover:text-primary-foreground!">Κράτηση θέσης</Pill>
                     <span className="absolute -right-2 -top-3 rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">Λίγες θέσεις</span>
                   </span>

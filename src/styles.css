@@ -235,9 +235,9 @@ a:hover { color: var(--accent); }
 .live-xsell-info:hover { background: var(--live-booking-hover); color: var(--live-xsell-hover-foreground); }
 .live-xsell-tooltip { position: absolute; right: -7px; bottom: calc(100% + 18px); z-index: 5; width: max-content; max-width: 260px; padding: 10px 14px; border-radius: 10px; background: var(--primary); color: var(--live-info-foreground); font-size: 13px; line-height: 1.4; box-shadow: var(--live-xsell-tooltip-shadow); }
 .live-course-grid { grid-template-columns: minmax(0, 1fr); }
-@media (min-width: 1024px) {
+@media (min-width: 900px) {
   .live-course-grid {
-    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 0.7fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(0, 2.3fr) minmax(0, 1.5fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 0.7fr) 170px;
     column-gap: 1.25rem;
   }
 }
