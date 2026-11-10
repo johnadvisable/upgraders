@@ -263,8 +263,8 @@ export function Faq() {
                   <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="shrink-0 transition-transform duration-300 group-data-[state=open]:rotate-90"><path d="M9 6l6 6-6 6" /></svg>
                 </AccordionPrimitive.Trigger>
               </AccordionPrimitive.Header>
-              <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
-                <p className="max-w-[780px] px-[clamp(20px,2.4vw,30px)] pb-[clamp(22px,2.4vw,30px)] text-[16px] leading-[1.6] text-[#5F5B53]">{a}</p>
+              <AccordionPrimitive.Content>
+                <p className="animate-[tuIn_0.35s_ease_both] max-w-[780px] px-[clamp(20px,2.4vw,30px)] pb-[clamp(22px,2.4vw,30px)] text-[16px] leading-[1.6] text-[#5F5B53]">{a}</p>
               </AccordionPrimitive.Content>
             </AccordionPrimitive.Item>
           ))}

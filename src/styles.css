@@ -313,3 +313,8 @@ a:hover { color: var(--accent); }
 .tool-glass { background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .25); backdrop-filter: blur(10px); }
 .tool-chip { background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .3); backdrop-filter: blur(14px); box-shadow: 0 10px 30px -12px rgb(0 0 0 / .35); }
 .tool-cta:hover { color: var(--foreground); }
+
+@keyframes tuIn {
+  from { opacity: 0; transform: translateY(.3em); }
+  to { opacity: 1; transform: none; }
+}
