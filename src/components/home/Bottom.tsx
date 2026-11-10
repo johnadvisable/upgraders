@@ -171,7 +171,7 @@ export function Why() {
   const muted = "text-[#5F5B53]";
   return (
     <Section id="why" className="pt-[clamp(40px,5vw,64px)] pb-[clamp(80px,10vw,140px)] text-center">
-      <p className="font-serif text-[22px] italic">Γιατί The Upgraders</p>
+      <p className="font-serif text-[22px] italic font-normal!">Γιατί The Upgraders</p>
       <h2 className="mx-auto mt-4 max-w-[1000px] text-[clamp(34px,4.8vw,68px)] font-light leading-[1.05] tracking-[-0.035em]">Είναι σεμινάριο; Είναι consulting;<br /><span className="font-serif font-normal! italic">Είναι Αναβάθμιση.</span></h2>
       <p className={`mx-auto mt-6 max-w-[700px] text-[18px] leading-[1.55] ${muted}`}>Τα σεμινάρια δεν αλλάζουν τη δουλειά. Οι σύμβουλοι δεν χτίζουν. Εμείς εκπαιδεύουμε τους ανθρώπους και χτίζουμε τα συστήματα, γρήγορα και εξατομικευμένα, όπως κάναμε στις δικές μας εταιρείες.</p>
       <div className="mt-[clamp(48px,6vw,80px)] overflow-x-auto text-left" role="img" aria-label="Διάγραμμα: ταχύτητα αποτελέσματος έναντι προσαρμογής. Τα online μαθήματα είναι γρήγορα αλλά γενικά, τα κλασικά σεμινάρια αργά και γενικά, οι μεγάλες συμβουλευτικές αργές και ειδικές με μεγάλη επένδυση, ενώ οι The Upgraders γρήγοροι και ειδικά για εσάς.">
