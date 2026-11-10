@@ -160,14 +160,15 @@ export function LiveCourses() {
         <Title>Τα επόμενα <span className="font-serif italic font-normal!">live<br className="hidden lg:block" /> μαθήματα.</span></Title>
         <p className="mt-4 text-lg text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
       </div>
-      <div className="mt-10 rounded-[20px] border border-border bg-card">
-        <div className="live-course-grid hidden border-b border-border px-6 py-4 font-mono text-[11px] uppercase text-muted-foreground lg:grid">
+      <div className="mt-10 rounded-[20px] border border-live-table-border bg-card">
+        <div className="live-course-grid hidden border-b border-live-header-divider px-7 py-4 font-mono text-[11px] uppercase text-muted-foreground lg:grid">
           <span>ΜΑΘΗΜΑ</span><span>ΗΜΕΡΟΜΗΝΙΑ</span><span>ΩΡΕΣ</span><span>ΤΡΟΠΟΣ</span><span>ΤΙΜΗ</span>
+          <span aria-hidden />
         </div>
         {courses.map((c, i) => {
           const done = c.status === "done";
           return (
-            <div key={i} className={`live-course-grid grid items-center gap-5 p-6 ${i > 0 ? "border-t border-border" : ""} ${done ? "opacity-55" : ""}`}>
+            <div key={i} className={`live-course-grid grid items-center gap-5 px-7 py-[22px] ${i > 0 ? "border-t border-live-row-divider" : ""} ${done ? "opacity-55" : ""}`}>
               <div>
                 <h3 className="font-display text-2xl">{c.title}</h3>
                 <p className="mt-1 text-sm text-muted-foreground">{c.tools}</p>
@@ -181,17 +182,15 @@ export function LiveCourses() {
                 })}
               </div>
               {done ? (
-                <span className="justify-self-start rounded-full border border-live-completed px-3 py-1.5 text-xs font-medium text-muted-foreground">Ολοκληρώθηκε</span>
+                <span className="justify-self-start rounded-full border border-live-completed px-3 py-1.5 text-xs font-medium text-muted-foreground lg:col-span-2">Ολοκληρώθηκε</span>
               ) : (
-                <div className="flex flex-wrap items-center gap-4 lg:flex-col lg:items-start">
-                  <div>
-                    <p className="font-display text-2xl">{c.price}</p>
-                  </div>
-                  <span className="relative mt-2 inline-flex">
+                <>
+                  <p className="font-display text-2xl">{c.price}</p>
+                  <span className="relative inline-flex justify-self-start">
                     <Pill className="whitespace-nowrap px-4">Κράτηση θέσης</Pill>
                     <span className="absolute -right-2 -top-3 rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">Λίγες θέσεις</span>
                   </span>
-                </div>
+                </>
               )}
             </div>
           );

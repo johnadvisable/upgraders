@@ -88,6 +88,9 @@
   --color-trusted-placeholder: var(--trusted-placeholder);
   --color-live-completed: var(--live-completed);
   --color-live-info-foreground: var(--live-info-foreground);
+  --color-live-table-border: var(--live-table-border);
+  --color-live-header-divider: var(--live-header-divider);
+  --color-live-row-divider: var(--live-row-divider);
 }
 
 :root {
@@ -125,6 +128,9 @@
   --trusted-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   --live-completed: rgba(28, 28, 26, 0.2);
   --live-info-foreground: #FFFFFF;
+  --live-table-border: rgba(28, 28, 26, 0.08);
+  --live-header-divider: #F0EAE0;
+  --live-row-divider: #F3EEE5;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
@@ -216,7 +222,7 @@ a:hover { color: var(--accent); }
 .live-course-grid { grid-template-columns: minmax(0, 1fr); }
 @media (min-width: 1024px) {
   .live-course-grid {
-    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 0.8fr) minmax(0, 1.2fr);
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 0.9fr) minmax(0, 0.7fr) minmax(0, 1.2fr);
     column-gap: 1.25rem;
   }
 }
