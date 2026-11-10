@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header, Hero, LiveCourses, Services } from "@/components/home/Top";
+import { BookingProvider } from "@/components/home/BookingModal";
 import { TrustedBy } from "@/components/home/TrustedBy";
 import { Enablement, Industries, Method, Paradox, Roles } from "@/components/home/Middle";
 import { Cases, Faq, Footer, Quote, Team, Tools, Why } from "@/components/home/Bottom";
@@ -23,6 +24,7 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
+    <BookingProvider>
     <main>
       <Header />
       <Hero />
@@ -42,5 +44,6 @@ function Index() {
       <Faq />
       <Footer />
     </main>
+    </BookingProvider>
   );
 }

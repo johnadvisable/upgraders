@@ -4,10 +4,12 @@ import { ArrowRight, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "./Slider";
+import { useOpenBooking } from "./BookingModal";
 import { courses } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
 export function Header() {
+  const openBooking = useOpenBooking();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -20,7 +22,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <a href="#top" aria-label="The Upgraders"><img src={scrolled ? "/logo.svg" : "/logo-negative.svg"} alt="The Upgraders" className="h-[34px] w-auto" /></a>
         <span className="relative">
-          <Pill href="#services" variant={scrolled ? "dark" : "light"} showArrow={false} className={`h-11 rounded-full px-5 py-0 text-[15px] font-medium ${scrolled ? "bg-ink text-ink-foreground hover:bg-ink/85" : ""}`}>
+          <Pill href="#contact" onClick={openBooking} variant={scrolled ? "dark" : "light"} showArrow={false} className={`h-11 rounded-full px-5 py-0 text-[15px] font-medium ${scrolled ? "bg-ink text-ink-foreground hover:bg-ink/85" : ""}`}>
             Θέλω εκπαίδευση
             <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </Pill>
@@ -97,7 +99,8 @@ export function Hero() {
   );
 }
 
-function ServiceCard({ title, sub, text, cta, badge, icon, tone }: { title: string; sub?: string; text: string; cta: string; badge?: string; icon: ServiceIconName; tone: "light" | "tan" }) {
+function ServiceCard({ title, sub, text, cta, badge, icon, tone, modal }: { title: string; sub?: string; text: string; cta: string; badge?: string; icon: ServiceIconName; tone: "light" | "tan"; modal?: boolean }) {
+  const openBooking = useOpenBooking();
   const light = tone === "light";
   return (
     <div className={`relative flex flex-col rounded-[20px] p-7 ${light ? "bg-card shadow-[0_8px_24px_-12px_rgba(28,28,26,0.18)]" : "bg-tan"}`}>
@@ -108,7 +111,7 @@ function ServiceCard({ title, sub, text, cta, badge, icon, tone }: { title: stri
       <h3 className="mt-10 text-xl font-semibold tracking-tight">{title}</h3>
       {sub && <p className="mt-1 text-foreground/70">{sub}</p>}
       <p className="mt-2 flex-1 leading-relaxed text-foreground/80">{text}</p>
-      <a href="#live" className="mt-8 inline-flex items-center gap-2 self-start rounded-[6px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 hover:text-primary-foreground">
+      <a href={modal ? "#contact" : "#live"} onClick={modal ? openBooking : undefined} className="mt-8 inline-flex items-center gap-2 self-start rounded-[6px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 hover:text-primary-foreground">
         {cta} <ArrowRight className="h-4 w-4" />
       </a>
     </div>
@@ -148,8 +151,8 @@ export function Services() {
         <div className="min-w-0">
           <GroupLabel title="Εξατομικευμένη" sub="Στημένη αποκλειστικά για την ομάδα σας" />
           <Slider className="lg:h-[calc(100%-3rem)]" sliderClassName="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
-            <ServiceCard tone="tan" icon="corporate" title="Εταιρικό AI Upgrade" text="Tailor-made εκπαίδευση, στημένη πάνω στην εταιρεία σας." cta="Δείτε πώς γίνεται" />
-            <ServiceCard tone="tan" icon="sprint" badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
+            <ServiceCard modal tone="tan" icon="corporate" title="Εταιρικό AI Upgrade" text="Tailor-made εκπαίδευση, στημένη πάνω στην εταιρεία σας." cta="Δείτε πώς γίνεται" />
+            <ServiceCard modal tone="tan" icon="sprint" badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
           </Slider>
         </div>
       </div>
