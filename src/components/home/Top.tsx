@@ -1,6 +1,6 @@
 import { GrainGradient } from "@paper-design/shaders-react";
 import { ClientOnly } from "@tanstack/react-router";
-import { ArrowRight, Building2, CirclePlay, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide-react";
+import { ArrowRight, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide-react";
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { courses } from "./data";
@@ -93,13 +93,13 @@ export function Hero() {
   );
 }
 
-function ServiceCard({ title, sub, text, cta, badge, icon: Icon, tone }: { title: string; sub?: string; text: string; cta: string; badge?: string; icon: LucideIcon; tone: "light" | "tan" }) {
+function ServiceCard({ title, sub, text, cta, badge, icon, tone }: { title: string; sub?: string; text: string; cta: string; badge?: string; icon: ServiceIconName; tone: "light" | "tan" }) {
   const light = tone === "light";
   return (
     <div className={`relative flex flex-col rounded-[20px] p-7 ${light ? "bg-card shadow-[0_8px_24px_-12px_rgba(28,28,26,0.18)]" : "bg-tan"}`}>
       {badge && <span className="absolute right-5 top-7 rounded-full bg-accent px-2.5 py-0.5 text-xs font-semibold text-accent-foreground">{badge}</span>}
       <span className={`flex h-11 w-11 items-center justify-center rounded-[4px] ${light ? "bg-tan" : "bg-card"}`}>
-        <Icon className="h-[18px] w-[18px]" strokeWidth={1.5} />
+        <ServiceIcon name={icon} className="h-[22px] w-[22px]" />
       </span>
       <h3 className="mt-10 text-xl font-semibold tracking-tight">{title}</h3>
       {sub && <p className="mt-1 text-foreground/70">{sub}</p>}
@@ -137,15 +137,15 @@ export function Services() {
         <div className="min-w-0">
           <GroupLabel title="Σε τμήματα" sub="Ανοιχτά μαθήματα & βιβλιοθήκη εκπαιδεύσεων" />
           <ServiceSlider>
-            <ServiceCard tone="light" icon={MonitorPlay} title="Live Εκπαίδευση" sub="(σε μικρά τμήματα)" text="Μικρά groups, σε δική μας αίθουσα ή livestream." cta="Επόμενα μαθήματα" />
-            <ServiceCard tone="light" icon={CirclePlay} title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" />
+            <ServiceCard tone="light" icon="live" title="Live Εκπαίδευση" sub="(σε μικρά τμήματα)" text="Μικρά groups, σε δική μας αίθουσα ή livestream." cta="Επόμενα μαθήματα" />
+            <ServiceCard tone="light" icon="demand" title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" />
           </ServiceSlider>
         </div>
         <div className="min-w-0">
           <GroupLabel title="Εξατομικευμένη" sub="Στημένη αποκλειστικά για την ομάδα σας" />
           <ServiceSlider>
-            <ServiceCard tone="tan" icon={Building2} title="Εταιρικό AI Upgrade" text="Tailor-made εκπαίδευση, στημένη πάνω στην εταιρεία σας." cta="Δείτε πώς γίνεται" />
-            <ServiceCard tone="tan" icon={Zap} badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
+            <ServiceCard tone="tan" icon="corporate" title="Εταιρικό AI Upgrade" text="Tailor-made εκπαίδευση, στημένη πάνω στην εταιρεία σας." cta="Δείτε πώς γίνεται" />
+            <ServiceCard tone="tan" icon="sprint" badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
           </ServiceSlider>
         </div>
       </div>
@@ -278,5 +278,21 @@ function SliderArrow({ dir, onClick }: { dir: "prev" | "next"; onClick: () => vo
         <path d={dir === "prev" ? "M19 12H5M11 6l-6 6 6 6" : "M5 12h14M13 6l6 6-6 6"} />
       </svg>
     </button>
+  );
+}
+
+type ServiceIconName = "corporate" | "sprint" | "live" | "demand";
+const serviceIconPaths: Record<ServiceIconName, string[]> = {
+  corporate: ["M4 21V5l8-3v19", "M12 9h8v12", "M3 21h18", "M7 8h2", "M7 12h2", "M7 16h2", "M15 13h2", "M15 17h2"],
+  sprint: ["M13 2L4 14h7l-1 8 9-12h-7z"],
+  live: ["M3 5h18v12H3z", "M8 21h8", "M12 17v4", "M10 8.5v5l4-2.5z"],
+  demand: ["M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18z", "M10 8.5v7l6-3.5z"],
+};
+
+function ServiceIcon({ name, className }: { name: ServiceIconName; className?: string }) {
+  return (
+    <svg width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
+      {serviceIconPaths[name].map((d) => <path key={d} d={d} />)}
+    </svg>
   );
 }
