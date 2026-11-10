@@ -16,7 +16,7 @@ export function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
   return (
-    <header className={`fixed inset-x-0 top-0 z-50 px-5 py-4 transition-colors duration-300 ${scrolled ? "border-b border-border bg-card/75 backdrop-blur-md" : "border-b border-transparent"}`}>
+    <header className={`fixed inset-x-0 top-0 z-50 px-5 py-4 border-b backdrop-blur-[14px] transition-colors duration-300 ${scrolled ? "border-foreground/8 bg-background/94" : "border-background/0"}`}>
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <a href="#top" aria-label="The Upgraders"><img src={scrolled ? "/logo.svg" : "/logo-negative.svg"} alt="The Upgraders" className="h-[34px] w-auto" /></a>
         <span className="relative">
