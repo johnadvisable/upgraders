@@ -127,7 +127,7 @@ export function Enablement() {
           bullets={["Hands-on εκπαίδευση ανά ρόλο", "Πάνω στην πραγματική δουλειά της ομάδας", "Από τη βασική χρήση σε επαναλαμβανόμενες ροές"]}
           link="Δείτε τα προγράμματα" href="#services"
         />
-        <img src="https://images.pexels.com/photos/3184327/pexels-photo-3184327.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Ελληνική ομάδα σε workshop γύρω από τραπέζι με laptops" loading="lazy" className="min-w-0 flex-[1.3_1_min(100%,460px)] rounded-[22px] object-cover" />
+        <img src="https://images.pexels.com/photos/3184327/pexels-photo-3184327.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Ελληνική ομάδα σε workshop γύρω από τραπέζι με laptops" loading="lazy" className="h-[240px] min-w-0 flex-[1.3_1_min(100%,460px)] rounded-[22px] object-cover min-[760px]:h-[clamp(320px,38vw,520px)]" />
       </div>
       <div className="mt-[clamp(56px,7vw,104px)] flex flex-row-reverse flex-wrap items-center gap-[clamp(36px,5vw,88px)]">
         <EnableText
