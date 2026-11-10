@@ -5,8 +5,8 @@ import { Slider } from "./Slider";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
 const listImages = {
-  roles: { src: "/roles-team.webp", alt: "Χαμογελαστή ελληνική ομάδα γραφείου (Kampus Production / Pexels)" },
-  industries: { src: "/industries-photo.webp", alt: "Λιμάνι με πλοίο (Martin Damboldt / Pexels)" },
+  roles: { src: "/roles-team.webp", alt: "Χαμογελαστή ελληνική ομάδα γραφείου" },
+  industries: { src: "/industries-photo.webp", alt: "Λιμάνι με πλοίο" },
 };
 
 function List({ eyebrow, title, items, id, reverse }: { eyebrow: string; title: string; items: string[][]; id: "roles" | "industries"; reverse?: boolean }) {
