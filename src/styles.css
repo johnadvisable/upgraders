@@ -78,6 +78,9 @@
   --color-ops-dot: var(--ops-dot);
   --color-ops-chip: var(--ops-chip);
   --color-method-bg: var(--method-bg);
+  --color-cases-metrics: var(--cases-metrics);
+  --color-cases-line: var(--cases-line);
+  --color-cases-note: var(--cases-note);
   --color-method-chip: var(--method-chip);
   --color-method-chip-border: var(--method-chip-border);
   --color-role-line: var(--role-line);
@@ -119,6 +122,9 @@
   --ops-dot: #E4DDD1;
   --ops-chip: #F3EDE2;
   --method-bg: #F3ECDF;
+  --cases-metrics: #F7F2EA;
+  --cases-line: #E8E1D5;
+  --cases-note: #8A847A;
   --method-chip: #FCFAF6;
   --method-chip-border: #ECE5D9;
   --role-line: rgba(28, 28, 26, 0.15);
@@ -296,3 +302,7 @@ a:hover { color: var(--accent); }
 .ops-card { box-shadow: 0 30px 60px -30px rgb(28 28 26 / .5); }
 
 .method-panel { box-shadow: 0 30px 60px -40px rgb(28 28 26 / .45); }
+
+.cases-track { scroll-snap-type: x mandatory; scrollbar-width: none; }
+.cases-track::-webkit-scrollbar { display: none; }
+.cases-badge { background: rgb(255 255 255 / .18); border: 1px solid rgb(255 255 255 / .28); backdrop-filter: blur(10px); }
