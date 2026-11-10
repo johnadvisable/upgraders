@@ -4,6 +4,7 @@ import { ArrowRight, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
 import { Slider } from "./Slider";
+import { Reveal } from "./Reveal";
 import { useOpenBooking } from "./BookingModal";
 import { courses } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
@@ -130,7 +131,7 @@ function GroupLabel({ title, sub }: { title: string; sub: string }) {
 export function Services() {
   return (
     <Section id="services" className="py-[clamp(72px,9vw,128px)]">
-      <div className="flex flex-wrap items-end justify-between gap-6">
+      <Reveal className="flex flex-wrap items-end justify-between gap-6">
         <div>
           <Eyebrow className="text-foreground">Υπηρεσίες εκπαίδευσης</Eyebrow>
           <Title className="mt-6 text-5xl md:text-7xl">
@@ -139,8 +140,8 @@ export function Services() {
           </Title>
         </div>
         <Pill>Θέλω εκπαίδευση</Pill>
-      </div>
-      <div className="mt-12 grid gap-4 lg:grid-cols-2">
+      </Reveal>
+      <Reveal className="mt-12 grid gap-4 lg:grid-cols-2">
         <div className="min-w-0">
           <GroupLabel title="Σε τμήματα" sub="Ανοιχτά μαθήματα & βιβλιοθήκη εκπαιδεύσεων" />
           <Slider className="lg:h-[calc(100%-3rem)]" sliderClassName="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
@@ -155,7 +156,7 @@ export function Services() {
             <ServiceCard modal tone="tan" icon="sprint" badge="Δημοφιλές" title="8ώρο AI Sprint" text="Δύο 4ωρα μέσα στην εταιρεία σας, εκπαίδευση στα εργαλεία που θα κάνουν τη διαφορά." cta="Κλείστε Sprint" />
           </Slider>
         </div>
-      </div>
+      </Reveal>
     </Section>
   );
 }
@@ -163,12 +164,12 @@ export function Services() {
 export function LiveCourses() {
   return (
     <Section id="live" className="pt-[clamp(40px,5vw,72px)] pb-0">
-      <div className="max-w-[51.25rem]">
+      <Reveal className="max-w-[51.25rem]">
         <Eyebrow>Live Upgrades</Eyebrow>
         <Title>Τα επόμενα <span className="font-serif italic font-normal!">live<br className="hidden lg:block" /> μαθήματα.</span></Title>
         <p className="mt-4 text-lg text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
-      </div>
-      <div className="mt-10 rounded-[20px] border border-live-table-border bg-card">
+      </Reveal>
+      <Reveal className="mt-10 rounded-[20px] border border-live-table-border bg-card">
         <div className="live-course-grid hidden border-b border-live-header-divider px-7 py-[18px] font-mono text-[11px] uppercase text-muted-foreground min-[900px]:grid">
           <span>ΜΑΘΗΜΑ</span><span>ΗΜΕΡΟΜΗΝΙΑ</span><span>ΩΡΕΣ</span><span>ΤΡΟΠΟΣ</span><span>ΤΙΜΗ</span>
           <span aria-hidden />
@@ -202,8 +203,8 @@ export function LiveCourses() {
             </div>
           );
         })}
-      </div>
-      <div className="live-xsell-list">
+      </Reveal>
+      <Reveal className="live-xsell-list">
         {[
           { text: "Θέλω εξατομικευμένη εταιρική εκπαίδευση", icon: UserRound, tooltip: "Η πιο εξατομικευμένη αλλά και ακριβή επιλογή." },
           { text: "Θέλω ένα 8ωρο Sprint μέσα στην εταιρεία μου", icon: Zap, tooltip: "Υψηλή εξατομίκευση, ελκυστικό κόστος." },
@@ -211,7 +212,7 @@ export function LiveCourses() {
         ].map((card) => (
           <LiveCrossSellCard key={card.text} {...card} />
         ))}
-      </div>
+      </Reveal>
     </Section>
   );
 }

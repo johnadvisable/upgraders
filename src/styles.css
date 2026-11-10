@@ -324,3 +324,15 @@ a:hover { color: var(--accent); }
 @media (min-width: 900px) {
   .booking-grid { grid-template-columns: 1fr 1fr; grid-template-areas: "intro cal" "list cal"; gap: 28px clamp(28px,4vw,56px); }
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.9s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+}

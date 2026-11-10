@@ -2,17 +2,18 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { cases, faqs, team, tools, type ToolTag } from "./data";
 import { Eyebrow, Section } from "./ui";
+import { Reveal } from "./Reveal";
 
 export function Cases() {
   const { ref, bar, update, go } = useCarousel(16);
   return (
     <Section id="cases" className="bg-ink text-ink-foreground py-[clamp(80px,10vw,140px)]">
       <div className="flex flex-wrap gap-[clamp(36px,5vw,72px)]">
-        <div className="grid max-w-[400px] flex-[1_1_300px] content-start gap-5">
+        <Reveal className="grid max-w-[400px] flex-[1_1_300px] content-start gap-5">
           <Eyebrow className="text-ink-foreground/80">Release notes</Eyebrow>
           <h2 className="text-[clamp(36px,4.6vw,64px)] font-light leading-[1.04] tracking-[-0.035em]">Τι κάναμε <span className="font-serif font-light! italic">για πελάτες μας.</span></h2>
           <p className="text-[17px] text-ink-foreground/78">Τι άλλαξε μετά την αναβάθμιση.</p>
-        </div>
+        </Reveal>
         <div className="min-w-0 flex-[2_1_520px]">
           <div className="mb-5 flex justify-end"><CarouselNav go={go} /></div>
           <div ref={ref} onScroll={update} className="cases-track flex gap-4 overflow-x-auto">
@@ -74,10 +75,10 @@ export function Tools() {
   return (
     <Section id="tools" className="pt-[clamp(80px,10vw,140px)] pb-[clamp(40px,5vw,64px)]">
       <div className="flex flex-wrap items-end justify-between gap-7">
-        <div className="max-w-[900px] flex-[1_1_500px]">
+        <Reveal className="max-w-[900px] flex-[1_1_500px]">
           <h2 className="text-[clamp(30px,3.8vw,52px)] font-semibold leading-[1.08] tracking-[-0.03em]">Χτίζουμε και Custom Εργαλεία<span className="font-serif font-semibold! italic">: σχεδιασμένα για κλάδους ή αποκλειστικά για τη δική σας εταιρεία.</span></h2>
           <p className="mt-4 text-lg text-muted-foreground">Πραγματικά συστήματα AI, σε πραγματικές ελληνικές εταιρείες.</p>
-        </div>
+        </Reveal>
         <CarouselNav go={go} light />
       </div>
       <div className="no-scrollbar mt-9 flex gap-2 overflow-x-auto">
@@ -171,10 +172,10 @@ export function Why() {
   const muted = "text-[#5F5B53]";
   return (
     <Section id="why" className="pt-[clamp(40px,5vw,64px)] pb-[clamp(80px,10vw,140px)] text-center">
-      <p className="font-serif text-[22px] italic font-normal!">Γιατί The Upgraders</p>
+      <Reveal><p className="font-serif text-[22px] italic font-normal!">Γιατί The Upgraders</p>
       <h2 className="mx-auto mt-4 max-w-[1000px] text-[clamp(34px,4.8vw,68px)] font-light leading-[1.05] tracking-[-0.035em]">Είναι σεμινάριο; Είναι consulting;<br /><span className="font-serif font-normal! italic">Είναι Αναβάθμιση.</span></h2>
-      <p className={`mx-auto mt-6 max-w-[700px] text-[18px] leading-[1.55] ${muted}`}>Τα σεμινάρια δεν αλλάζουν τη δουλειά. Οι σύμβουλοι δεν χτίζουν. Εμείς εκπαιδεύουμε τους ανθρώπους και χτίζουμε τα συστήματα, γρήγορα και εξατομικευμένα, όπως κάναμε στις δικές μας εταιρείες.</p>
-      <div className="mt-[clamp(48px,6vw,80px)] overflow-x-auto text-left" role="img" aria-label="Διάγραμμα: ταχύτητα αποτελέσματος έναντι προσαρμογής. Τα online μαθήματα είναι γρήγορα αλλά γενικά, τα κλασικά σεμινάρια αργά και γενικά, οι μεγάλες συμβουλευτικές αργές και ειδικές με μεγάλη επένδυση, ενώ οι The Upgraders γρήγοροι και ειδικά για εσάς.">
+      <p className={`mx-auto mt-6 max-w-[700px] text-[18px] leading-[1.55] ${muted}`}>Τα σεμινάρια δεν αλλάζουν τη δουλειά. Οι σύμβουλοι δεν χτίζουν. Εμείς εκπαιδεύουμε τους ανθρώπους και χτίζουμε τα συστήματα, γρήγορα και εξατομικευμένα, όπως κάναμε στις δικές μας εταιρείες.</p></Reveal>
+      <Reveal className="mt-[clamp(48px,6vw,80px)] overflow-x-auto text-left" role="img" aria-label="Διάγραμμα: ταχύτητα αποτελέσματος έναντι προσαρμογής. Τα online μαθήματα είναι γρήγορα αλλά γενικά, τα κλασικά σεμινάρια αργά και γενικά, οι μεγάλες συμβουλευτικές αργές και ειδικές με μεγάλη επένδυση, ενώ οι The Upgraders γρήγοροι και ειδικά για εσάς.">
         <div className="relative mx-auto aspect-[0.9] max-w-[980px] min-[600px]:aspect-[1.32] min-[600px]:min-w-[660px]">
           <div className="absolute top-2 right-2 bottom-16 left-16 border-b-[1.5px] border-l-[1.5px] border-foreground">
             <div className="absolute inset-y-0 left-1/2 border-l border-dashed border-[rgba(28,28,26,0.25)]" />
@@ -198,7 +199,7 @@ export function Why() {
           <div className={`pointer-events-none absolute right-2 bottom-9 left-16 flex justify-between text-[13px] ${muted}`}><span>Γενικό</span><span>Ειδικά για εσάς</span></div>
           <div className="pointer-events-none absolute right-2 bottom-1 left-16 text-center text-[15px] font-medium text-foreground">Προσαρμογή</div>
         </div>
-      </div>
+      </Reveal>
     </Section>
   );
 }
@@ -208,13 +209,13 @@ export function Team() {
   return (
     <Section id="team" className="pt-0 pb-[clamp(80px,10vw,140px)]">
       <div className="flex flex-wrap items-end justify-between gap-6">
-        <div className="max-w-[860px]">
+        <Reveal className="max-w-[860px]">
           <p className="font-serif text-[18px] italic font-normal!">Γνωρίστε την ομάδα</p>
           <h2 className="text-[clamp(34px,4.6vw,64px)] font-light leading-[1.06] tracking-[-0.035em]">
             <span className="font-serif font-normal! italic">Builders, Makers, Entrepreneurs, Trainers</span><br />
             <span className="mt-[10px] inline-block text-[0.5em] font-normal leading-[1.2] tracking-[-0.02em]">Πρώτα το κάναμε για τις εταιρείες μας. Τώρα, το κάνουμε και για τις δικές σας.</span>
           </h2>
-        </div>
+        </Reveal>
         <CarouselNav go={go} light />
       </div>
       <div ref={ref} onScroll={update} className="cases-track mt-[clamp(32px,4vw,48px)] flex gap-3 overflow-x-auto">
@@ -239,11 +240,11 @@ export function Quote() {
     <section id="contact" className="px-[clamp(12px,3vw,48px)] pb-[clamp(80px,10vw,140px)]">
       <div className="relative mx-auto max-w-[1280px] overflow-hidden rounded-[28px] px-6 py-[clamp(80px,10vw,140px)] text-center text-white" style={{ background: "radial-gradient(60% 80% at 0% 100%,#B07F9C 0%,transparent 65%), radial-gradient(60% 70% at 100% 0%,#36366E 0%,transparent 70%), linear-gradient(120deg,#5E62A0 0%,#53508E 45%,#6B5791 100%)" }}>
         <div aria-hidden="true" className="absolute inset-0" style={{ opacity: 0.35, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
-        <div className="relative">
+        <Reveal className="relative">
           <p className="text-[clamp(32px,4.4vw,64px)] font-light leading-[1.06] tracking-[-0.035em]">Φτιαγμένο με AI,</p>
           <p className="mx-auto mt-3 max-w-[900px] font-serif text-[clamp(24px,3.2vw,44px)] font-light! italic leading-[1.15] tracking-[-0.02em]">Και 15 χρόνια εμπειρίας σε product, business, copywriting, design και coding.</p>
           <img src="/logo-negative.svg" alt="The Upgraders" className="mx-auto mt-10 block h-[30px]" />
-        </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -253,7 +254,7 @@ export function Faq() {
   return (
     <Section id="faq" className="pt-0 pb-[clamp(80px,10vw,140px)]">
       <div className="mx-auto max-w-[1168px]">
-        <h2 className="text-center text-[clamp(36px,5vw,68px)] font-light leading-[1.04] tracking-[-0.035em]">Ερωτήσεις, <span className="font-serif font-normal! italic text-[#FF3B30]">απαντημένες.</span></h2>
+        <Reveal as="h2" className="text-center text-[clamp(36px,5vw,68px)] font-light leading-[1.04] tracking-[-0.035em]">Ερωτήσεις, <span className="font-serif font-normal! italic text-[#FF3B30]">απαντημένες.</span></Reveal>
         <AccordionPrimitive.Root type="single" collapsible defaultValue="q0" className="mt-[clamp(40px,5vw,64px)] grid gap-[10px]">
           {faqs.map(([q, a], i) => (
             <AccordionPrimitive.Item key={q} value={`q${i}`} className="group rounded-[16px] bg-[#F5EEE2] transition-colors hover:bg-[#F1E8DA]">

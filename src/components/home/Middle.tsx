@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { industries, roles, steps } from "./data";
 import { Slider } from "./Slider";
+import { Reveal } from "./Reveal";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
 const listImages = {
@@ -12,11 +13,11 @@ function List({ eyebrow, title, items, id, reverse }: { eyebrow: string; title: 
   const img = listImages[id];
   return (
     <Section id={id} className="py-[28px] min-[760px]:py-[clamp(56px,7vw,104px)]">
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <Title>{title}</Title>
+      <Reveal><Eyebrow>{eyebrow}</Eyebrow>
+      <Title>{title}</Title></Reveal>
       <div className={`mt-[clamp(32px,4vw,56px)] flex flex-wrap items-start gap-[clamp(24px,3vw,44px)] ${reverse ? "flex-row-reverse" : ""}`}>
-        <img src={img.src} alt={img.alt} loading="lazy" className="relative h-[240px] max-w-full flex-[1_1_300px] rounded-[20px] object-cover min-[760px]:sticky min-[760px]:top-[100px] min-[760px]:h-auto min-[760px]:max-w-[440px] min-[760px]:self-start" />
-        <div className="relative -mx-5 min-w-0 flex-[2_1_480px] min-[760px]:mx-0 min-[760px]:pl-[26px]">
+        <Reveal className="relative max-w-full flex-[1_1_300px] min-[760px]:sticky min-[760px]:top-[100px] min-[760px]:max-w-[440px] min-[760px]:self-start"><img src={img.src} alt={img.alt} loading="lazy" className="block h-[240px] w-full rounded-[20px] object-cover min-[760px]:h-auto" /></Reveal>
+        <Reveal className="relative -mx-5 min-w-0 flex-[2_1_480px] min-[760px]:mx-0 min-[760px]:pl-[26px]">
           <span aria-hidden="true" className="absolute top-[30px] bottom-[30px] left-1 hidden border-l border-role-line min-[760px]:block" />
           <Slider sliderClassName="list-slider grid gap-[10px]">
             {items.map(([name, text]) => (
@@ -27,7 +28,7 @@ function List({ eyebrow, title, items, id, reverse }: { eyebrow: string; title: 
               </article>
             ))}
           </Slider>
-        </div>
+        </Reveal>
       </div>
     </Section>
   );
@@ -58,7 +59,7 @@ export function Paradox() {
     <section className="relative overflow-hidden bg-ink px-5 py-[clamp(44px,5vw,72px)] text-center text-ink-foreground">
       <div aria-hidden="true" className="paradox-glow absolute inset-0" />
       <div aria-hidden="true" className="absolute inset-0" style={{ opacity: 0.18, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
-      <div ref={ref} className="relative mx-auto max-w-[1040px]">
+      <Reveal className="relative mx-auto max-w-[1040px]"><div ref={ref}>
         <Eyebrow className="flex justify-center text-ink-foreground/80">Το ελληνικό παράδοξο</Eyebrow>
         <h2 className="mt-3 text-[clamp(24px,2.6vw,36px)] font-light leading-[1.15] tracking-[-0.035em]">
           Οι Έλληνες χρησιμοποιούν AI.<br />
@@ -79,7 +80,7 @@ export function Paradox() {
           ))}
         </div>
         <p className="mt-4 text-[11px] font-semibold text-ink-foreground/75">Πηγή: Eurostat, 2025</p>
-      </div>
+      </div></Reveal>
     </section>
   );
 }
@@ -89,7 +90,7 @@ const svgBase = { width: 30, height: 30, viewBox: "0 0 24 24", fill: "none", str
 
 function EnableText({ icon, eyebrow, lead, accent, text, bullets, link, href }: { icon: string[]; eyebrow: string; lead: string; accent: string; text: string; bullets: string[]; link: string; href: string }) {
   return (
-    <div className="flex max-w-[540px] flex-[1_1_min(100%,360px)] flex-col gap-5">
+    <Reveal className="flex max-w-[540px] flex-[1_1_min(100%,360px)] flex-col gap-5">
       <svg {...svgBase}>{icon.map((d) => <path key={d} d={d} />)}</svg>
       <p className="font-mono text-xs uppercase tracking-[0.1em] text-muted-foreground">{eyebrow}</p>
       <h2 className="text-[clamp(36px,4.4vw,60px)] font-light leading-[1.04] tracking-[-0.035em]">{lead}<span className="font-serif font-normal! italic">{accent}</span></h2>
@@ -101,7 +102,7 @@ function EnableText({ icon, eyebrow, lead, accent, text, bullets, link, href }: 
         {link}
         <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
       </a>
-    </div>
+    </Reveal>
   );
 }
 
@@ -119,7 +120,7 @@ export function Enablement() {
           bullets={["Hands-on εκπαίδευση ανά ρόλο", "Πάνω στην πραγματική δουλειά της ομάδας", "Από τη βασική χρήση σε επαναλαμβανόμενες ροές"]}
           link="Δείτε τα προγράμματα" href="#services"
         />
-        <img src="https://images.pexels.com/photos/3184327/pexels-photo-3184327.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Ελληνική ομάδα σε workshop γύρω από τραπέζι με laptops" loading="lazy" className="h-[240px] min-w-0 flex-[1.3_1_min(100%,460px)] rounded-[22px] object-cover min-[760px]:h-[clamp(320px,38vw,520px)]" />
+        <Reveal className="min-w-0 flex-[1.3_1_min(100%,460px)]"><img src="https://images.pexels.com/photos/3184327/pexels-photo-3184327.jpeg?auto=compress&cs=tinysrgb&w=1400" alt="Ελληνική ομάδα σε workshop γύρω από τραπέζι με laptops" loading="lazy" className="block h-[240px] w-full rounded-[22px] object-cover min-[760px]:h-[clamp(320px,38vw,520px)]" /></Reveal>
       </div>
       <div className="mt-[clamp(56px,7vw,104px)] flex flex-row-reverse flex-wrap items-center gap-[clamp(36px,5vw,88px)]">
         <EnableText
@@ -129,7 +130,7 @@ export function Enablement() {
           bullets={["Πάνω στα συστήματα που ήδη έχετε", "Συνδεδεμένα με πραγματικά δεδομένα", "Σε λειτουργία, με παρακολούθηση και συνεχή βελτίωση"]}
           link="Δείτε τι έχουμε χτίσει" href="#tools"
         />
-        <div className="ops-frame relative min-w-0 flex-[1.3_1_min(100%,460px)] overflow-hidden rounded-[22px] p-[clamp(18px,3vw,40px)]">
+        <Reveal className="ops-frame relative min-w-0 flex-[1.3_1_min(100%,460px)] overflow-hidden rounded-[22px] p-[clamp(18px,3vw,40px)]">
           <div aria-hidden="true" className="absolute inset-0" style={{ opacity: 0.3, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
           <div className="ops-card relative overflow-hidden rounded-[14px] bg-card">
             <div className="flex items-center gap-3 border-b border-ops-line px-4 py-3">
@@ -167,7 +168,7 @@ export function Enablement() {
               </div>
             </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </Section>
   );
@@ -276,8 +277,8 @@ export function Method() {
   return (
     <section id="method" className="mx-auto max-w-[1320px] px-[clamp(12px,3vw,48px)] pt-0 pb-[clamp(72px,9vw,128px)]">
       <div className="rounded-[28px] bg-method-bg px-[clamp(20px,5vw,72px)] py-[clamp(32px,5vw,72px)]">
-        <Eyebrow className="text-foreground">Μεθοδολογία</Eyebrow>
-        <h2 className="mt-3 text-[clamp(36px,5vw,72px)] font-light leading-[1.04] tracking-[-0.035em]">Εφαρμόζουμε 4 βήματα.<br /><span className="font-serif font-normal! italic">Μετά, φέρνουμε αποτέλεσμα.</span></h2>
+        <Reveal><Eyebrow className="text-foreground">Μεθοδολογία</Eyebrow>
+        <h2 className="mt-3 text-[clamp(36px,5vw,72px)] font-light leading-[1.04] tracking-[-0.035em]">Εφαρμόζουμε 4 βήματα.<br /><span className="font-serif font-normal! italic">Μετά, φέρνουμε αποτέλεσμα.</span></h2></Reveal>
         <div className="mt-[clamp(36px,5vw,64px)] flex flex-wrap items-center gap-[clamp(28px,4vw,64px)]">
           <div className="grid min-h-[300px] max-w-[480px] flex-[1_1_320px] content-start gap-[18px]">
             <p className={`${mono} text-xs text-muted-foreground`}>0{active + 1} / 04 · {s.key}</p>
