@@ -51,26 +51,35 @@ function useInView<T extends HTMLElement>() {
 
 export function Paradox() {
   const [ref, seen] = useInView<HTMLDivElement>();
-  const bars = [["ΕΛΛΑΔΑ", 8.9, "8,9%", "bg-accent"], ["ΕΕ", 20, "20%", "bg-ink-foreground/70"]] as const;
+  const bars = [
+    { label: "ΕΛΛΑΔΑ 8,9%", v: 8.9, fill: "bg-accent", transition: "width 1.6s cubic-bezier(.2,.7,.2,1) .2s" },
+    { label: "ΕΕ 20%", v: 20, fill: "bg-ink-foreground", transition: "width 1.8s cubic-bezier(.2,.7,.2,1) .35s" },
+  ];
   return (
-    <section className="bg-ink px-5 py-[clamp(44px,5vw,72px)] text-ink-foreground">
-      <div ref={ref} className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
-        <div>
-          <Eyebrow>Το ελληνικό παράδοξο</Eyebrow>
-          <Title>Οι Έλληνες χρησιμοποιούν AI. <span className="italic text-ink-muted">Οι ελληνικές εταιρείες όχι.</span></Title>
-          <p className="mt-6 text-ink-muted">8,9% των ελληνικών επιχειρήσεων χρησιμοποιεί AI. Ο μέσος όρος στην Ευρώπη είναι 20%.</p>
-        </div>
-        <div className="space-y-6">
-          {bars.map(([label, v, txt, color]) => (
-            <div key={label}>
-              <div className="mb-2 flex justify-between text-sm font-semibold"><span>{label}</span><span className="font-display text-2xl">{txt}</span></div>
-              <div className="h-4 rounded-full bg-ink-foreground/10">
-                <div className={`h-4 rounded-full ${color} transition-all duration-[1500ms] ease-out`} style={{ width: seen ? `${(v / 25) * 100}%` : "0%" }} />
+    <section className="relative overflow-hidden bg-ink px-5 py-[clamp(44px,5vw,72px)] text-center text-ink-foreground">
+      <div aria-hidden="true" className="paradox-glow absolute inset-0" />
+      <div aria-hidden="true" className="absolute inset-0" style={{ opacity: 0.18, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
+      <div ref={ref} className="relative mx-auto max-w-[1040px]">
+        <Eyebrow className="flex justify-center text-ink-foreground/80">Το ελληνικό παράδοξο</Eyebrow>
+        <h2 className="mt-3 text-[clamp(24px,2.6vw,36px)] font-light leading-[1.15] tracking-[-0.035em]">
+          Οι Έλληνες χρησιμοποιούν AI.<br />
+          <span className="font-serif font-light! italic">Οι ελληνικές εταιρείες όχι.</span>
+        </h2>
+        <p className="mx-auto mt-[14px] max-w-[720px] text-[clamp(15px,1.2vw,17px)] leading-normal text-ink-foreground/85">
+          <span className="text-[1.5em] font-medium tracking-[-0.03em] text-accent">8,9%</span> των ελληνικών επιχειρήσεων χρησιμοποιεί AI.<br />
+          Ο μέσος όρος στην Ευρώπη είναι <span className="text-[1.5em] font-medium tracking-[-0.03em] text-ink-foreground">20%</span>.
+        </p>
+        <div className="mx-auto mt-6 grid max-w-[760px] gap-3 text-left font-mono text-[11px] tracking-[0.08em]">
+          {bars.map((b) => (
+            <div key={b.label} className="grid grid-cols-[104px_1fr] items-center gap-4">
+              <span>{b.label}</span>
+              <div className="h-4 overflow-hidden rounded-[8px] bg-ink-foreground/10">
+                <div className={`h-full rounded-[8px] ${b.fill}`} style={{ width: seen ? `${(b.v / 25) * 100}%` : "0%", transition: b.transition }} />
               </div>
             </div>
           ))}
-          <p className="text-xs text-ink-muted">Πηγή: Eurostat, 2025</p>
         </div>
+        <p className="mt-4 text-[11px] font-semibold text-ink-foreground/75">Πηγή: Eurostat, 2025</p>
       </div>
     </section>
   );
