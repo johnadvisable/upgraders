@@ -185,7 +185,7 @@ export function LiveCourses() {
                 <span className="justify-self-start rounded-full border border-live-completed px-3 py-1.5 text-xs font-medium text-muted-foreground lg:col-span-2">Ολοκληρώθηκε</span>
               ) : (
                 <>
-                  <p className="font-display text-2xl">{c.price}</p>
+                  <p className="text-base font-medium">{c.price}</p>
                   <span className="relative inline-flex justify-self-start">
                     <Pill className="whitespace-nowrap px-4">Κράτηση θέσης</Pill>
                     <span className="absolute -right-2 -top-3 rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">Λίγες θέσεις</span>
