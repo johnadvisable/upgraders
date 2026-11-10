@@ -9,7 +9,7 @@ export function Title({ children, className }: { children: ReactNode; className?
   return <h2 className={cn("mt-3 text-[clamp(2.25rem,5vw,4.5rem)] font-light leading-[1.04]", className)}>{children}</h2>;
 }
 
-export function Pill({ children, href = "#contact", variant = "dark", className }: { children: ReactNode; href?: string; variant?: "dark" | "light" | "outline"; className?: string }) {
+export function Pill({ children, href = "#contact", variant = "dark", className, showArrow = true }: { children: ReactNode; href?: string; variant?: "dark" | "light" | "outline"; className?: string; showArrow?: boolean }) {
   const styles = {
     dark: "bg-primary text-primary-foreground hover:bg-primary/85",
     light: "bg-ink-foreground text-ink hover:bg-ink-foreground/85",
@@ -17,7 +17,7 @@ export function Pill({ children, href = "#contact", variant = "dark", className 
   }[variant];
   return (
     <a href={href} className={cn("inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold transition-colors", styles, className)}>
-      {children} <span aria-hidden>→</span>
+      {children} {showArrow && <span aria-hidden>→</span>}
     </a>
   );
 }

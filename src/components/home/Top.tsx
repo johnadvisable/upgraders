@@ -173,9 +173,9 @@ export function LiveCourses() {
                 <div className="text-[17px] font-medium">{c.title}</div>
                 <p className="mt-1 text-[13px] text-live-subtitle">{c.tools}</p>
               </div>
-              <p className="flex items-start gap-2 text-sm font-semibold"><Calendar aria-hidden className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.5} />{c.date}</p>
-              <p className="flex items-center gap-2 whitespace-nowrap text-sm text-muted-foreground"><Clock aria-hidden className="h-4 w-4 shrink-0" strokeWidth={1.5} />{c.time}</p>
-              <div className="flex flex-wrap gap-3 text-sm text-muted-foreground lg:flex-col lg:gap-2">
+              <p className="flex items-start gap-2 text-[15px] font-normal"><Calendar aria-hidden className="mt-0.5 h-4 w-4 shrink-0" strokeWidth={1.5} />{c.date}</p>
+              <p className="flex items-center gap-2 whitespace-nowrap text-[15px]"><Clock aria-hidden className="h-4 w-4 shrink-0" strokeWidth={1.5} />{c.time}</p>
+              <div className="flex flex-wrap gap-3 text-[15px] lg:flex-col lg:gap-2">
                 {c.modes.map((m) => {
                   const ModeIcon = m === "On site" ? MapPin : Monitor;
                   return <span key={m} className="inline-flex items-center gap-2 whitespace-nowrap"><ModeIcon aria-hidden className="h-4 w-4" strokeWidth={1.5} />{m}</span>;
@@ -187,7 +187,7 @@ export function LiveCourses() {
                 <>
                   <p className="text-base font-medium">{c.price}</p>
                   <span className="relative inline-flex justify-self-start">
-                    <Pill className="whitespace-nowrap px-4">Κράτηση θέσης</Pill>
+                    <Pill showArrow={false} className="whitespace-nowrap px-4 hover:bg-live-booking-hover hover:text-primary-foreground!">Κράτηση θέσης</Pill>
                     <span className="absolute -right-2 -top-3 rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">Λίγες θέσεις</span>
                   </span>
                 </>

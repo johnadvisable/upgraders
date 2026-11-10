@@ -92,6 +92,7 @@
   --color-live-header-divider: var(--live-header-divider);
   --color-live-row-divider: var(--live-row-divider);
   --color-live-subtitle: var(--live-subtitle);
+  --color-live-booking-hover: var(--live-booking-hover);
 }
 
 :root {
@@ -133,6 +134,7 @@
   --live-header-divider: #F0EAE0;
   --live-row-divider: #F3EEE5;
   --live-subtitle: #77726A;
+  --live-booking-hover: #000000;
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
