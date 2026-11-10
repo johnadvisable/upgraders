@@ -77,9 +77,12 @@ export const tools: { name: string; text: string; tag: ToolTag; meta: string; ch
 ];
 
 export const team = [
-  { name: "Νίκος Ξυδάς", role: "Founder · Entrepreneur · Trainer · Content Creator · Marketer" },
-  { name: "Βασίλης Καλλάρας", role: "Founder · Entrepreneur · Trainer · Lead Engineer" },
-  { name: "Πάνος Καλλάρας", role: "Lead Engineer · Partner · Trainer" },
+  { name: "Νίκος Ξυδάς", role: "Founder · Entrepreneur · Trainer · Content Creator · Marketer", img: "/team-0.webp" },
+  { name: "Βασίλης Καλλάρας", role: "Founder · Entrepreneur · Trainer · Lead Engineer", img: "/team-1.webp" },
+  { name: "Πάνος Καλλάρας", role: "Lead Engineer · Partner · Trainer", img: "/team-2.webp" },
+  { name: "Ναστάζια Ταμπακοπούλου", role: "Founder · Marketing Director · Trainer", img: "/team-3.webp" },
+  { name: "Νίκος Σταθόπουλος", role: "Business Lead. Πρώην Sales Director, [Εταιρεία]", img: "https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=800" },
+  { name: "Κατερίνα Ηλιοπούλου", role: "Design Lead · Product Design, [Εταιρεία]", img: "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg?auto=compress&cs=tinysrgb&w=800" },
 ];
 
 const tbd = "Σύντομα θα προστεθεί αναλυτική απάντηση. Επικοινωνήστε μαζί μας για λεπτομέρειες.";

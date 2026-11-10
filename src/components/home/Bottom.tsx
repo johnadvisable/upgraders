@@ -204,25 +204,32 @@ export function Why() {
 }
 
 export function Team() {
+  const { ref, bar, update, go } = useCarousel(12);
   return (
     <Section id="team" className="pt-0 pb-[clamp(80px,10vw,140px)]">
-      <Eyebrow>Γνωρίστε την ομάδα</Eyebrow>
-      <Title>Builders, Makers, Entrepreneurs, Trainers</Title>
-      <p className="mt-4 text-muted-foreground">Πρώτα το κάναμε για τις εταιρείες μας. Τώρα, το κάνουμε και για τις δικές σας.</p>
-      <div className="mt-10 grid gap-6 md:grid-cols-3">
+      <div className="flex flex-wrap items-end justify-between gap-6">
+        <div className="max-w-[860px]">
+          <p className="font-serif text-[18px] italic font-normal!">Γνωρίστε την ομάδα</p>
+          <h2 className="text-[clamp(34px,4.6vw,64px)] font-light leading-[1.06] tracking-[-0.035em]">
+            <span className="font-serif font-normal! italic">Builders, Makers, Entrepreneurs, Trainers</span><br />
+            <span className="mt-[10px] inline-block text-[0.5em] font-normal leading-[1.2] tracking-[-0.02em]">Πρώτα το κάναμε για τις εταιρείες μας. Τώρα, το κάνουμε και για τις δικές σας.</span>
+          </h2>
+        </div>
+        <CarouselNav go={go} light />
+      </div>
+      <div ref={ref} onScroll={update} className="cases-track mt-[clamp(32px,4vw,48px)] flex gap-3 overflow-x-auto">
         {team.map((m) => (
-          <div key={m.name} className="overflow-hidden rounded-[14px] bg-card">
-            <div className="hero-gradient flex aspect-[4/5] items-end p-6">
-              <span className="font-display text-6xl text-ink-foreground/80">{m.name.split(" ").map((w) => w[0]).join("")}</span>
+          <article key={m.name} className="relative h-[350px] flex-[0_0_300px] snap-start overflow-hidden rounded-[20px] bg-[#3A3631]">
+            <img src={m.img} alt={m.name} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />
+            <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,transparent_45%,rgba(20,18,16,0.82)_100%)]" />
+            <div className="pointer-events-none absolute right-[22px] bottom-[22px] left-[22px] text-white">
+              <h3 className="text-[24px] tracking-[-0.02em]">{m.name}</h3>
+              <p className="mt-1 text-[14px] leading-[1.4] text-white/88">{m.role}</p>
             </div>
-            <div className="p-6">
-              <h3 className="font-display text-2xl">{m.name}</h3>
-              <p className="mt-1 text-sm text-muted-foreground">{m.role}</p>
-            </div>
-          </div>
+          </article>
         ))}
       </div>
-      <p className="mt-12 text-center font-display text-2xl">Φτιαγμένο με AI, <span className="italic text-muted-foreground">και 15 χρόνια εμπειρίας σε product, business, copywriting, design και coding.</span></p>
+      <ProgressBar bar={bar} light />
     </Section>
   );
 }
