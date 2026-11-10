@@ -20,8 +20,11 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <a href="#top" aria-label="The Upgraders"><img src={scrolled ? "/logo.svg" : "/logo-negative.svg"} alt="The Upgraders" className="h-[34px] w-auto" /></a>
         <span className="relative">
-          <Pill href="#services" variant="light" className="px-5 py-3 font-medium">Θέλω εκπαίδευση</Pill>
-          <span className="absolute -right-1.5 -top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-semibold text-accent-foreground">1</span>
+          <Pill href="#services" variant={scrolled ? "dark" : "light"} showArrow={false} className={`h-11 rounded-full px-5 py-0 text-[15px] font-medium ${scrolled ? "bg-ink text-ink-foreground hover:bg-ink/85" : ""}`}>
+            Θέλω εκπαίδευση
+            <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+          </Pill>
+          <span className="absolute -right-1 -top-[7px] flex h-5 w-5 items-center justify-center rounded-full bg-accent text-[11px] font-semibold text-accent-foreground">1</span>
         </span>
       </div>
     </header>
