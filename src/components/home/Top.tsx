@@ -1,3 +1,4 @@
+import type React from "react";
 import { GrainGradient } from "@paper-design/shaders-react";
 import { ClientOnly } from "@tanstack/react-router";
 import { ArrowRight, MonitorPlay, UserRound, Zap, type LucideIcon } from "lucide-react";
@@ -34,32 +35,140 @@ export function Header() {
   );
 }
 
-function UpdateCard() {
+const NOTIF_KEY = "tu-update-notif-closed";
+type Placement = "sheet" | "bottom" | "top" | "corner" | "wait";
+type NotifMode = "main" | "later" | "done";
+
+function UpdateCard({ textRef }: { textRef: React.RefObject<HTMLDivElement | null> }) {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [mode, setMode] = useState<NotifMode>("main");
+  const [placement, setPlacement] = useState<Placement>("wait");
+  const [vw, setVw] = useState(1280);
+  const [reduced, setReduced] = useState(false);
+  const closing = useRef(false);
+
+  const compute = useCallback(() => {
+    const w = window.innerWidth;
+    setVw(w);
+    if (w < 900) { setPlacement("sheet"); return; }
+    const card = cardRef.current;
+    const hero = card?.offsetParent as HTMLElement | null;
+    const h = card?.offsetHeight ?? 160;
+    const vh = window.innerHeight;
+    const right = w - Math.min(Math.max(16, w * 0.03), 32);
+    const left = right - 360;
+    const texts = textRef.current ? Array.from(textRef.current.children).map((el) => el.getBoundingClientRect()) : [];
+    const clear = (top: number) => top >= 0 && top + h <= vh && !texts.some((r) => r.width > 0 && r.left < right && r.right > left && r.top < top + h && r.bottom > top);
+    const heroBottom = hero?.getBoundingClientRect().bottom ?? 0;
+    if (hero && clear(heroBottom - 20 - h)) return setPlacement("bottom");
+    if (clear(88)) return setPlacement("top");
+    if (clear(vh - 12 - h)) return setPlacement("corner");
+    setPlacement("wait");
+  }, [textRef]);
+
+  const show = useCallback(() => {
+    setMounted(true);
+    requestAnimationFrame(() => requestAnimationFrame(() => { compute(); setVisible(true); }));
+  }, [compute]);
+
+  useEffect(() => {
+    if (sessionStorage.getItem(NOTIF_KEY) === "1") return;
+    setReduced(window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    if (window.innerWidth < 900) {
+      const onScroll = () => {
+        if (window.scrollY < 24) return;
+        window.removeEventListener("scroll", onScroll);
+        timer = setTimeout(show, 400);
+      };
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+      return () => { window.removeEventListener("scroll", onScroll); clearTimeout(timer); };
+    }
+    timer = setTimeout(show, 8000);
+    return () => clearTimeout(timer);
+  }, [show]);
+
+  useEffect(() => {
+    if (!mounted) return;
+    let raf = 0;
+    const onChange = () => { cancelAnimationFrame(raf); raf = requestAnimationFrame(compute); };
+    window.addEventListener("scroll", onChange, { passive: true });
+    window.addEventListener("resize", onChange);
+    return () => { cancelAnimationFrame(raf); window.removeEventListener("scroll", onChange); window.removeEventListener("resize", onChange); };
+  }, [mounted, compute]);
+
+  const close = useCallback(() => {
+    if (closing.current) return;
+    closing.current = true;
+    sessionStorage.setItem(NOTIF_KEY, "1");
+    setVisible(false);
+    setTimeout(() => setMounted(false), 450);
+  }, []);
+
+  if (!mounted) return null;
+  const sheet = placement === "sheet";
+  const small = vw < 600;
+  const rightOffset = sheet && small ? "12px" : sheet ? "clamp(20px,4vw,48px)" : "clamp(16px,3vw,32px)";
+  const pos: React.CSSProperties =
+    sheet ? { position: "fixed", bottom: small ? 12 : 16, right: rightOffset, left: small ? 12 : undefined, width: small ? "auto" : 360 }
+    : placement === "bottom" ? { position: "absolute", bottom: 20, right: rightOffset, width: 360 }
+    : placement === "top" ? { position: "fixed", top: 88, right: rightOffset, width: 360 }
+    : { position: "fixed", bottom: 12, right: rightOffset, width: 360 };
+  const shown = visible && placement !== "wait";
+  const offset = reduced ? "none" : sheet ? "translateY(calc(100% + 24px))" : "translateY(16px)";
+  const style: React.CSSProperties = {
+    ...pos, zIndex: 60,
+    visibility: placement === "wait" ? "hidden" : "visible",
+    opacity: shown ? 1 : 0, transform: shown ? "none" : offset,
+    transition: "opacity .45s ease, transform .55s cubic-bezier(.2,.8,.2,1)",
+  };
+
   return (
-    <div className="absolute bottom-5 right-5 z-[1] hidden w-[360px] rounded-[18px] border border-ink-foreground/15 bg-ink/60 p-4 text-left shadow-2xl backdrop-blur-2xl sm:block">
-      <button aria-label="Κλείσιμο" className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-ink-foreground/15 text-xs text-ink-foreground">×</button>
-      <div className="flex gap-3">
-        <span className="relative flex h-9 w-9 shrink-0 items-center justify-center rounded-[10px] bg-ink font-display text-lg font-bold">
-          u
-          <span className="absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full bg-accent" />
-        </span>
-        <div className="flex-1">
-          <div className="flex items-center justify-between pr-6">
-            <p className="text-sm font-semibold">Update Available</p>
-            <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-ink-foreground/60">Τώρα</span>
-          </div>
-          <p className="mt-1 text-[13px] leading-snug text-ink-foreground/85">Το πιο σημαντικό Upgrade είναι διαθέσιμο για την εταιρεία σας. Η εταιρεία σας 2.0.</p>
-          <div className="mt-4 grid grid-cols-2 gap-2">
-            <button className="rounded-[8px] bg-ink-foreground py-1.5 text-[13px] font-medium text-ink">Εγκατάσταση τώρα</button>
-            <button className="rounded-[8px] bg-ink-foreground/15 py-1.5 text-[13px] font-medium">Αργότερα</button>
+    <div ref={cardRef} role="status" style={style} className="rounded-[18px] border border-ink-foreground/15 bg-ink/60 p-4 text-left text-ink-foreground shadow-2xl backdrop-blur-2xl">
+      <button type="button" aria-label="Κλείσιμο" onClick={close} className="absolute right-3 top-3 flex h-5 w-5 items-center justify-center rounded-full bg-ink-foreground/15 text-ink-foreground">
+        <svg width={10} height={10} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} strokeLinecap="round" aria-hidden><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      {mode === "main" && (
+        <div className="flex gap-3">
+          <img src="/icon.png" alt="" width={40} height={40} className="h-10 w-10 shrink-0 rounded-[10px]" />
+          <div className="flex-1">
+            <div className="flex items-center justify-between pr-6">
+              <p className="text-sm font-semibold">Update Available</p>
+              <span className="font-mono text-[9px] uppercase tracking-[0.1em] text-ink-foreground/60">Τώρα</span>
+            </div>
+            <p className="mt-1 text-[13px] leading-snug text-ink-foreground/85">Το πιο σημαντικό Upgrade είναι διαθέσιμο για την εταιρεία σας. Η εταιρεία σας 2.0.</p>
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              <button type="button" onClick={close} className="rounded-[8px] bg-ink-foreground py-1.5 text-[13px] font-medium text-ink">Εγκατάσταση τώρα</button>
+              <button type="button" onClick={() => { setMode("later"); requestAnimationFrame(compute); }} className="rounded-[8px] bg-ink-foreground/15 py-1.5 text-[13px] font-medium">Αργότερα</button>
+            </div>
           </div>
         </div>
-      </div>
+      )}
+      {mode === "later" && (
+        <div className="animate-[tuIn_0.35s_ease_both] pr-6">
+          <p className="text-sm font-semibold">Κατανοητό. Θα σας υπενθυμίσουμε.</p>
+          <p className="mt-1 font-serif text-[15px] italic text-ink-foreground/85">Οι ανταγωνιστές σας πάτησαν ήδη Εγκατάσταση.</p>
+          <form className="mt-3 flex gap-2" onSubmit={(e) => { e.preventDefault(); setMode("done"); setTimeout(close, 2600); }}>
+            <input type="email" required placeholder="email@εταιρεία.gr" aria-label="Email" className="min-w-0 flex-1 rounded-[8px] border border-ink-foreground/20 bg-ink-foreground/10 px-3 py-1.5 text-[13px] text-ink-foreground placeholder:text-ink-foreground/50 outline-none focus:border-ink-foreground/50" />
+            <button type="submit" className="shrink-0 rounded-[8px] bg-ink-foreground px-3 py-1.5 text-[13px] font-medium text-ink">Ενημερώστε με</button>
+          </form>
+        </div>
+      )}
+      {mode === "done" && (
+        <div className="animate-[tuIn_0.35s_ease_both] pr-6">
+          <p className="text-sm font-semibold">Εγγραφήκατε ✓</p>
+          <p className="mt-1 text-[13px] text-ink-foreground/85">Θα λαμβάνετε τα Patch Notes μία φορά τον μήνα.</p>
+        </div>
+      )}
     </div>
   );
 }
 
 export function Hero() {
+  const textRef = useRef<HTMLDivElement>(null);
   return (
     <section id="top" className="relative flex overflow-hidden bg-ink min-h-screen items-center justify-center px-5 text-center text-ink-foreground">
       <div aria-hidden className="absolute inset-0 overflow-hidden">
@@ -82,7 +191,7 @@ export function Hero() {
         <div className="absolute inset-0" style={{ background: "linear-gradient(180deg, rgba(20,20,19,.5) 0%, rgba(20,20,19,.12) 45%, rgba(20,20,19,.45) 100%)" }} />
         <div className="absolute inset-0" style={{ opacity: 0.28, mixBlendMode: "overlay", backgroundImage: "url(data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E)" }} />
       </div>
-      <div className="relative z-[1] max-w-4xl">
+      <div ref={textRef} className="relative z-[1] max-w-4xl">
         <h1 className="text-[clamp(2.125rem,4.4vw,4.25rem)] font-semibold leading-[1.15]">
           Βάλατε ChatGPT<br className="md:hidden" /> και Claude.
           <span className="mt-1 block md:whitespace-nowrap text-[clamp(1.75rem,3.6vw,3.4375rem)] italic">Η καθημερινότητα<br className="md:hidden" /> όμως έμεινε ίδια.</span>
@@ -95,7 +204,7 @@ export function Hero() {
           Υπηρεσίες εκπαίδευσης για επιχειρήσεις →
         </a>
       </div>
-      <UpdateCard />
+      <UpdateCard textRef={textRef} />
     </section>
   );
 }
