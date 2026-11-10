@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
+import React, { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 
 /** Horizontal swipe slider with prev/next arrows that render only when scrolling is possible in that direction. */
 export function Slider({ children, className = "", sliderClassName }: { children: ReactNode; className?: string; sliderClassName: string }) {
@@ -23,9 +23,44 @@ export function Slider({ children, className = "", sliderClassName }: { children
     const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
     el.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: "smooth" });
   };
+  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (!el || e.pointerType !== "mouse" || e.button !== 0) return;
+    const x0 = e.clientX;
+    const l0 = el.scrollLeft;
+    let moved = false;
+    const prevSnap = el.style.scrollSnapType;
+    el.style.scrollSnapType = "none";
+    const move = (ev: PointerEvent) => {
+      const dx = ev.clientX - x0;
+      if (Math.abs(dx) > 4) moved = true;
+      el.scrollLeft = l0 - dx;
+    };
+    const up = (ev: PointerEvent) => {
+      window.removeEventListener("pointermove", move);
+      window.removeEventListener("pointerup", up);
+      el.style.scrollSnapType = prevSnap;
+      const card = el.firstElementChild as HTMLElement | null;
+      const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+      const w = (card?.offsetWidth ?? el.clientWidth * 0.8) + gap;
+      const dx = ev.clientX - x0;
+      el.scrollTo({ left: Math.abs(dx) > 40 ? l0 + Math.sign(-dx) * w : l0, behavior: "smooth" });
+      if (moved) {
+        const block = (ce: MouseEvent) => {
+          ce.preventDefault();
+          ce.stopPropagation();
+          window.removeEventListener("click", block, true);
+        };
+        window.addEventListener("click", block, true);
+        setTimeout(() => window.removeEventListener("click", block, true), 50);
+      }
+    };
+    window.addEventListener("pointermove", move);
+    window.addEventListener("pointerup", up);
+  };
   return (
     <div className={`relative ${className}`}>
-      <div ref={ref} onScroll={update} className={sliderClassName}>
+      <div ref={ref} onScroll={update} onPointerDown={onPointerDown} className={sliderClassName}>
         {children}
       </div>
       {canPrev && <SliderArrow dir="prev" onClick={() => go(-1)} />}
