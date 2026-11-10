@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { cases, faqs, team, tools, type ToolTag } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
@@ -252,19 +252,23 @@ export function Quote() {
 export function Faq() {
   return (
     <Section id="faq" className="pt-0 pb-[clamp(80px,10vw,140px)]">
-      <div className="grid gap-10 lg:grid-cols-[1fr_2fr]">
-        <div>
-          <Eyebrow>The Upgraders</Eyebrow>
-          <Title>Ερωτήσεις, απαντημένες.</Title>
-        </div>
-        <Accordion type="single" collapsible defaultValue="q0">
+      <div className="mx-auto max-w-[1168px]">
+        <h2 className="text-center text-[clamp(36px,5vw,68px)] font-light leading-[1.04] tracking-[-0.035em]">Ερωτήσεις, <span className="font-serif font-normal! italic text-[#FF3B30]">απαντημένες.</span></h2>
+        <AccordionPrimitive.Root type="single" collapsible defaultValue="q0" className="mt-[clamp(40px,5vw,64px)] grid gap-[10px]">
           {faqs.map(([q, a], i) => (
-            <AccordionItem key={q} value={`q${i}`}>
-              <AccordionTrigger className="text-left text-lg font-semibold">{q}</AccordionTrigger>
-              <AccordionContent className="text-base text-muted-foreground">{a}</AccordionContent>
-            </AccordionItem>
+            <AccordionPrimitive.Item key={q} value={`q${i}`} className="group rounded-[16px] bg-[#F5EEE2] transition-colors hover:bg-[#F1E8DA]">
+              <AccordionPrimitive.Header className="flex">
+                <AccordionPrimitive.Trigger className="flex w-full items-center justify-between gap-5 bg-transparent px-[clamp(20px,2.4vw,30px)] py-[clamp(20px,2.2vw,28px)] text-left text-[clamp(17px,1.6vw,20px)] tracking-[-0.01em]">
+                  {q}
+                  <svg width={20} height={20} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className="shrink-0 transition-transform duration-300 group-data-[state=open]:rotate-90"><path d="M9 6l6 6-6 6" /></svg>
+                </AccordionPrimitive.Trigger>
+              </AccordionPrimitive.Header>
+              <AccordionPrimitive.Content className="overflow-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down">
+                <p className="max-w-[780px] px-[clamp(20px,2.4vw,30px)] pb-[clamp(22px,2.4vw,30px)] text-[16px] leading-[1.6] text-[#5F5B53]">{a}</p>
+              </AccordionPrimitive.Content>
+            </AccordionPrimitive.Item>
           ))}
-        </Accordion>
+        </AccordionPrimitive.Root>
       </div>
     </Section>
   );
