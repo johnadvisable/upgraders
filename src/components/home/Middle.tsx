@@ -272,7 +272,7 @@ function MethodPanel({ step }: { step: number }) {
 
 export function Method() {
   const [active, setActive] = useState(0);
-  const s = steps[active];
+  const s = steps[active] ?? steps[0]!;
   return (
     <section id="method" className="mx-auto max-w-[1320px] px-[clamp(12px,3vw,48px)] pt-0 pb-[clamp(72px,9vw,128px)]">
       <div className="rounded-[28px] bg-method-bg px-[clamp(20px,5vw,72px)] py-[clamp(32px,5vw,72px)]">
