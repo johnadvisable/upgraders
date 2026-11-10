@@ -14,7 +14,7 @@ function List({ eyebrow, title, items, id, reverse }: { eyebrow: string; title: 
   return (
     <Section id={id} className="py-[28px] min-[760px]:py-[clamp(56px,7vw,104px)]">
       <Reveal><Eyebrow>{eyebrow}</Eyebrow>
-      <Title>{title}</Title></Reveal>
+      <Title className="text-[clamp(2.25rem,5vw,4.25rem)] leading-[1.06]">{title}</Title></Reveal>
       <div className={`mt-[clamp(32px,4vw,56px)] flex flex-wrap items-start gap-[clamp(24px,3vw,44px)] ${reverse ? "flex-row-reverse" : ""}`}>
         <Reveal className="relative max-w-full flex-[1_1_300px] min-[760px]:sticky min-[760px]:top-[100px] min-[760px]:max-w-[440px] min-[760px]:self-start"><img src={img.src} alt={img.alt} loading="lazy" className="block h-[240px] w-full rounded-[20px] object-cover min-[760px]:h-auto" /></Reveal>
         <Reveal className="relative -mx-5 min-w-0 flex-[2_1_480px] min-[760px]:mx-0 min-[760px]:pl-[26px]">

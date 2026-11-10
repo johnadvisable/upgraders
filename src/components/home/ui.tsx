@@ -3,7 +3,7 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 export function Eyebrow({ children, className }: { children: ReactNode; className?: string }) {
-  return <p className={cn("font-mono text-[11px] font-medium uppercase tracking-[0.08em] text-accent", className)}>{children}</p>;
+  return <p className={cn("font-mono text-xs font-normal uppercase tracking-[0.1em] text-foreground", className)}>{children}</p>;
 }
 
 export function Title({ children, className }: { children: ReactNode; className?: string }) {
