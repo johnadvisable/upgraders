@@ -25,7 +25,7 @@ export function Slider({ children, className = "", sliderClassName }: { children
   };
   return (
     <div className={`relative ${className}`}>
-      <div ref={ref} onScroll={update} onPointerDown={dragScroll} className={sliderClassName}>
+      <div ref={ref} onScroll={update} onPointerDown={dragScroll} className={`drag-scroll ${sliderClassName}`}>
         {children}
       </div>
       {canPrev && <SliderArrow dir="prev" onClick={() => go(-1)} />}
@@ -34,42 +34,67 @@ export function Slider({ children, className = "", sliderClassName }: { children
   );
 }
 
-/** Mouse drag-to-scroll for a horizontal scroll-snap row: disables snap while dragging, snaps one card on release (>40px), and swallows the click after a drag. */
+/** Mouse drag-to-scroll for a horizontal scroll-snap row: disables snap and text selection while dragging, moves one card on release (>40px) or returns to the original card, and swallows the click after a drag. */
 export function dragScroll(e: React.PointerEvent<HTMLElement>) {
-    const el = e.currentTarget;
-    if ( e.pointerType !== "mouse" || e.button !== 0) return;
-    const x0 = e.clientX;
-    const l0 = el.scrollLeft;
-    let moved = false;
-    const prevSnap = el.style.scrollSnapType;
-    el.style.scrollSnapType = "none";
-    const move = (ev: PointerEvent) => {
-      const dx = ev.clientX - x0;
-      if (Math.abs(dx) > 4) moved = true;
-      el.scrollLeft = l0 - dx;
-    };
-    const up = (ev: PointerEvent) => {
-      window.removeEventListener("pointermove", move);
-      window.removeEventListener("pointerup", up);
+  const el = e.currentTarget;
+  if (e.pointerType !== "mouse" || e.button !== 0) return;
+  const x0 = e.clientX;
+  const l0 = el.scrollLeft;
+  let moved = false;
+  const prevSnap = el.style.scrollSnapType;
+  const prevSelect = el.style.userSelect;
+  el.style.scrollSnapType = "none";
+  el.style.userSelect = "none";
+  el.classList.add("is-dragging");
+  const noDrag = (de: DragEvent) => de.preventDefault();
+  const move = (ev: PointerEvent) => {
+    const dx = ev.clientX - x0;
+    if (Math.abs(dx) > 4) moved = true;
+    el.scrollLeft = l0 - dx;
+  };
+  const end = (ev: PointerEvent) => {
+    window.removeEventListener("pointermove", move);
+    window.removeEventListener("pointerup", end);
+    window.removeEventListener("pointercancel", end);
+    window.removeEventListener("dragstart", noDrag);
+    el.classList.remove("is-dragging");
+    el.style.userSelect = prevSelect;
+    const card = el.firstElementChild as HTMLElement | null;
+    const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
+    const w = (card?.offsetWidth ?? el.clientWidth * 0.8) + gap;
+    const dx = ev.type === "pointercancel" ? 0 : ev.clientX - x0;
+    const start = Math.round(l0 / w) * w;
+    const target = Math.abs(dx) > 40 ? start + Math.sign(-dx) * w : start;
+    const max = el.scrollWidth - el.clientWidth;
+    const left = Math.max(0, Math.min(max, target));
+    let restored = false;
+    const restore = () => {
+      if (restored) return;
+      restored = true;
+      el.removeEventListener("scrollend", restore);
       el.style.scrollSnapType = prevSnap;
-      const card = el.firstElementChild as HTMLElement | null;
-      const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
-      const w = (card?.offsetWidth ?? el.clientWidth * 0.8) + gap;
-      const dx = ev.clientX - x0;
-      el.scrollTo({ left: Math.abs(dx) > 40 ? l0 + Math.sign(-dx) * w : l0, behavior: "smooth" });
-      if (moved) {
-        const block = (ce: MouseEvent) => {
-          ce.preventDefault();
-          ce.stopPropagation();
-          window.removeEventListener("click", block, true);
-        };
-        window.addEventListener("click", block, true);
-        setTimeout(() => window.removeEventListener("click", block, true), 50);
-      }
     };
-    window.addEventListener("pointermove", move);
-    window.addEventListener("pointerup", up);
-  }
+    if (Math.abs(el.scrollLeft - left) < 1) restore();
+    else {
+      el.addEventListener("scrollend", restore);
+      setTimeout(restore, 600);
+      el.scrollTo({ left, behavior: "smooth" });
+    }
+    if (moved) {
+      const block = (ce: MouseEvent) => {
+        ce.preventDefault();
+        ce.stopPropagation();
+        window.removeEventListener("click", block, true);
+      };
+      window.addEventListener("click", block, true);
+      setTimeout(() => window.removeEventListener("click", block, true), 50);
+    }
+  };
+  window.addEventListener("pointermove", move);
+  window.addEventListener("pointerup", end);
+  window.addEventListener("pointercancel", end);
+  window.addEventListener("dragstart", noDrag);
+}
 
 function SliderArrow({ dir, onClick }: { dir: "prev" | "next"; onClick: () => void }) {
   return (
