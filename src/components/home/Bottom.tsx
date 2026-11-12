@@ -4,6 +4,7 @@ import { cases, faqs, team, tools, type ToolTag } from "./data";
 import { Eyebrow, Section } from "./ui";
 import { Reveal } from "./Reveal";
 import { LegalModal, type LegalDoc } from "./LegalModal";
+import { dragScroll } from "./Slider";
 
 export function Cases() {
   const { ref, bar, update, go } = useCarousel(16);
@@ -17,7 +18,7 @@ export function Cases() {
         </Reveal>
         <div className="min-w-0 flex-[2_1_520px]">
           <div className="mb-5 flex justify-end"><CarouselNav go={go} /></div>
-          <div ref={ref} onScroll={update} className="cases-track flex gap-4 overflow-x-auto">
+          <div ref={ref} onScroll={update} onPointerDown={dragScroll} className="cases-track flex gap-4 overflow-x-auto">
             {cases.map((c) => (
               <article key={c.name} className="flex flex-[0_0_min(500px,84vw)] snap-start flex-col overflow-hidden rounded-[22px] bg-card text-foreground">
                 <div className="relative flex h-[150px] flex-col justify-between px-[26px] py-[22px] text-white" style={{ background: c.gradient }}>
@@ -88,7 +89,7 @@ export function Tools() {
             className={`shrink-0 whitespace-nowrap rounded-full border px-4 py-2.5 text-sm ${filter === f ? "border-foreground bg-foreground text-background" : "border-foreground/20 bg-transparent text-foreground"}`}>{f}</button>
         ))}
       </div>
-      <div ref={ref} onScroll={update} className="cases-track mt-6 flex gap-[14px] overflow-x-auto">
+      <div ref={ref} onScroll={update} onPointerDown={dragScroll} className="cases-track mt-6 flex gap-[14px] overflow-x-auto">
         {shown.map((t, i) => {
           const st = toolStyles[t.tag];
           const al = chipAlign[i % 3]!;
@@ -219,7 +220,7 @@ export function Team() {
         </Reveal>
         <CarouselNav go={go} light />
       </div>
-      <div ref={ref} onScroll={update} className="cases-track mt-[clamp(32px,4vw,48px)] flex gap-3 overflow-x-auto">
+      <div ref={ref} onScroll={update} onPointerDown={dragScroll} className="cases-track mt-[clamp(32px,4vw,48px)] flex gap-3 overflow-x-auto">
         {team.map((m) => (
           <article key={m.name} className="relative h-[350px] flex-[0_0_300px] snap-start overflow-hidden rounded-[20px] bg-[#3A3631]">
             <img src={m.img} alt={m.name} loading="lazy" className="absolute inset-0 h-full w-full object-cover" />

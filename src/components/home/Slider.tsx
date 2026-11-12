@@ -23,9 +23,21 @@ export function Slider({ children, className = "", sliderClassName }: { children
     const gap = parseFloat(getComputedStyle(el).columnGap) || 0;
     el.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: "smooth" });
   };
-  const onPointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
-    const el = ref.current;
-    if (!el || e.pointerType !== "mouse" || e.button !== 0) return;
+  return (
+    <div className={`relative ${className}`}>
+      <div ref={ref} onScroll={update} onPointerDown={dragScroll} className={sliderClassName}>
+        {children}
+      </div>
+      {canPrev && <SliderArrow dir="prev" onClick={() => go(-1)} />}
+      {canNext && <SliderArrow dir="next" onClick={() => go(1)} />}
+    </div>
+  );
+}
+
+/** Mouse drag-to-scroll for a horizontal scroll-snap row: disables snap while dragging, snaps one card on release (>40px), and swallows the click after a drag. */
+export function dragScroll(e: React.PointerEvent<HTMLElement>) {
+    const el = e.currentTarget;
+    if ( e.pointerType !== "mouse" || e.button !== 0) return;
     const x0 = e.clientX;
     const l0 = el.scrollLeft;
     let moved = false;
@@ -57,17 +69,7 @@ export function Slider({ children, className = "", sliderClassName }: { children
     };
     window.addEventListener("pointermove", move);
     window.addEventListener("pointerup", up);
-  };
-  return (
-    <div className={`relative ${className}`}>
-      <div ref={ref} onScroll={update} onPointerDown={onPointerDown} className={sliderClassName}>
-        {children}
-      </div>
-      {canPrev && <SliderArrow dir="prev" onClick={() => go(-1)} />}
-      {canNext && <SliderArrow dir="next" onClick={() => go(1)} />}
-    </div>
-  );
-}
+  }
 
 function SliderArrow({ dir, onClick }: { dir: "prev" | "next"; onClick: () => void }) {
   return (
