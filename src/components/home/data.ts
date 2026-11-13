@@ -13,9 +13,10 @@ export const clients: { name: string; logo?: string; whiteLogo?: boolean }[] = [
   { name: "chillbox", logo: "/logos/chillbox_logo.png" },
 ];
 
-export const courses = [
-  { title: "AI for Business", tools: "ChatGPT, Claude, Copilot · Projects, Skills, MCP connectors", date: "12 & 13 Νοεμβρίου 2026", time: "10:00 – 14:00", modes: ["On site", "Online"], price: "189 €", status: "open" as const },
-  { title: "AI για Managers", tools: "Claude, NotebookLM · Αποφάσεις, reporting, ροές ομάδας", date: "3 Δεκεμβρίου 2026", time: "09:30 – 17:30", modes: ["Online"], price: "249 €", status: "open" as const },
+// Placeholder URLs: replace these with the real Eventora event links.
+export const courses: { title: string; tools: string; date: string; time: string; modes: string[]; price: string; status: "open" | "done"; url?: string }[] = [
+  { title: "AI for Business", tools: "ChatGPT, Claude, Copilot · Projects, Skills, MCP connectors", date: "12 & 13 Νοεμβρίου 2026", time: "10:00 – 14:00", modes: ["On site", "Online"], price: "189 €", status: "open" as const, url: "https://eventora.example/PLACEHOLDER-ai-for-business" },
+  { title: "AI για Managers", tools: "Claude, NotebookLM · Αποφάσεις, reporting, ροές ομάδας", date: "3 Δεκεμβρίου 2026", time: "09:30 – 17:30", modes: ["Online"], price: "249 €", status: "open" as const, url: "https://eventora.example/PLACEHOLDER-ai-for-managers" },
   { title: "AI for Business", tools: "ChatGPT, Claude, Copilot · Projects, Skills, MCP connectors", date: "24 & 25 Σεπτεμβρίου 2026", time: "15:00 – 19:00", modes: ["On site", "Online"], price: "", status: "done" as const },
 ];
 
