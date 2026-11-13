@@ -11,14 +11,14 @@ export function TrustedBy() {
           <div className="trusted-by-track flex w-max">
             {[0, 1].map((copy) => (
               <div key={copy} aria-hidden={copy === 1 ? true : undefined} className="flex shrink-0 items-center gap-12 pr-12">
-                {clients.map(({ name, logo }) => (
+                {clients.map(({ name, logo, whiteLogo }) => (
                   <div key={name} className="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-xl font-semibold text-trusted-name">
                     {logo ? (
                       <img
                         src={logo}
                         alt={name}
                         loading="lazy"
-                        className={`h-8 w-auto object-contain${name === "Stoiximan" || name === "GBL" ? " brightness-0" : ""}`}
+                        className={`h-8 w-auto object-contain${whiteLogo ? " brightness-0" : ""}`}
                       />
                     ) : (
                       <>

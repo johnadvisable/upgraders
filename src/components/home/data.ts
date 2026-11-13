@@ -1,9 +1,9 @@
-export const clients: { name: string; logo?: string }[] = [
+export const clients: { name: string; logo?: string; whiteLogo?: boolean }[] = [
   { name: "Insurance Market", logo: "/logos/insurance-market.webp" },
   { name: "Seajets", logo: "/logos/seajets-logo.svg" },
-  { name: "Stoiximan", logo: "/logos/logo__stoiximan.svg" },
-  { name: "GBL", logo: "/logos/stoiximan-gbl.png" },
-  { name: "Wecare" },
+  { name: "Stoiximan", logo: "/logos/logo__stoiximan.svg", whiteLogo: true },
+  { name: "GBL", logo: "/logos/stoiximan-gbl.png", whiteLogo: true },
+  { name: "Wecare", logo: "/logos/wecare_white_logo.svg", whiteLogo: true },
   { name: "Edructer", logo: "/logos/edructer-logo.svg" },
   { name: "Jacobs", logo: "/logos/jacobs-logo.png" },
   { name: "Νέα Οδός", logo: "/logos/logo-nea-odos.svg" },
