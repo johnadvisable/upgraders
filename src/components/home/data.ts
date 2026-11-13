@@ -1,4 +1,17 @@
-export const clients = ["Insurance Market", "Seajets", "Stoiximan", "GBL", "Wecare", "Edructer", "Jacobs", "Νέα Οδός", "Κεντρική Οδός", "sebamed", "Galerie de Beauté", "chillbox"];
+export const clients: { name: string; logo?: string }[] = [
+  { name: "Insurance Market", logo: "/logos/insurance-market.webp" },
+  { name: "Seajets", logo: "/logos/seajets-logo.svg" },
+  { name: "Stoiximan", logo: "/logos/logo__stoiximan.svg" },
+  { name: "GBL", logo: "/logos/stoiximan-gbl.png" },
+  { name: "Wecare" },
+  { name: "Edructer", logo: "/logos/edructer-logo.svg" },
+  { name: "Jacobs", logo: "/logos/jacobs-logo.png" },
+  { name: "Νέα Οδός", logo: "/logos/logo-nea-odos.svg" },
+  { name: "Κεντρική Οδός", logo: "/logos/logo-ko-el.svg" },
+  { name: "sebamed", logo: "/logos/sebamed.png" },
+  { name: "Galerie de Beauté", logo: "/logos/galerie-de-beaute.png" },
+  { name: "chillbox", logo: "/logos/chillbox_logo.png" },
+];
 
 export const courses = [
   { title: "AI for Business", tools: "ChatGPT, Claude, Copilot · Projects, Skills, MCP connectors", date: "12 & 13 Νοεμβρίου 2026", time: "10:00 – 14:00", modes: ["On site", "Online"], price: "189 €", status: "open" as const },

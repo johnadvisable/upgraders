@@ -11,10 +11,21 @@ export function TrustedBy() {
           <div className="trusted-by-track flex w-max">
             {[0, 1].map((copy) => (
               <div key={copy} aria-hidden={copy === 1 ? true : undefined} className="flex shrink-0 items-center gap-12 pr-12">
-                {clients.map((client) => (
-                  <div key={client} className="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-xl font-semibold text-trusted-name">
-                    <span aria-hidden="true" className="h-[22px] w-[22px] shrink-0 rounded-[6px] border-[1.5px] border-dashed border-trusted-placeholder" />
-                    <span>{client}</span>
+                {clients.map(({ name, logo }) => (
+                  <div key={name} className="flex shrink-0 items-center gap-2.5 whitespace-nowrap text-xl font-semibold text-trusted-name">
+                    {logo ? (
+                      <img
+                        src={logo}
+                        alt={name}
+                        loading="lazy"
+                        className={`h-8 w-auto object-contain${name === "Stoiximan" || name === "GBL" ? " brightness-0" : ""}`}
+                      />
+                    ) : (
+                      <>
+                        <span aria-hidden="true" className="h-[22px] w-[22px] shrink-0 rounded-[6px] border-[1.5px] border-dashed border-trusted-placeholder" />
+                        <span>{name}</span>
+                      </>
+                    )}
                   </div>
                 ))}
               </div>
