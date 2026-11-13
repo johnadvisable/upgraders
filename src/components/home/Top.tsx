@@ -305,7 +305,7 @@ export function LiveCourses() {
                 <span className="justify-self-start rounded-full border border-live-completed px-3 py-1.5 text-xs font-medium text-muted-foreground min-[900px]:col-span-2">Ολοκληρώθηκε</span>
               ) : (
                 <>
-                  <p className="whitespace-nowrap text-base font-medium">{c.price}{c.price && <span className="ml-1 text-[13px] font-normal text-muted-foreground">+ ΦΠΑ</span>}</p>
+                  <p className="text-base font-medium">{c.price}{c.price && <span className="block text-xs font-normal text-muted-foreground">+ ΦΠΑ</span>}</p>
                   <span className="relative inline-flex justify-self-start min-[900px]:justify-self-end">
                     <Pill showArrow={false} className="whitespace-nowrap px-4 hover:bg-live-booking-hover hover:text-primary-foreground!">Κράτηση θέσης</Pill>
                     <span className="absolute -right-2 -top-3 rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold text-accent-foreground">Λίγες θέσεις</span>
