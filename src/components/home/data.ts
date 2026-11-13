@@ -13,10 +13,11 @@ export const clients: { name: string; logo?: string; whiteLogo?: boolean }[] = [
   { name: "chillbox", logo: "/logos/chillbox_logo.png" },
 ];
 
-// Placeholder URLs: replace these with the real Eventora event links.
+// URLs containing PLACEHOLDER must be replaced with the real Eventora event links.
 export const courses: { title: string; tools: string; date: string; time: string; modes: string[]; price: string; status: "open" | "done"; url?: string }[] = [
   { title: "AI for Business", tools: "ChatGPT, Claude, Copilot · Projects, Skills, MCP connectors", date: "12 & 13 Νοεμβρίου 2026", time: "10:00 – 14:00", modes: ["On site", "Online"], price: "189 €", status: "open" as const, url: "https://eventora.example/PLACEHOLDER-ai-for-business" },
   { title: "AI για Managers", tools: "Claude, NotebookLM · Αποφάσεις, reporting, ροές ομάδας", date: "3 Δεκεμβρίου 2026", time: "09:30 – 17:30", modes: ["Online"], price: "249 €", status: "open" as const, url: "https://eventora.example/PLACEHOLDER-ai-for-managers" },
+  { title: "AI Coding Masterclass", tools: "Lovable · Διήμερο masterclass, βιντεοσκόπηση για 3 μήνες και credits δώρο", date: "17 & 18 Δεκεμβρίου 2026", time: "15:00 – 20:00", modes: ["On site", "Online"], price: "από 149 €", status: "open" as const, url: "https://www.eventora.com/el/Events/upgraders-ai-coding-masterclas" },
   { title: "AI for Business", tools: "ChatGPT, Claude, Copilot · Projects, Skills, MCP connectors", date: "24 & 25 Σεπτεμβρίου 2026", time: "15:00 – 19:00", modes: ["On site", "Online"], price: "", status: "done" as const },
 ];
 
