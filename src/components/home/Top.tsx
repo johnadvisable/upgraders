@@ -324,9 +324,9 @@ export function LiveCourses() {
       </Reveal>
       <Reveal className="live-xsell-list">
         {[
-          { text: "Θέλω εξατομικευμένη εταιρική εκπαίδευση", icon: UserRound, tooltip: "Η πιο εξατομικευμένη αλλά και ακριβή επιλογή." },
-          { text: "Θέλω ένα 8ωρο Sprint μέσα στην εταιρεία μου", icon: Zap, tooltip: "Υψηλή εξατομίκευση, ελκυστικό κόστος." },
-          { text: "Θέλω να δω μαγνητοσκοπημένες εκπαιδεύσεις", icon: MonitorPlay, tooltip: "Η πιο οικονομική, Do-it-Yourself επιλογή." },
+          { text: "Θέλω εξατομικευμένη εταιρική εκπαίδευση", icon: UserRound, tooltip: "Η πιο εξατομικευμένη αλλά και ακριβή επιλογή.", modal: true },
+          { text: "Θέλω ένα 8ωρο Sprint μέσα στην εταιρεία μου", icon: Zap, tooltip: "Υψηλή εξατομίκευση, ελκυστικό κόστος.", modal: true },
+          { text: "Θέλω να δω μαγνητοσκοπημένες εκπαιδεύσεις", icon: MonitorPlay, tooltip: "Η πιο οικονομική, Do-it-Yourself επιλογή.", href: "https://thesessions.gr/" },
         ].map((card) => (
           <LiveCrossSellCard key={card.text} {...card} />
         ))}
@@ -335,7 +335,8 @@ export function LiveCourses() {
   );
 }
 
-function LiveCrossSellCard({ text, icon: Icon, tooltip }: { text: string; icon: LucideIcon; tooltip: string }) {
+function LiveCrossSellCard({ text, icon: Icon, tooltip, modal, href }: { text: string; icon: LucideIcon; tooltip: string; modal?: boolean; href?: string }) {
+  const openBooking = useOpenBooking();
   const tooltipId = useId();
   const [hovered, setHovered] = useState(false);
   const [focused, setFocused] = useState(false);
@@ -343,7 +344,7 @@ function LiveCrossSellCard({ text, icon: Icon, tooltip }: { text: string; icon: 
   const open = hovered || focused || pinned;
   return (
     <div className="live-xsell-card">
-      <Pill showArrow={false} className="live-xsell-link">
+      <Pill href={modal ? "#contact" : href} onClick={modal ? openBooking : undefined} target={href ? "_blank" : undefined} rel={href ? "noopener noreferrer" : undefined} showArrow={false} className="live-xsell-link">
         <span className="live-xsell-swatch"><Icon aria-hidden className="h-5 w-5" strokeWidth={1.8} /></span>
         <span className="min-w-0 flex-1">{text}</span>
         <svg aria-hidden width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4 shrink-0"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
