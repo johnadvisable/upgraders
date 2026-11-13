@@ -40,6 +40,7 @@ type Placement = "sheet" | "bottom" | "top" | "corner" | "wait";
 type NotifMode = "main" | "later" | "done";
 
 function UpdateCard({ textRef }: { textRef: React.RefObject<HTMLDivElement | null> }) {
+  const openBooking = useOpenBooking();
   const cardRef = useRef<HTMLDivElement>(null);
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -141,7 +142,12 @@ function UpdateCard({ textRef }: { textRef: React.RefObject<HTMLDivElement | nul
             </div>
             <p className="mt-1 text-[13px] leading-snug text-ink-foreground/85">Το πιο σημαντικό Upgrade είναι διαθέσιμο για την εταιρεία σας. Η εταιρεία σας 2.0.</p>
             <div className="mt-4 grid grid-cols-2 gap-2">
-              <button type="button" onClick={close} className="rounded-[8px] bg-ink-foreground py-1.5 text-[13px] font-medium text-ink">Εγκατάσταση τώρα</button>
+              <button type="button" onClick={() => {
+                close();
+                // Restore focus to the persistent booking CTA, not the dismissed card.
+                document.querySelector<HTMLAnchorElement>('header a[href="#contact"]')?.focus();
+                openBooking();
+              }} className="rounded-[8px] bg-ink-foreground py-1.5 text-[13px] font-medium text-ink">Εγκατάσταση τώρα</button>
               <button type="button" onClick={() => { setMode("later"); requestAnimationFrame(compute); }} className="rounded-[8px] bg-ink-foreground/15 py-1.5 text-[13px] font-medium">Αργότερα</button>
             </div>
           </div>
