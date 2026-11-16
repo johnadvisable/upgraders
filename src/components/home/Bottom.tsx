@@ -4,6 +4,7 @@ import { cases, faqs, team, tools, type ToolTag } from "./data";
 import { Eyebrow, Section } from "./ui";
 import { Reveal } from "./Reveal";
 import { LegalModal, type LegalDoc } from "./LegalModal";
+import { ContactModal } from "./ContactModal";
 import { dragScroll } from "./Slider";
 
 export function Cases() {
@@ -279,9 +280,10 @@ export function Faq() {
 
 export function Footer() {
   const [legal, setLegal] = useState<LegalDoc | null>(null);
+  const [contact, setContact] = useState(false);
   const cols: Record<string, [string, string][]> = {
     "ΥΠΗΡΕΣΙΕΣ": [["Εταιρικό AI Upgrade", "#contact"], ["8ώρο AI Sprint", "#contact"], ["Live Εκπαίδευση", "#live"], ["Custom AI εργαλεία", "#tools"]],
-    "ΕΤΑΙΡΕΙΑ": [["Η ομάδα", "#team"], ["Case Studies", "#cases"], ["Συχνές ερωτήσεις", "#faq"], ["Επικοινωνία", "#contact"]],
+    "ΕΤΑΙΡΕΙΑ": [["Η ομάδα", "#team"], ["Case Studies", "#cases"], ["Συχνές ερωτήσεις", "#faq"], ["Επικοινωνία", "modal:contact"]],
     "ΝΟΜΙΚΑ": [["Όροι χρήσης", "legal:terms"], ["Πολιτική απορρήτου", "legal:privacy"], ["Πολιτική cookies", "legal:cookies"]],
   };
   const socials = [
@@ -304,12 +306,13 @@ export function Footer() {
             {Object.entries(cols).map(([h, items]) => (
               <div key={h}>
                 <p className="font-mono text-xs font-semibold tracking-[0.08em] text-ink-muted">{h}</p>
-                <ul className="mt-4 space-y-2 text-sm">{items.map(([l, href]) => <li key={l}>{href.startsWith("legal:") ? <a href="#" onClick={(e) => { e.preventDefault(); e.currentTarget.focus(); setLegal(href.slice(6) as LegalDoc); }} className="hover:text-accent">{l}</a> : <a href={href} className="hover:text-accent">{l}</a>}</li>)}</ul>
+                <ul className="mt-4 space-y-2 text-sm">{items.map(([l, href]) => <li key={l}>{href === "modal:contact" ? <a href="#contact" onClick={(e) => { e.preventDefault(); e.currentTarget.focus(); setContact(true); }} className="hover:text-accent">{l}</a> : href.startsWith("legal:") ? <a href="#" onClick={(e) => { e.preventDefault(); e.currentTarget.focus(); setLegal(href.slice(6) as LegalDoc); }} className="hover:text-accent">{l}</a> : <a href={href} className="hover:text-accent">{l}</a>}</li>)}</ul>
               </div>
             ))}
           </div>
         </div>
       </div>
+      {contact && <ContactModal onClose={() => setContact(false)} />}
       {legal && <LegalModal doc={legal} onClose={() => setLegal(null)} />}
       <div className="px-[clamp(12px,2vw,28px)] pt-[clamp(40px,5vw,72px)] pb-[clamp(16px,2vw,28px)]">
         <img src="/logo-negative.svg" alt="The Upgraders" className="block h-auto w-full" />
