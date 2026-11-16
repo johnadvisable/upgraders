@@ -8,6 +8,7 @@ export const clients: { name: string; logo?: string; whiteLogo?: boolean }[] = [
   { name: "Κεντρική Οδός", logo: "/logos/logo-ko-el.svg" },
   { name: "sebamed", logo: "/logos/sebamed.png" },
   { name: "Galerie de Beauté", logo: "/logos/galerie-de-beaute.png" },
+  { name: "BoConcept", logo: "/logos/boconcept-logo.svg" },
   { name: "chillbox", logo: "/logos/chillbox_logo.png" },
 ];
 
