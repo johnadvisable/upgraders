@@ -10,6 +10,8 @@ import { useOpenBooking } from "./BookingModal";
 import { courses } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
+const SHOW_ON_DEMAND = false;
+
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -263,7 +265,8 @@ export function Services() {
           <GroupLabel title="Σε τμήματα" sub="Ανοιχτά μαθήματα & βιβλιοθήκη εκπαιδεύσεων" />
           <Slider className="lg:h-[calc(100%-3rem)]" sliderClassName="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
             <ServiceCard tone="light" icon="live" title="Live Εκπαίδευση" sub="(σε μικρά τμήματα)" text="Μικρά groups, σε δική μας αίθουσα ή livestream." cta="Επόμενα μαθήματα" tooltip="Ζωντανή εκπαίδευση σε μικρή ομάδα, σε προσιτό κόστος." />
-            <ServiceCard tone="light" icon="demand" title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" tooltip="Η πιο οικονομική, Do-it-Yourself επιλογή." />
+            {/* On Demand temporarily disabled — set SHOW_ON_DEMAND to true to restore. */}
+            {SHOW_ON_DEMAND && <ServiceCard tone="light" icon="demand" title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" tooltip="Η πιο οικονομική, Do-it-Yourself επιλογή." />}
           </Slider>
         </div>
         <div className="min-w-0">
