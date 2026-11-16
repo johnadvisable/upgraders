@@ -95,6 +95,9 @@ export const team = [
   { name: "Βασίλης Καλλάρας", role: "Founder · Entrepreneur · Trainer · Lead Engineer", img: "/team-1.webp" },
   { name: "Πάνος Καλλάρας", role: "Lead Engineer · Partner · Trainer", img: "/team-2.webp" },
   { name: "Ναστάζια Ταμπακοπούλου", role: "Founder · Marketing Director · Trainer", img: "/team-3.webp" },
+  { name: "Ανδρέας Καραβανάς", role: "Founder & Builder", img: "/team-4.webp" },
+  { name: "Μάκης Καμπουρίδης", role: "Founder & Builder", img: "/team-5.webp" },
+  { name: "Βασίλης Τράκας", role: "Data Analyst · BI Professional", img: "/team-6.webp" },
 ];
 
 export const faqs: [string, string][] = [
