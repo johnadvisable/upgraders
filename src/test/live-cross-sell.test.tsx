@@ -14,7 +14,7 @@ describe("Live cross-sell destinations", () => {
     const link = getByRole("link", { name });
     expect(link).toHaveAttribute("href", "#contact");
     expect(fireEvent.click(link)).toBe(false);
-    expect(getByRole("dialog").querySelector("iframe")?.src).toContain("https://calendly.com/theupgraders/30min");
+    expect(getByRole("dialog").querySelector("iframe")?.src).toContain("https://calendly.com/xydas-n/30min");
     fireEvent.keyDown(document, { key: "Escape" });
     expect(queryByRole("dialog")).toBeNull();
     expect(document.activeElement).toBe(link);

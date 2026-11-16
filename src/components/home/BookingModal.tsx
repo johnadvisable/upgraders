@@ -20,7 +20,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
   }, []);
   const close = useCallback(() => setOpen(false), []);
 
-  const src = typeof window === "undefined" ? "" : "https://calendly.com/theupgraders/30min?hide_gdpr_banner=1&hide_landing_page_details=1&background_color=ffffff&text_color=1c1c1a&primary_color=1c1c1a&embed_type=Inline&embed_domain=" + encodeURIComponent(window.location.hostname);
+  const src = typeof window === "undefined" ? "" : "https://calendly.com/xydas-n/30min?hide_gdpr_banner=1&primary_color=1a1a1a&embed_type=Inline&embed_domain=" + encodeURIComponent(window.location.hostname);
 
   return (
     <BookingContext.Provider value={openModal}>
