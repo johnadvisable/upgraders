@@ -11,7 +11,6 @@ import { courses } from "./data";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
 export function Header() {
-  const openBooking = useOpenBooking();
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -24,7 +23,7 @@ export function Header() {
       <div className="mx-auto flex max-w-6xl items-center justify-between">
         <a href="#top" aria-label="The Upgraders"><img src={scrolled ? "/logo.svg" : "/logo-negative.svg"} alt="The Upgraders" className="h-[34px] w-auto" /></a>
         <span className="relative">
-          <Pill href="#contact" onClick={openBooking} variant={scrolled ? "dark" : "light"} showArrow={false} className={`h-11 rounded-full px-5 py-0 text-[15px] font-medium ${scrolled ? "bg-ink text-ink-foreground hover:bg-ink/85" : ""}`}>
+          <Pill href="#services" variant={scrolled ? "dark" : "light"} showArrow={false} className={`h-11 rounded-full px-5 py-0 text-[15px] font-medium ${scrolled ? "bg-ink text-ink-foreground hover:bg-ink/85" : ""}`}>
             Θέλω εκπαίδευση
             <svg width={16} height={16} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </Pill>
@@ -145,7 +144,7 @@ function UpdateCard({ textRef }: { textRef: React.RefObject<HTMLDivElement | nul
               <button type="button" onClick={() => {
                 close();
                 // Restore focus to the persistent booking CTA, not the dismissed card.
-                document.querySelector<HTMLAnchorElement>('header a[href="#contact"]')?.focus();
+                document.querySelector<HTMLAnchorElement>('header a[href="#services"]')?.focus();
                 openBooking();
               }} className="rounded-[8px] bg-ink-foreground py-1.5 text-[13px] font-medium text-ink">Εγκατάσταση τώρα</button>
               <button type="button" onClick={() => { setMode("later"); requestAnimationFrame(compute); }} className="rounded-[8px] bg-ink-foreground/15 py-1.5 text-[13px] font-medium">Αργότερα</button>
