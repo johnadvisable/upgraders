@@ -280,6 +280,9 @@ export function Services() {
   );
 }
 
+// Set to true to show the course table again instead of the "coming soon" panel.
+const SHOW_LIVE_COURSES = false;
+
 export function LiveCourses() {
   return (
     <Section id="live" className="pt-[clamp(40px,5vw,72px)] pb-0">
@@ -288,6 +291,13 @@ export function LiveCourses() {
         <Title>Τα επόμενα <span className="font-serif italic font-normal!">live<br className="hidden lg:block" /> μαθήματα.</span></Title>
         <p className="mt-4 text-lg text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
       </Reveal>
+      {!SHOW_LIVE_COURSES ? (
+      <Reveal className="mt-10 rounded-[20px] border border-live-table-border bg-card px-7 py-12 text-center">
+        <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">Coming soon</p>
+        <p className="mt-3 text-[clamp(22px,2.4vw,30px)] font-medium">Σύντομα διαθέσιμα</p>
+        <p className="mt-2 text-base text-muted-foreground">Ετοιμάζουμε τα επόμενα live μαθήματα. Ανακοινώνονται σύντομα.</p>
+      </Reveal>
+      ) : (
       <Reveal className="mt-10 rounded-[20px] border border-live-table-border bg-card">
         <div className="live-course-grid hidden border-b border-live-header-divider px-7 py-[18px] font-mono text-[11px] uppercase text-muted-foreground min-[900px]:grid">
           <span>ΜΑΘΗΜΑ</span><span>ΗΜΕΡΟΜΗΝΙΑ</span><span>ΩΡΕΣ</span><span>ΤΡΟΠΟΣ</span><span>ΤΙΜΗ</span>
@@ -323,6 +333,7 @@ export function LiveCourses() {
           );
         })}
       </Reveal>
+      )}
       <Reveal className="live-xsell-list">
         {[
           { text: "Θέλω εξατομικευμένη εταιρική εκπαίδευση", icon: UserRound, tooltip: "Η πιο εξατομικευμένη αλλά και ακριβή επιλογή.", modal: true },
