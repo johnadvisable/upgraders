@@ -24,7 +24,7 @@ export function ContactForm() {
           <label className="text-sm font-medium">Email<input name="email" type="email" required maxLength={255} autoComplete="email" className={field} /></label>
           <label className="text-sm font-medium">Τηλέφωνο (προαιρετικό)<input name="phone" type="tel" maxLength={30} autoComplete="tel" className={field} /></label>
           <label className="text-sm font-medium">Μήνυμα<textarea name="message" required maxLength={2000} rows={5} className={field} /></label>
-          {(error || state === "error") && <p role="alert" className="text-sm text-destructive">{error || "Κάτι πήγε στραβά. Δοκιμάστε ξανά ή καλέστε μας."}</p>}
+          {(error || state === "error") && <p role="alert" className="text-sm text-destructive">{error || "Κάτι πήγε στραβά. Δοκιμάστε ξανά."}</p>}
           <button type="submit" disabled={state === "sending"} className="mt-2 h-12 rounded-[10px] bg-foreground px-6 text-[15px] font-medium text-background disabled:opacity-60">{state === "sending" ? "Αποστολή…" : "Αποστολή μηνύματος"}</button>
         </form>
       )}
@@ -36,7 +36,7 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
   return (
     <ModalShell onClose={onClose} labelledBy="contact-title" z="z-[210]" className="max-w-[560px] bg-background p-[clamp(28px,4vw,48px)]">
       <h2 id="contact-title" className="pr-10 text-[clamp(26px,3vw,34px)] font-semibold leading-[1.1] tracking-[-0.025em]">Επικοινωνία</h2>
-      <p className="mt-3 text-[15px] text-muted-foreground">Στείλτε μας μήνυμα ή καλέστε μας στο <a href="tel:+302106209996" className="font-medium text-foreground underline underline-offset-2">210.62.09.996</a>.</p>
+      <p className="mt-3 text-[15px] text-muted-foreground">Στείλτε μας μήνυμα.</p>
       <ContactForm />
     </ModalShell>
   );

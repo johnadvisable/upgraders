@@ -40,7 +40,7 @@ export function BookingProvider({ children }: { children: ReactNode }) {
                 </ul>
               </div>
               <div style={{ gridArea: "cal" }} className="rounded-[16px] bg-card p-[clamp(20px,3vw,32px)]">
-                <p className="text-[15px] text-muted-foreground">Στείλτε μας μήνυμα ή καλέστε μας στο <a href="tel:+302106209996" className="font-medium text-foreground underline underline-offset-2">210.62.09.996</a>.</p>
+                <p className="text-[15px] text-muted-foreground">Στείλτε μας μήνυμα.</p>
                 <ContactForm />
               </div>
             </div>
