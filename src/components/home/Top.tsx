@@ -216,7 +216,7 @@ export function Hero() {
   );
 }
 
-function ServiceCard({ title, sub, text, cta, badge, icon, tone, modal, tooltip }: { title: string; sub?: string; text: string; cta: string; badge?: string; icon: ServiceIconName; tone: "light" | "tan"; modal?: boolean; tooltip: string }) {
+function ServiceCard({ title, sub, text, cta, badge, icon, tone, modal, tooltip, disabled = false }: { title: string; sub?: string; text: string; cta: string; badge?: string; icon: ServiceIconName; tone: "light" | "tan"; modal?: boolean; tooltip: string; disabled?: boolean }) {
   const openBooking = useOpenBooking();
   const light = tone === "light";
   const tooltipId = useId();
@@ -234,9 +234,9 @@ function ServiceCard({ title, sub, text, cta, badge, icon, tone, modal, tooltip 
       {sub && <p className="mt-[2px] text-foreground/70">{sub}</p>}
       <p className="mt-[10px] leading-relaxed text-foreground/80">{text}</p>
       <div className="flex-1" />
-      <a href={modal ? "#contact" : "#live"} onClick={modal ? openBooking : undefined} aria-describedby={open ? tooltipId : undefined} className="mt-4 inline-flex items-center gap-2 self-start rounded-[6px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 hover:text-primary-foreground">
+      {disabled ? <Button type="button" disabled className="mt-4 h-auto self-start whitespace-normal rounded-[6px] px-4 py-2.5 text-sm font-semibold">{cta}</Button> : <a href={modal ? "#contact" : "#live"} onClick={modal ? openBooking : undefined} aria-describedby={open ? tooltipId : undefined} className="mt-4 inline-flex items-center gap-2 self-start rounded-[6px] bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary/85 hover:text-primary-foreground">
         {cta} <ArrowRight className="h-4 w-4" />
-      </a>
+      </a>}
     </div>
   );
 }
@@ -265,7 +265,7 @@ export function Services() {
           <GroupLabel title="Σε τμήματα" sub="Ανοιχτά μαθήματα & βιβλιοθήκη εκπαιδεύσεων" />
           <Slider className="lg:h-[calc(100%-3rem)]" sliderClassName="service-slider h-full min-[760px]:grid min-[760px]:grid-cols-2 min-[760px]:gap-4">
             <ServiceCard tone="light" icon="live" title="Live Εκπαίδευση" sub="(σε μικρά τμήματα)" text="Μικρά groups, σε δική μας αίθουσα ή livestream." cta="Επόμενα μαθήματα" tooltip="Ζωντανή εκπαίδευση σε μικρή ομάδα, σε προσιτό κόστος." />
-            {SHOW_ON_DEMAND && <ServiceCard tone="light" icon="demand" title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Περισσότερα" tooltip="Η πιο οικονομική, Do-it-Yourself επιλογή." />}
+            {SHOW_ON_DEMAND && <ServiceCard disabled tone="light" icon="demand" title="On Demand εκπαίδευση" text="Δείτε σε μαγνητοσκόπηση κρίσιμες εκπαιδεύσεις για τα σημαντικότερα εργαλεία AI." cta="Σύντομα διαθέσιμο" tooltip="Η πιο οικονομική, Do-it-Yourself επιλογή." />}
           </Slider>
         </div>
         <div className="min-w-0">
