@@ -14,11 +14,11 @@ const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&
 export const sendContact = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => contactSchema.parse(input))
   .handler(async ({ data }) => {
-    const lovableKey = process.env.LOVABLE_API_KEY;
-    const resendKey = process.env.RESEND_API_KEY;
+    const lovableKey = process.env["LOVABLE_API_KEY"];
+    const resendKey = process.env["RESEND_API_KEY"];
     if (!lovableKey || !resendKey) throw new Error("email_not_configured");
     const rows = [["Ονοματεπώνυμο", data.name], ["Email", data.email], ["Τηλέφωνο", data.phone || "—"]]
-      .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#666">${k}</td><td>${esc(v)}</td></tr>`).join("");
+      .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#666">${k}</td><td>${esc(v ?? "")}</td></tr>`).join("");
     const res = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
       method: "POST",
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${lovableKey}`, "X-Connection-Api-Key": resendKey },
