@@ -8,16 +8,32 @@ export const contactSchema = z.object({
   message: z.string().trim().min(1, "Γράψτε το μήνυμά σας").max(2000),
 });
 
-// The recipient address stays on the server so it never appears in the page.
+const esc = (s: string) => s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!);
+
+// Sent via Resend (verified domain upgraders.gr). Recipient stays server-side.
 export const sendContact = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => contactSchema.parse(input))
   .handler(async ({ data }) => {
-    const res = await fetch("https://formsubmit.co/ajax/xydas.n@gmail.com", {
+    const lovableKey = process.env.LOVABLE_API_KEY;
+    const resendKey = process.env.RESEND_API_KEY;
+    if (!lovableKey || !resendKey) throw new Error("email_not_configured");
+    const rows = [["Ονοματεπώνυμο", data.name], ["Email", data.email], ["Τηλέφωνο", data.phone || "—"]]
+      .map(([k, v]) => `<tr><td style="padding:4px 12px 4px 0;color:#666">${k}</td><td>${esc(v)}</td></tr>`).join("");
+    const res = await fetch("https://connector-gateway.lovable.dev/resend/emails", {
       method: "POST",
-      headers: { "Content-Type": "application/json", Accept: "application/json", Origin: "https://upgraters.advisable.link", Referer: "https://upgraters.advisable.link/" },
-      body: JSON.stringify({ ...data, _subject: `Νέο μήνυμα από ${data.name} (The Upgraders)`, _replyto: data.email, _template: "table", _captcha: "false" }),
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${lovableKey}`, "X-Connection-Api-Key": resendKey },
+      body: JSON.stringify({
+        from: "The Upgraders <contact@upgraders.gr>",
+        to: ["xydas.n@gmail.com"],
+        reply_to: data.email,
+        subject: `Νέο μήνυμα από ${data.name} (The Upgraders)`,
+        html: `<table>${rows}</table><p style="white-space:pre-wrap">${esc(data.message)}</p>`,
+      }),
     });
-    const json = (await res.json().catch(() => ({}))) as { success?: string | boolean; message?: string };
-    if (!res.ok || String(json.success) !== "true") throw new Error(json.message || "send_failed");
+    if (!res.ok) {
+      const body = await res.text();
+      console.error(`Resend send failed [${res.status}]: ${body}`);
+      throw new Error(`send_failed [${res.status}]`);
+    }
     return { ok: true };
   });
