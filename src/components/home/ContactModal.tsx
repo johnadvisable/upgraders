@@ -4,7 +4,7 @@ import { sendContact, contactSchema } from "@/lib/contact.functions";
 
 const field = "mt-1.5 w-full rounded-[10px] border border-foreground/15 bg-background px-3.5 py-3 text-[15px] outline-none focus:border-foreground";
 
-export function ContactModal({ onClose }: { onClose: () => void }) {
+export function ContactForm() {
   const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
   const [error, setError] = useState("");
   async function submit(e: FormEvent<HTMLFormElement>) {
@@ -15,9 +15,7 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
     try { await sendContact({ data: parsed.data }); setState("done"); } catch { setState("error"); }
   }
   return (
-    <ModalShell onClose={onClose} labelledBy="contact-title" z="z-[210]" className="max-w-[560px] bg-background p-[clamp(28px,4vw,48px)]">
-      <h2 id="contact-title" className="pr-10 text-[clamp(26px,3vw,34px)] font-semibold leading-[1.1] tracking-[-0.025em]">Επικοινωνία</h2>
-      <p className="mt-3 text-[15px] text-muted-foreground">Στείλτε μας μήνυμα ή καλέστε μας στο <a href="tel:+302106209996" className="font-medium text-foreground underline underline-offset-2">210.62.09.996</a>.</p>
+    <>
       {state === "done" ? (
         <p role="status" className="mt-8 rounded-[12px] bg-secondary p-5 text-[15px]">Ευχαριστούμε! Λάβαμε το μήνυμά σας και θα επικοινωνήσουμε σύντομα.</p>
       ) : (
@@ -30,6 +28,16 @@ export function ContactModal({ onClose }: { onClose: () => void }) {
           <button type="submit" disabled={state === "sending"} className="mt-2 h-12 rounded-[10px] bg-foreground px-6 text-[15px] font-medium text-background disabled:opacity-60">{state === "sending" ? "Αποστολή…" : "Αποστολή μηνύματος"}</button>
         </form>
       )}
+    </>
+  );
+}
+
+export function ContactModal({ onClose }: { onClose: () => void }) {
+  return (
+    <ModalShell onClose={onClose} labelledBy="contact-title" z="z-[210]" className="max-w-[560px] bg-background p-[clamp(28px,4vw,48px)]">
+      <h2 id="contact-title" className="pr-10 text-[clamp(26px,3vw,34px)] font-semibold leading-[1.1] tracking-[-0.025em]">Επικοινωνία</h2>
+      <p className="mt-3 text-[15px] text-muted-foreground">Στείλτε μας μήνυμα ή καλέστε μας στο <a href="tel:+302106209996" className="font-medium text-foreground underline underline-offset-2">210.62.09.996</a>.</p>
+      <ContactForm />
     </ModalShell>
   );
 }

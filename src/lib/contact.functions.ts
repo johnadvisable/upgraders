@@ -23,7 +23,7 @@ export const sendContact = createServerFn({ method: "POST" })
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${resendKey}` },
       body: JSON.stringify({
         from: "The Upgraders <contact@upgraders.gr>",
-        to: ["xydas.n@gmail.com"],
+        to: ["vkallaras@advisable.com", "nikos@humble.gr", "n.xydas@humble.gr", "panos@advisable.com"],
         reply_to: data.email,
         subject: `Νέο μήνυμα από ${data.name} (The Upgraders)`,
         html: `<table>${rows}</table><p style="white-space:pre-wrap">${esc(data.message)}</p>`,

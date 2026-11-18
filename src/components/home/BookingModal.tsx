@@ -1,6 +1,6 @@
 import { createContext, useCallback, useContext, useState, type MouseEvent, type ReactNode } from "react";
 import { ModalShell } from "./ModalShell";
-import { ContactModal } from "./ContactModal";
+import { ContactForm } from "./ContactModal";
 
 const BookingContext = createContext<(e?: MouseEvent) => void>(() => {});
 export const useOpenBooking = () => useContext(BookingContext);
@@ -20,10 +20,6 @@ export function BookingProvider({ children }: { children: ReactNode }) {
     setOpen(true);
   }, []);
   const close = useCallback(() => setOpen(false), []);
-  const [contact, setContact] = useState(false);
-
-  const src = typeof window === "undefined" ? "" : "https://calendly.com/xydas-n/30min?hide_gdpr_banner=1&primary_color=1a1a1a&embed_type=Inline&embed_domain=" + encodeURIComponent(window.location.hostname);
-
   return (
     <BookingContext.Provider value={openModal}>
       {children}
@@ -42,15 +38,14 @@ export function BookingProvider({ children }: { children: ReactNode }) {
                     <li key={t} className="flex gap-3 text-base"><span className="font-bold text-accent">{String(i + 1).padStart(2, "0")}.</span><span>{t}</span></li>
                   ))}
                 </ul>
-                <button type="button" onClick={() => { setOpen(false); setContact(true); }} className="mt-8 text-[15px] font-medium underline underline-offset-4 hover:text-accent">Θα προτιμούσα να στείλω ένα μήνυμα</button>
               </div>
-              <div style={{ gridArea: "cal" }} className="min-h-[660px] overflow-hidden rounded-[16px] bg-card">
-                <iframe src={src} title="Κλείστε ραντεβού" className="block h-[700px] w-full border-0" />
+              <div style={{ gridArea: "cal" }} className="rounded-[16px] bg-card p-[clamp(20px,3vw,32px)]">
+                <p className="text-[15px] text-muted-foreground">Στείλτε μας μήνυμα ή καλέστε μας στο <a href="tel:+302106209996" className="font-medium text-foreground underline underline-offset-2">210.62.09.996</a>.</p>
+                <ContactForm />
               </div>
             </div>
         </ModalShell>
       )}
-      {contact && <ContactModal onClose={() => setContact(false)} />}
     </BookingContext.Provider>
   );
 }
