@@ -296,6 +296,7 @@ export function LiveCourses() {
         <div className="grid min-[900px]:grid-cols-[1.4fr_1fr]">
           <div className="p-[clamp(24px,3.5vw,44px)]">
             <div className="flex flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.08em]">
+              <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-accent"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-accent" /></span>Upcoming event</span>
               <span className="rounded-full bg-foreground px-3 py-1 text-background">Christmas edition</span>
               <span className="rounded-full border border-foreground/15 px-3 py-1 text-muted-foreground">Vibe coding</span>
               <span className="rounded-full border border-foreground/15 px-3 py-1 text-muted-foreground">Δια ζώσης & online</span>
