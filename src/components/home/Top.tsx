@@ -298,7 +298,6 @@ export function LiveCourses() {
             <div className="flex flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.08em]">
               <span className="inline-flex items-center gap-2 rounded-full bg-accent/10 px-3 py-1 text-accent"><span className="relative flex h-2 w-2"><span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" /><span className="relative inline-flex h-2 w-2 rounded-full bg-accent" /></span>Upcoming event</span>
               <span className="rounded-full bg-foreground px-3 py-1 text-background">Christmas edition</span>
-              <span className="rounded-full border border-foreground/15 px-3 py-1 text-muted-foreground">Vibe coding</span>
               <span className="rounded-full border border-foreground/15 px-3 py-1 text-muted-foreground">Δια ζώσης & online</span>
             </div>
             <h3 className="mt-6 text-[clamp(28px,3.4vw,44px)] font-semibold leading-[1.05] tracking-[-0.025em]">AI Coding Masterclass</h3>
