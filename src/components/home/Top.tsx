@@ -312,9 +312,10 @@ export function LiveCourses() {
               ))}
             </dl>
             <div>
-              <div className="flex items-end gap-6">
+              <div className="flex items-end gap-5">
                 <div><p className="font-mono text-[11px] uppercase text-muted-foreground">Online</p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">149 €</p></div>
                 <div><p className="font-mono text-[11px] uppercase text-muted-foreground">Δια ζώσης</p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">249 €</p></div>
+                <div><p className="font-mono text-[11px] uppercase text-muted-foreground">Full pack</p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">399 €</p></div>
               </div>
               <p className="mt-2 text-[13px] text-muted-foreground">Δωρεάν ακύρωση έως 10 ημέρες πριν</p>
               <div className="mt-5 flex flex-wrap items-center gap-4"><Pill href="https://www.eventora.com/el/Events/upgraders-ai-coding-masterclas" target="_blank" rel="noopener noreferrer">Κράτηση θέσης</Pill><button type="button" onClick={() => setMcOpen(true)} className="text-[15px] font-medium underline underline-offset-4 hover:text-muted-foreground">Περισσότερα</button></div>
