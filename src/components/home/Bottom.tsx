@@ -302,7 +302,7 @@ export function Footer() {
                 className="flex h-[38px] w-[38px] items-center justify-center rounded-[10px] border border-ink-foreground/20 font-mono text-[11px] font-medium transition-colors hover:border-ink-foreground hover:text-ink-foreground">{s.code}</a>
             ))}
           </div>
-          <div className="grid max-w-[860px] flex-[1_1_620px] grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-9">
+          <div className="grid w-full min-w-0 max-w-[860px] flex-[1_1_620px] grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-9">
             {Object.entries(cols).map(([h, items]) => (
               <div key={h}>
                 <p className="font-mono text-xs font-semibold tracking-[0.08em] text-ink-muted">{h}</p>
