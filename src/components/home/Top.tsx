@@ -302,7 +302,7 @@ export function LiveCourses() {
           <li>Πέμ–Παρ 15:00 – 20:00 · Σάβ 12:00 – 18:00</li>
           <li>Δια ζώσης 249 € · Online 149 € · Δωρεάν ακύρωση έως 10 ημέρες πριν</li>
         </ul>
-        <div className="mt-6"><Pill href="https://advisable.com/academy/seminar/ai-coding-masterclass" target="_blank" rel="noopener noreferrer">Δείτε το πρόγραμμα & κράτηση</Pill></div>
+        <div className="mt-6"><Pill href="https://www.eventora.com/el/Events/ai-coding-masterclass" target="_blank" rel="noopener noreferrer">Δείτε το πρόγραμμα & κράτηση</Pill></div>
       </Reveal>
       ) : (
       <Reveal className="mt-10 rounded-[20px] border border-live-table-border bg-card">
