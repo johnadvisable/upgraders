@@ -315,7 +315,7 @@ export function LiveCourses() {
                 <div><p className="font-mono text-[11px] uppercase text-muted-foreground">Δια ζώσης</p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">249 €</p></div>
               </div>
               <p className="mt-2 text-[13px] text-muted-foreground">Δωρεάν ακύρωση έως 10 ημέρες πριν</p>
-              <div className="mt-5"><Pill href="https://www.eventora.com/el/Events/ai-coding-masterclass" target="_blank" rel="noopener noreferrer">Κράτηση θέσης</Pill></div>
+              <div className="mt-5"><Pill href="https://www.eventora.com/el/Events/upgraders-ai-coding-masterclas" target="_blank" rel="noopener noreferrer">Κράτηση θέσης</Pill></div>
             </div>
           </div>
         </div>
