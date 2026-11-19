@@ -8,6 +8,7 @@ import { Slider } from "./Slider";
 import { Reveal } from "./Reveal";
 import { useOpenBooking } from "./BookingModal";
 import { courses } from "./data";
+import { MasterclassModal } from "./MasterclassModal";
 import { Eyebrow, Pill, Section, Title } from "./ui";
 
 const SHOW_ON_DEMAND = true;
@@ -284,6 +285,7 @@ export function Services() {
 const SHOW_LIVE_COURSES = false;
 
 export function LiveCourses() {
+  const [mcOpen, setMcOpen] = useState(false);
   return (
     <Section id="live" className="pt-[clamp(40px,5vw,72px)] pb-0">
       <Reveal className="max-w-[51.25rem]">
@@ -315,7 +317,8 @@ export function LiveCourses() {
                 <div><p className="font-mono text-[11px] uppercase text-muted-foreground">Δια ζώσης</p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">249 €</p></div>
               </div>
               <p className="mt-2 text-[13px] text-muted-foreground">Δωρεάν ακύρωση έως 10 ημέρες πριν</p>
-              <div className="mt-5"><Pill href="https://www.eventora.com/el/Events/upgraders-ai-coding-masterclas" target="_blank" rel="noopener noreferrer">Κράτηση θέσης</Pill></div>
+              <div className="mt-5 flex flex-wrap items-center gap-4"><Pill href="https://www.eventora.com/el/Events/upgraders-ai-coding-masterclas" target="_blank" rel="noopener noreferrer">Κράτηση θέσης</Pill><button type="button" onClick={() => setMcOpen(true)} className="text-[15px] font-medium underline underline-offset-4 hover:text-muted-foreground">Περισσότερα</button></div>
+              {mcOpen && <MasterclassModal onClose={() => setMcOpen(false)} />}
             </div>
           </div>
         </div>
