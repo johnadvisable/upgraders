@@ -315,7 +315,7 @@ export function LiveCourses() {
               <div className="flex items-end gap-5">
                 <div><p className="font-mono text-[11px] uppercase text-muted-foreground">Online</p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">149 €</p></div>
                 <div><p className="font-mono text-[11px] uppercase text-muted-foreground">Δια ζώσης</p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">249 €</p></div>
-                <div><p className="font-mono text-[11px] uppercase text-muted-foreground">Full pack</p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">399 €</p></div>
+                <div><p className="flex items-center gap-1 font-mono text-[11px] uppercase text-muted-foreground">Full pack <FullPackTip /></p><p className="text-[32px] font-semibold leading-none tracking-[-0.02em] whitespace-nowrap">399 €</p></div>
               </div>
               <p className="mt-2 text-[13px] text-muted-foreground">Δωρεάν ακύρωση έως 10 ημέρες πριν</p>
               <div className="mt-5 flex flex-wrap items-center gap-4"><Pill href="https://www.eventora.com/el/Events/upgraders-ai-coding-masterclas" target="_blank" rel="noopener noreferrer">Κράτηση θέσης</Pill><button type="button" onClick={() => setMcOpen(true)} className="text-[15px] font-medium underline underline-offset-4 hover:text-muted-foreground">Περισσότερα</button></div>
@@ -413,5 +413,30 @@ function ServiceIcon({ name, className }: { name: ServiceIconName; className?: s
     <svg width={22} height={22} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.4} strokeLinecap="round" strokeLinejoin="round" className={className} aria-hidden="true">
       {serviceIconPaths[name].map((d) => <path key={d} d={d} />)}
     </svg>
+  );
+}
+
+function FullPackTip() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLSpanElement>(null);
+  const id = useId();
+  const [shift, setShift] = useState(0);
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: PointerEvent) => { if (!ref.current?.contains(e.target as Node)) setOpen(false); };
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => { document.removeEventListener("pointerdown", onDown); document.removeEventListener("keydown", onKey); };
+  }, [open]);
+  return (
+    <span ref={ref} className="relative inline-flex normal-case" onPointerEnter={(e) => { if (e.pointerType === "mouse") setOpen(true); }} onPointerLeave={(e) => { if (e.pointerType === "mouse") setOpen(false); }}>
+      <button type="button" aria-label="Τι περιλαμβάνει το Full pack" aria-expanded={open} aria-describedby={open ? id : undefined} onClick={() => setOpen((o) => !o)} className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-current text-[10px] font-semibold leading-none">i</button>
+      {open && (
+        <span id={id} role="tooltip" ref={(el) => { if (!el) { setShift(0); return; } const left = el.getBoundingClientRect().left - shift; const next = left < 12 ? 12 - left : 0; if (Math.abs(next - shift) > 0.5) setShift(next); }} style={{ transform: `translateX(${shift}px)` }} className="absolute bottom-full right-0 z-30 mb-2 w-[min(260px,80vw)] rounded-lg bg-foreground p-3 font-sans text-[13px] leading-snug tracking-normal text-background shadow-lg">
+          Όλα όσα περιλαμβάνει το δια ζώσης (Πέμ 17 & Παρ 18/12, 15:00–20:00) και επιπλέον workshop το Σάββατο 19/12, 12:00–18:00, και Christmas party.
+        </span>
+      )}
+    </span>
   );
 }
