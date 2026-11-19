@@ -301,7 +301,7 @@ export function LiveCourses() {
               <span className="rounded-full border border-foreground/15 px-3 py-1 text-muted-foreground">Δια ζώσης & online</span>
             </div>
             <h3 className="mt-6 text-[clamp(28px,3.4vw,44px)] font-semibold leading-[1.05] tracking-[-0.025em]">AI Coding Masterclass</h3>
-            <p className="mt-2 font-serif text-[clamp(20px,2vw,26px)] italic">Χτίσε το site, το e-shop ή το app σου με AI.</p>
+            <p className="mt-2 text-[clamp(18px,1.8vw,22px)] text-muted-foreground">Χτίσε το site, το e-shop ή το app σου με AI.</p>
             <p className="mt-5 max-w-[38rem] text-base text-muted-foreground">Διήμερο masterclass 10 ωρών: φτιάξε μόνος σου website, e-shop ή εφαρμογή με prompts, διαχειρίσου τα από το Claude ή το ChatGPT και βγάλ' τα live με ασφάλεια μέσω Cloudflare.</p>
           </div>
           <div className="flex flex-col justify-between gap-8 border-t border-live-table-border bg-secondary/50 p-[clamp(24px,3.5vw,44px)] min-[900px]:border-l min-[900px]:border-t-0">
