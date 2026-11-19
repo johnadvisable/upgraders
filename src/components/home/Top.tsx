@@ -303,8 +303,8 @@ export function LiveCourses() {
             <p className="mt-2 text-[clamp(18px,1.8vw,22px)] text-muted-foreground">Χτίσε το site, το e-shop ή το app σου με AI.</p>
             <p className="mt-5 max-w-[38rem] text-base text-muted-foreground">Διήμερο masterclass 10 ωρών: φτιάξε μόνος σου website, e-shop ή εφαρμογή με prompts, διαχειρίσου τα από το Claude ή το ChatGPT και βγάλ' τα live με ασφάλεια μέσω Cloudflare.</p>
           </div>
-          <div className="flex flex-col justify-between gap-8 border-t border-live-table-border bg-secondary/50 p-[clamp(24px,3.5vw,44px)] min-[900px]:border-l min-[900px]:border-t-0">
-            <dl className="grid gap-5">
+          <div className="flex flex-col justify-between gap-8 sm:grid sm:grid-cols-2 sm:items-end min-[900px]:flex border-t border-live-table-border bg-secondary/50 p-[clamp(24px,3.5vw,44px)] min-[900px]:border-l min-[900px]:border-t-0">
+            <dl className="grid gap-5 sm:gap-3 min-[900px]:gap-5">
               {[["Ημερομηνίες", "17 – 19 Δεκεμβρίου 2026"], ["Ώρες", "Πέμ–Παρ 15:00 – 20:00 · Σάβ 12:00 – 18:00"], ["Για ποιους", "Startupers, επιχειρήσεις, agencies, freelancers"]].map(([k, v]) => (
                 <div key={k}><dt className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">{k}</dt><dd className="mt-1 text-[15px] font-medium">{v}</dd></div>
               ))}
