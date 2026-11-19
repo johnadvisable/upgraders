@@ -292,10 +292,17 @@ export function LiveCourses() {
         <p className="mt-4 text-lg text-muted-foreground">Μικρά groups, σε αίθουσα ή livestream. Κάθε μάθημα έχει τη δική του σελίδα με αναλυτική ύλη, κράτηση θέσης και πληρωμή.</p>
       </Reveal>
       {!SHOW_LIVE_COURSES ? (
-      <Reveal className="mt-10 rounded-[20px] border border-live-table-border bg-card px-7 py-12 text-center">
-        <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">Coming soon</p>
-        <p className="mt-3 text-[clamp(22px,2.4vw,30px)] font-medium">Σύντομα διαθέσιμα</p>
-        <p className="mt-2 text-base text-muted-foreground">Ετοιμάζουμε τα επόμενα live μαθήματα. Ανακοινώνονται σύντομα.</p>
+      <Reveal className="mt-10 rounded-[20px] border border-live-table-border bg-card px-7 py-10">
+        <p className="font-mono text-[11px] uppercase tracking-[0.08em] text-muted-foreground">Vibe coding · Δια ζώσης & online · Christmas edition</p>
+        <p className="mt-3 text-[clamp(22px,2.4vw,30px)] font-medium">AI Coding Masterclass</p>
+        <p className="mt-1 text-lg">Χτίσε το site, το e-shop ή το app σου με AI</p>
+        <p className="mt-3 max-w-[46rem] text-base text-muted-foreground">Διήμερο masterclass 10 ωρών: φτιάξε μόνος σου website, e-shop ή εφαρμογή με prompts, διαχειρίσου τα από το Claude ή το ChatGPT και βγάλ' τα live με ασφάλεια μέσω Cloudflare. Για startupers, επιχειρήσεις, digital agencies και freelancers.</p>
+        <ul className="mt-5 grid gap-1.5 text-[15px]">
+          <li>17 – 19 Δεκεμβρίου 2026</li>
+          <li>Πέμ–Παρ 15:00 – 20:00 · Σάβ 12:00 – 18:00</li>
+          <li>Δια ζώσης 249 € · Online 149 € · Δωρεάν ακύρωση έως 10 ημέρες πριν</li>
+        </ul>
+        <div className="mt-6"><Pill href="https://advisable.com/academy/seminar/ai-coding-masterclass" target="_blank" rel="noopener noreferrer">Δείτε το πρόγραμμα & κράτηση</Pill></div>
       </Reveal>
       ) : (
       <Reveal className="mt-10 rounded-[20px] border border-live-table-border bg-card">
